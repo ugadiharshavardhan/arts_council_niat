@@ -1,0 +1,48 @@
+import { WinnerItem } from "@/types";
+
+export const recentWinnersList: WinnerItem[] = [
+  {
+    id: "win-01",
+    name: "Winner Name [PLACEHOLDER]",
+    eventName: "Inter-University Classical Solo [PLACEHOLDER]",
+    position: "1st Place (Gold Trophy)",
+    date: "12 September 2026",
+    prizeOrAchievement: "Rolling Trophy & ₹25,000 Grant [PLACEHOLDER]",
+    category: "Classical Solo Vocal",
+    photo: "/images/placeholder-winner-1.svg",
+    isFeatured: true,
+  },
+  {
+    id: "win-02",
+    name: "Winner Name [PLACEHOLDER]",
+    eventName: "State One-Act Play Championship [PLACEHOLDER]",
+    position: "Best Production & Ensemble",
+    date: "28 August 2026",
+    prizeOrAchievement: "Governor's Merit Citation [PLACEHOLDER]",
+    category: "Theatrics",
+    photo: "/images/placeholder-winner-2.svg",
+    isFeatured: false,
+  },
+  {
+    id: "win-03",
+    name: "Winner Name [PLACEHOLDER]",
+    eventName: "Percussion Conclave 2026 [PLACEHOLDER]",
+    position: "1st Runner Up (Silver Medallion)",
+    date: "04 July 2026",
+    prizeOrAchievement: "National Youth Honor [PLACEHOLDER]",
+    category: "Instrumental Rhythm",
+    photo: "/images/placeholder-winner-3.svg",
+    isFeatured: false,
+  },
+  {
+    id: "win-04",
+    name: "Winner Name [PLACEHOLDER]",
+    eventName: "Contemporary Choreography Summit [PLACEHOLDER]",
+    position: "Choreographer of the Year",
+    date: "16 May 2026",
+    prizeOrAchievement: "Best Original Score & Movement [PLACEHOLDER]",
+    category: "Contemporary Dance",
+    photo: "/images/placeholder-winner-4.svg",
+    isFeatured: false,
+  },
+];

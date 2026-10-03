@@ -17,16 +17,17 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
 }) => {
   return (
     <section
-      id="leadership"
-      aria-label="Council Leadership"
+      id="about"
+      aria-label="About the Council & Leadership"
       className="py-20 md:py-28 bg-zinc-950 relative overflow-hidden"
     >
+      <div id="leadership" className="sr-only" />
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-amber-500/5 rounded-full blur-[140px] pointer-events-none" />
 
       <Container size="wide">
         <SectionHeading
-          eyebrow="Council Governance"
+          eyebrow="About the Council"
           title="Executive Leadership"
           description="Leading cultural dialogue, fostering inter-collegiate artistic prestige, and empowering hundreds of student performers across theater, acoustics, and dance."
           badge="Elected Directorate"

@@ -2,7 +2,6 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { IntroLoader } from "@/components/home/IntroLoader";
 import { Hero } from "@/components/home/Hero";
-import { UpcomingEventFeature } from "@/components/home/UpcomingEventFeature";
 import { CouncilStatsSection } from "@/components/home/CouncilStats";
 import { LeadershipSection } from "@/components/home/LeadershipSection";
 import { UpcomingEvents } from "@/components/home/UpcomingEvents";
@@ -16,7 +15,6 @@ import { FinalCTA } from "@/components/home/FinalCTA";
 
 // Data layers
 import {
-  upcomingEventHighlight,
   upcomingEventsList,
   pastEventsList,
 } from "@/data/events";
@@ -40,33 +38,33 @@ export default function Home() {
       <Navbar institutionName={siteMetadataInfo.institutionNamePlaceholder} />
 
       <main className="flex-1 w-full flex flex-col">
-        {/* 3. Hero section */}
+        {/* 3. Hero section (Title only) */}
         <Hero
           tagline={siteMetadataInfo.tagline}
           institutionName={siteMetadataInfo.institutionNamePlaceholder}
           councilName={siteMetadataInfo.councilName}
         />
 
-        {/* 4. Upcoming event highlight */}
-        <UpcomingEventFeature event={upcomingEventHighlight} />
-
-        {/* 5. Council statistics */}
-        <CouncilStatsSection stats={councilStatistics} />
-
-        {/* 6. President + Vice President leadership section */}
+        {/* 4. About the Council (Leadership) */}
         <LeadershipSection
           president={councilLeadership.president}
           vicePresident={councilLeadership.vicePresident}
         />
 
-        {/* 7. Upcoming events section */}
+        {/* 5. Council statistics */}
+        <CouncilStatsSection stats={councilStatistics} />
+
+        {/* 6. Upcoming events section */}
         <UpcomingEvents events={upcomingEventsList} />
+
+        {/* 7. Past events section */}
+        <PastEvents events={pastEventsList} />
 
         {/* 8. Recent winners section */}
         <RecentWinners winners={recentWinnersList} />
 
-        {/* 9. Past events section */}
-        <PastEvents events={pastEventsList} />
+        {/* 9. Club members preview */}
+        <CouncilMembersPreview members={featuredCouncilMembers} />
 
         {/* 10. Leaderboard preview */}
         <LeaderboardPreviewSection entries={leaderboardPreviewList} />
@@ -74,13 +72,10 @@ export default function Home() {
         {/* 11. Ganesh Chaturthi Laddu Auction highlight */}
         <LadduAuctionHighlight data={ladduAuctionHighlight} />
 
-        {/* 12. Council members preview */}
-        <CouncilMembersPreview members={featuredCouncilMembers} />
-
-        {/* 13. President's Manifesto preview */}
+        {/* 12. President's Manifesto preview */}
         <ManifestoPreview pillars={manifestoPillars} />
 
-        {/* 14. Final CTA */}
+        {/* 13. Final CTA */}
         <FinalCTA />
       </main>
 

@@ -23,7 +23,7 @@ export const CouncilMembersPreview: React.FC<CouncilMembersPreviewProps> = ({
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <SectionHeading
             eyebrow="Student Representatives"
-            title="Council Members"
+            title="Club Members"
             description="Dedicated student directors, stage coordinators, acoustic curators, and logistics conveners powering every council production."
             badge="Executive Board 2026-27"
             className="mb-0"
@@ -36,7 +36,7 @@ export const CouncilMembersPreview: React.FC<CouncilMembersPreviewProps> = ({
               size="md"
               icon={<Users className="w-4 h-4 text-amber-400" />}
             >
-              Meet the Full Council
+              Meet Club Members
             </Button>
           </div>
         </div>

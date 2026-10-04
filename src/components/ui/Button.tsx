@@ -22,7 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    "inline-flex items-center justify-center font-medium rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-amber-400/50 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98] select-none tracking-wide";
+    "inline-flex items-center justify-center font-medium rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#D4845A]/50 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98] select-none tracking-wide";
 
   const sizeStyles = {
     sm: "text-xs px-3.5 py-1.5 gap-1.5",
@@ -32,15 +32,15 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     primary:
-      "bg-amber-400 text-zinc-950 hover:bg-amber-300 shadow-md shadow-amber-500/10 font-semibold",
+      "bg-[#8B2E2E] text-[#FAF0E6] hover:bg-[#5C1A1A] shadow-md shadow-[#8B2E2E]/30 font-semibold",
     secondary:
-      "bg-zinc-800 text-zinc-100 hover:bg-zinc-700 border border-zinc-700/60 shadow-sm",
+      "bg-[#2A1014] text-[#FAF0E6] hover:bg-[#3D2018] border border-[#3D2018] shadow-sm",
     outline:
-      "border border-zinc-700 text-zinc-200 hover:border-amber-400/60 hover:text-amber-300 hover:bg-amber-400/5 backdrop-blur-sm",
+      "border border-[#3D2018] text-[#C4A882] hover:border-[#D4845A]/60 hover:text-[#D4845A] hover:bg-[#D4845A]/10 backdrop-blur-sm",
     ghost:
-      "text-zinc-300 hover:text-amber-400 hover:bg-zinc-800/50",
+      "text-[#C4A882] hover:text-[#D4845A] hover:bg-[#2A1014]/50",
     gold:
-      "bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-500 text-zinc-950 font-semibold hover:shadow-lg hover:shadow-amber-500/20",
+      "bg-gradient-to-r from-[#D4845A] via-[#E8C87A] to-[#D4845A] text-[#1C0F0A] font-semibold hover:shadow-lg hover:shadow-[#D4845A]/30",
   };
 
   const combinedClasses = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;

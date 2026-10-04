@@ -33,14 +33,14 @@ export const PillNav: React.FC<PillNavProps> = ({
   activeHref,
   className = '',
   ease = 'power3.easeOut',
-  baseColor = '#fbbf24',
-  pillColor = '#18181b',
-  hoveredPillTextColor = '#09090b',
+  baseColor = '#F4C95D',
+  pillColor = '#17152B',
+  hoveredPillTextColor = '#0F172A',
   pillTextColor,
   onMobileMenuClick,
   initialLoadAnimation = true
 }) => {
-  const resolvedPillTextColor = pillTextColor ?? '#f4f4f5';
+  const resolvedPillTextColor = pillTextColor ?? '#F8FAFC';
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const circleRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const tlRefs = useRef<(gsap.core.Timeline | null)[]>([]);

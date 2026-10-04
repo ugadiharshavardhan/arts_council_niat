@@ -13,7 +13,7 @@ interface UpcomingEventsProps {
 export const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
   if (!events || events.length === 0) {
     return (
-      <section id="events" className="py-20 bg-zinc-900/30">
+      <section id="events" className="py-20 bg-[#2A1014]/30">
         <Container size="wide">
           <SectionHeading
             eyebrow="Calendar of Productions"
@@ -31,7 +31,7 @@ export const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
     <section
       id="events"
       aria-label="Upcoming Events Calendar"
-      className="py-20 md:py-28 bg-zinc-950 relative"
+      className="py-20 md:py-28 bg-[#1C0F0A] relative"
     >
       <Container size="wide">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
@@ -45,10 +45,10 @@ export const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
 
           <div className="mt-6 md:mt-0 shrink-0">
             <Button
-                    href="#events"
+              href="#events"
               variant="outline"
               size="md"
-              icon={<ArrowRight className="w-4 h-4 text-amber-400" />}
+              icon={<ArrowRight className="w-4 h-4 text-[#D4845A]" />}
             >
               View All Upcoming Events
             </Button>
@@ -59,19 +59,19 @@ export const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Main Featured Event (7 columns) */}
           {featuredEvent && (
-            <div className="lg:col-span-7 flex flex-col bg-zinc-900/60 border border-zinc-800 rounded-2xl overflow-hidden group hover:border-amber-400/50 transition-all duration-300 shadow-xl">
-              <div className="relative h-[280px] sm:h-[360px] overflow-hidden bg-zinc-950">
+            <div className="lg:col-span-7 flex flex-col bg-[#2A1014] border border-[#3D2018] rounded-2xl overflow-hidden group hover:border-[#D4845A]/50 transition-all duration-300 shadow-xl">
+              <div className="relative h-[280px] sm:h-[360px] overflow-hidden bg-[#1C0F0A]">
                 <ImagePlaceholder
                   src={featuredEvent.image}
                   alt={featuredEvent.title}
                   aspectRatio="video"
                   className="w-full h-full"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1C0F0A] via-[#1C0F0A]/30 to-transparent" />
 
                 {featuredEvent.badge && (
                   <div className="absolute top-4 left-4">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-amber-400 text-zinc-950 shadow-md">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#D4845A] text-[#1C0F0A] shadow-md">
                       <Sparkles className="w-3.5 h-3.5" />
                       {featuredEvent.badge}
                     </span>
@@ -79,10 +79,10 @@ export const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
                 )}
 
                 <div className="absolute bottom-4 left-6 right-6 flex items-center justify-between">
-                  <span className="px-2.5 py-1 rounded bg-black/80 backdrop-blur-md text-xs font-mono text-amber-400 border border-amber-400/30">
+                  <span className="px-2.5 py-1 rounded bg-[#1C0F0A]/80 backdrop-blur-md text-xs font-mono text-[#D4845A] border border-[#D4845A]/30">
                     {featuredEvent.category || "Featured Production"}
                   </span>
-                  <span className="text-xs font-mono text-zinc-400">
+                  <span className="text-xs font-mono text-[#C4A882]">
                     {featuredEvent.date}
                   </span>
                 </div>
@@ -90,32 +90,32 @@ export const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
 
               <div className="p-6 sm:p-8 flex flex-col justify-between flex-1">
                 <div>
-                  <h3 className="text-2xl sm:text-3xl font-serif font-bold text-zinc-100 group-hover:text-amber-300 transition-colors mb-3">
+                  <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#FAF0E6] group-hover:text-[#E8C87A] transition-colors mb-3">
                     {featuredEvent.title}
                   </h3>
-                  <p className="text-sm text-zinc-300 font-light leading-relaxed mb-6">
+                  <p className="text-sm text-[#C4A882] font-light leading-relaxed mb-6">
                     {featuredEvent.description}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-zinc-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div className="flex items-center gap-4 text-xs font-mono text-zinc-400">
+                <div className="pt-4 border-t border-[#3D2018] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="flex items-center gap-4 text-xs font-mono text-[#C4A882]">
                     {featuredEvent.time && (
                       <span className="inline-flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5 text-amber-400" />
+                        <Clock className="w-3.5 h-3.5 text-[#D4845A]" />
                         {featuredEvent.time}
                       </span>
                     )}
                     {featuredEvent.venue && (
                       <span className="inline-flex items-center gap-1.5 truncate max-w-[200px]">
-                        <MapPin className="w-3.5 h-3.5 text-amber-400" />
+                        <MapPin className="w-3.5 h-3.5 text-[#D4845A]" />
                         {featuredEvent.venue}
                       </span>
                     )}
                   </div>
 
                   <Button
-                          href="#events"
+                    href="#events"
                     variant="primary"
                     size="sm"
                     icon={<ArrowRight className="w-3.5 h-3.5" />}
@@ -132,18 +132,18 @@ export const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
             {secondaryEvents.map((evt) => (
               <div
                 key={evt.id}
-                className="flex flex-col sm:flex-row lg:flex-col bg-zinc-900/40 border border-zinc-800 rounded-2xl overflow-hidden group hover:border-amber-400/40 transition-all duration-300 shadow-md flex-1"
+                className="flex flex-col sm:flex-row lg:flex-col bg-[#2A1014]/60 border border-[#3D2018] rounded-2xl overflow-hidden group hover:border-[#D4845A]/40 transition-all duration-300 shadow-md flex-1"
               >
-                <div className="relative sm:w-1/2 lg:w-full h-48 overflow-hidden bg-zinc-950 shrink-0">
+                <div className="relative sm:w-1/2 lg:w-full h-48 overflow-hidden bg-[#1C0F0A] shrink-0">
                   <ImagePlaceholder
                     src={evt.image}
                     alt={evt.title}
                     aspectRatio="video"
                     className="w-full h-full"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1C0F0A]/80 via-transparent to-transparent" />
                   <div className="absolute top-3 left-3">
-                    <span className="px-2.5 py-0.5 rounded text-[10px] font-mono uppercase bg-zinc-900/90 text-amber-400 border border-zinc-700">
+                    <span className="px-2.5 py-0.5 rounded text-[10px] font-mono uppercase bg-[#2A1014] text-[#D4845A] border border-[#3D2018]">
                       {evt.category || "Calendar"}
                     </span>
                   </div>
@@ -151,27 +151,27 @@ export const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
 
                 <div className="p-5 flex flex-col justify-between flex-1">
                   <div>
-                    <div className="flex items-center gap-2 text-xs font-mono text-amber-400/90 mb-1">
+                    <div className="flex items-center gap-2 text-xs font-mono text-[#D4845A] mb-1">
                       <Calendar className="w-3.5 h-3.5" />
                       <span>{evt.date}</span>
                     </div>
-                    <h4 className="text-lg font-serif font-bold text-zinc-100 group-hover:text-amber-300 transition-colors mb-2">
+                    <h4 className="text-lg font-serif font-bold text-[#FAF0E6] group-hover:text-[#E8C87A] transition-colors mb-2">
                       {evt.title}
                     </h4>
-                    <p className="text-xs text-zinc-400 font-light line-clamp-2 leading-relaxed mb-4">
+                    <p className="text-xs text-[#C4A882] font-light line-clamp-2 leading-relaxed mb-4">
                       {evt.description}
                     </p>
                   </div>
 
-                  <div className="flex items-center justify-between pt-3 border-t border-zinc-800/80">
-                    <span className="text-[11px] font-mono text-zinc-500 truncate max-w-[180px]">
+                  <div className="flex items-center justify-between pt-3 border-t border-[#3D2018]">
+                    <span className="text-[11px] font-mono text-[#C4A882]/70 truncate max-w-[180px]">
                       {evt.venue}
                     </span>
                     <Button
-                            href="#events"
+                      href="#events"
                       variant="ghost"
                       size="sm"
-                      className="text-xs text-amber-400 hover:text-amber-300 p-0"
+                      className="text-xs text-[#D4845A] hover:text-[#E8C87A] p-0"
                       icon={<ArrowRight className="w-3.5 h-3.5" />}
                     >
                       View Details

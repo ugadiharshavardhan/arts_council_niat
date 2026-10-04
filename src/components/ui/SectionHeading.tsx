@@ -26,12 +26,12 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   return (
     <div className={`flex flex-col mb-10 md:mb-16 ${alignmentClasses[align]} ${className}`}>
       {badge && (
-        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-amber-400/10 text-amber-300 border border-amber-400/20 mb-3">
+        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#8B2E2E]/20 text-[#D4845A] border border-[#8B2E2E]/40 mb-3">
           {badge}
         </span>
       )}
       {eyebrow && (
-        <span className="text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-amber-400/90 mb-2">
+        <span className="text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-[#D4845A] mb-2">
           {eyebrow}
         </span>
       )}
@@ -43,7 +43,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
           {description}
         </p>
       )}
-      <div className={`mt-4 h-0.5 w-12 bg-amber-400/60 rounded-full ${align === "center" ? "mx-auto" : ""}`} />
+      <div className={`mt-4 h-0.5 w-12 bg-[#D4845A] rounded-full ${align === "center" ? "mx-auto" : ""}`} />
     </div>
   );
 };

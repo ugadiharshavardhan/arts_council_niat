@@ -38,29 +38,29 @@ export const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-zinc-950 text-zinc-400 border-t border-zinc-800/80 pt-16 pb-12 overflow-hidden relative">
+    <footer className="bg-[#1C0F0A] text-[#C4A882] border-t border-[#3D2018] pt-16 pb-12 overflow-hidden relative">
       {/* Subtle background glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[250px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[250px] bg-[#8B2E2E]/15 blur-[120px] rounded-full pointer-events-none" />
 
       <Container size="wide">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-14 border-b border-zinc-900">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-14 border-b border-[#3D2018]">
           {/* Brand Column */}
           <div className="lg:col-span-2 flex flex-col gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full border border-amber-400/50 bg-zinc-900 flex items-center justify-center text-amber-400 font-serif font-bold text-sm">
+              <div className="w-9 h-9 rounded-full border border-[#D4845A]/60 bg-[#2A1014] flex items-center justify-center text-[#D4845A] font-serif font-bold text-sm">
                 PAC
               </div>
-              <span className="font-serif text-lg tracking-wider text-zinc-100 font-bold">
+              <span className="font-serif text-lg tracking-wider text-[#FAF0E6] font-bold">
                 PERFORMING ARTS COUNCIL
               </span>
             </div>
 
-            <p className="text-sm text-zinc-400 max-w-sm font-light leading-relaxed">
+            <p className="text-sm text-[#C4A882] max-w-sm font-light leading-relaxed">
               Official collegiate cultural governance body celebrating stagecraft, musical traditions, theatrics, and dance excellence at {siteMetadataInfo.institutionNamePlaceholder}.
             </p>
 
             <div className="flex items-center gap-2 mt-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-zinc-900 border border-zinc-800 text-amber-400">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-[#2A1014] border border-[#3D2018] text-[#D4845A]">
                 <Sparkles className="w-3 h-3" />
                 Academic Term: {siteMetadataInfo.academicYear} [PLACEHOLDER]
               </span>
@@ -70,7 +70,7 @@ export const Footer: React.FC = () => {
           {/* Links Columns */}
           {navColumns.map((col) => (
             <div key={col.title} className="flex flex-col gap-3">
-              <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-200">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-[#FAF0E6]">
                 {col.title}
               </h3>
               <ul className="flex flex-col gap-2 mt-1">
@@ -78,10 +78,10 @@ export const Footer: React.FC = () => {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-zinc-400 hover:text-amber-400 transition-colors inline-flex items-center gap-1 group"
+                      className="text-sm text-[#C4A882] hover:text-[#D4845A] transition-colors inline-flex items-center gap-1 group"
                     >
                       <span>{link.label}</span>
-                      <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-amber-400" />
+                      <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-[#D4845A]" />
                     </Link>
                   </li>
                 ))}
@@ -91,12 +91,12 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom row: disclaimer & copyright */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-400 font-light">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#C4A882]/70 font-light">
           <p>
             © {currentYear} {siteMetadataInfo.councilName}, {siteMetadataInfo.institutionNamePlaceholder}. All rights reserved.
           </p>
 
-          <p className="flex items-center gap-1 text-zinc-400">
+          <p className="flex items-center gap-1 text-[#C4A882]/70">
             <span>Production-ready UI · Made for student performers</span>
             <Heart className="w-3 h-3 text-red-500 fill-red-500 inline" />
           </p>

@@ -44,7 +44,7 @@ export default function RootLayout({
       lang="en"
       className={`${sansFont.variable} ${serifFont.variable} scroll-smooth antialiased dark`}
     >
-      <body className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col selection:bg-amber-400 selection:text-zinc-950">
+      <body className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col selection:bg-[#D4845A] selection:text-[#1C0F0A]">
         {children}
       </body>
     </html>

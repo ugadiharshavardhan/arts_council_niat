@@ -16,7 +16,7 @@ export const LeaderboardPreviewSection: React.FC<LeaderboardPreviewProps> = ({
     <section
       id="leaderboard"
       aria-label="House Cultural Championship Leaderboard"
-      className="py-20 md:py-28 bg-zinc-950 relative overflow-hidden"
+      className="py-20 md:py-28 bg-[#1C0F0A] relative overflow-hidden"
     >
       <Container size="wide">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
@@ -33,7 +33,7 @@ export const LeaderboardPreviewSection: React.FC<LeaderboardPreviewProps> = ({
               href="#leaderboard"
               variant="outline"
               size="md"
-              icon={<ArrowRight className="w-4 h-4 text-amber-400" />}
+              icon={<ArrowRight className="w-4 h-4 text-[#D4845A]" />}
             >
               View Full Leaderboard
             </Button>
@@ -41,14 +41,14 @@ export const LeaderboardPreviewSection: React.FC<LeaderboardPreviewProps> = ({
         </div>
 
         {/* Development Data Notice Badge */}
-        <div className="flex items-center gap-2 p-3 mb-8 rounded-xl bg-amber-400/5 border border-amber-400/20 text-xs font-mono text-amber-300 max-w-xl">
-          <ShieldAlert className="w-4 h-4 text-amber-400 shrink-0" />
+        <div className="flex items-center gap-2 p-3 mb-8 rounded-xl bg-[#8B2E2E]/15 border border-[#8B2E2E]/30 text-xs font-mono text-[#D4845A] max-w-xl">
+          <ShieldAlert className="w-4 h-4 text-[#D4845A] shrink-0" />
           <span>Note: Displaying mock development standings. Official council tally will connect dynamically.</span>
         </div>
 
         {/* Leaderboard Table / Card Layout */}
-        <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl">
-          <div className="divide-y divide-zinc-800/80">
+        <div className="bg-[#2A1014] border border-[#3D2018] rounded-2xl overflow-hidden shadow-2xl">
+          <div className="divide-y divide-[#3D2018]">
             {entries.map((entry) => {
               const isFirst = entry.rank === 1;
               const isSecond = entry.rank === 2;
@@ -59,8 +59,8 @@ export const LeaderboardPreviewSection: React.FC<LeaderboardPreviewProps> = ({
                   key={entry.rank}
                   className={`flex flex-col sm:flex-row sm:items-center justify-between p-5 sm:p-6 transition-colors duration-200 ${
                     isFirst
-                      ? "bg-amber-400/10 hover:bg-amber-400/15"
-                      : "hover:bg-zinc-800/50"
+                      ? "bg-[#8B2E2E]/20 hover:bg-[#8B2E2E]/30"
+                      : "hover:bg-[#3D2018]/40"
                   }`}
                 >
                   {/* Rank and Team Name */}
@@ -68,12 +68,12 @@ export const LeaderboardPreviewSection: React.FC<LeaderboardPreviewProps> = ({
                     <div
                       className={`w-12 h-12 rounded-xl flex items-center justify-center font-serif font-black text-xl shrink-0 ${
                         isFirst
-                          ? "bg-gradient-to-br from-amber-300 to-amber-500 text-zinc-950 shadow-md shadow-amber-500/20"
+                          ? "bg-gradient-to-br from-[#D4845A] to-[#C5683C] text-[#1C0F0A] shadow-md shadow-[#D4845A]/20"
                           : isSecond
-                          ? "bg-zinc-300 text-zinc-950 font-bold"
+                          ? "bg-[#3D2018] text-[#FAF0E6] font-bold"
                           : isThird
-                          ? "bg-amber-800/60 text-amber-200 border border-amber-700/60"
-                          : "bg-zinc-800 text-zinc-400"
+                          ? "bg-[#5C1A1A]/60 text-[#FAF0E6] border border-[#5C1A1A]"
+                          : "bg-[#1C0F0A] text-[#C4A882]"
                       }`}
                     >
                       {String(entry.rank).padStart(2, "0")}
@@ -81,41 +81,41 @@ export const LeaderboardPreviewSection: React.FC<LeaderboardPreviewProps> = ({
 
                     <div>
                       <div className="flex items-center gap-2">
-                        <h4 className="text-base sm:text-lg font-serif font-bold text-zinc-100">
+                        <h4 className="text-base sm:text-lg font-serif font-bold text-[#FAF0E6]">
                           {entry.teamOrHouse}
                         </h4>
                         {isFirst && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-amber-400/20 text-amber-300 border border-amber-400/40">
-                            <Flame className="w-3 h-3 text-amber-400" />
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-[#8B2E2E]/30 text-[#D4845A] border border-[#D4845A]/40">
+                            <Flame className="w-3 h-3 text-[#D4845A]" />
                             Leader
                           </span>
                         )}
                       </div>
-                      <span className="text-xs font-mono text-zinc-500">
+                      <span className="text-xs font-mono text-[#C4A882]/70">
                         {entry.eventsParticipated} Events Participated
                       </span>
                     </div>
                   </div>
 
                   {/* Points and Rank Status */}
-                  <div className="flex items-center justify-between sm:justify-end gap-8 mt-4 sm:mt-0 pt-3 sm:pt-0 border-t sm:border-t-0 border-zinc-800/60">
+                  <div className="flex items-center justify-between sm:justify-end gap-8 mt-4 sm:mt-0 pt-3 sm:pt-0 border-t sm:border-t-0 border-[#3D2018]">
                     <div className="text-left sm:text-right">
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 block">
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#C4A882]/70 block">
                         Total Points
                       </span>
                       <span
                         className={`text-xl sm:text-2xl font-black font-mono tracking-tight ${
-                          isFirst ? "text-amber-400" : "text-zinc-100"
+                          isFirst ? "text-[#D4845A]" : "text-[#FAF0E6]"
                         }`}
                       >
                         {entry.points.toLocaleString()}
                       </span>
                     </div>
 
-                    <div className="w-8 h-8 rounded-full bg-zinc-800/80 flex items-center justify-center text-zinc-400">
+                    <div className="w-8 h-8 rounded-full bg-[#1C0F0A] flex items-center justify-center text-[#C4A882]">
                       <Trophy
                         className={`w-4 h-4 ${
-                          isFirst ? "text-amber-400" : "text-zinc-600"
+                          isFirst ? "text-[#D4845A]" : "text-[#C4A882]/50"
                         }`}
                       />
                     </div>

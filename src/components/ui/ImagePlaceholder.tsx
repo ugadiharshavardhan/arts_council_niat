@@ -38,7 +38,6 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
       <div
         className={`relative flex flex-col items-center justify-center bg-zinc-900 border border-zinc-800 text-zinc-500 overflow-hidden ${aspectClass} ${className}`}
       >
-        <div className="absolute inset-0 bg-radial-gradient opacity-10" />
         <span className="text-xs uppercase tracking-widest text-zinc-400 font-medium">
           [Asset Placeholder]
         </span>
@@ -46,6 +45,7 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
           {alt}
         </span>
       </div>
+
     );
   }
 

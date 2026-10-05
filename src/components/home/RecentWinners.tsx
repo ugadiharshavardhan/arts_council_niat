@@ -42,8 +42,9 @@ export const RecentWinners: React.FC<RecentWinnersProps> = ({ winners }) => {
     <section
       id="winners"
       aria-label="Recent Winners and Laureates"
-      className="py-20 md:py-28 bg-gradient-to-b from-[#1C0F0A] via-[#2A1014] to-[#1C0F0A] border-t border-[#3D2018] relative overflow-hidden"
+      className="py-20 md:py-28 bg-[#1C0F0A] border-t border-[#3D2018] relative overflow-hidden"
     >
+
       {/* Decorative warm backdrop halo */}
       <div className="absolute top-1/3 right-10 w-96 h-96 bg-[#8B2E2E]/15 rounded-full blur-[140px] pointer-events-none" />
 
@@ -101,7 +102,6 @@ export const RecentWinners: React.FC<RecentWinnersProps> = ({ winners }) => {
                   aspectRatio="portrait"
                   className="w-full h-full"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1C0F0A] via-[#1C0F0A]/30 to-transparent" />
 
                 <div className="absolute top-4 left-4">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#D4845A] text-[#1C0F0A] shadow-md">
@@ -110,7 +110,7 @@ export const RecentWinners: React.FC<RecentWinnersProps> = ({ winners }) => {
                   </span>
                 </div>
 
-                <div className="absolute bottom-4 left-6 right-6">
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-[#1C0F0A]/95 border-t border-[#3D2018]">
                   <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#D4845A] block mb-1">
                     {featuredWinner.position}
                   </span>
@@ -118,6 +118,7 @@ export const RecentWinners: React.FC<RecentWinnersProps> = ({ winners }) => {
                     {featuredWinner.name}
                   </h3>
                 </div>
+
               </div>
 
               <div className="p-6 sm:p-7 flex flex-col justify-between flex-1 bg-[#2A1014]/60">
@@ -173,12 +174,12 @@ export const RecentWinners: React.FC<RecentWinnersProps> = ({ winners }) => {
                       aspectRatio="video"
                       className="w-full h-full"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1C0F0A] via-transparent to-transparent" />
                     <div className="absolute top-3 left-3">
                       <span className="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-[#2A1014] text-[#D4845A] border border-[#D4845A]/30">
                         {winner.position}
                       </span>
                     </div>
+
                   </div>
 
                   <div className="p-5 flex flex-col justify-between flex-1">

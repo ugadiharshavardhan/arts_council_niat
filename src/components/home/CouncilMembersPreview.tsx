@@ -55,7 +55,7 @@ export const CouncilMembersPreview: React.FC<CouncilMembersPreviewProps> = ({
                   aspectRatio="portrait"
                   className="w-full h-full"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1C0F0A] via-[#1C0F0A]/20 to-transparent" />
+
                 
                 {member.department && (
                   <div className="absolute top-3 left-3">

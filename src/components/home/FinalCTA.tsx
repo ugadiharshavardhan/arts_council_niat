@@ -23,10 +23,11 @@ export const FinalCTA: React.FC = () => {
 
         <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-black tracking-tight text-[#FAF0E6] uppercase leading-[1.08] mb-6">
           YOUR TALENT <br />
-          <span className="bg-gradient-to-r from-[#FAF0E6] via-[#D4845A] to-[#E8C87A] bg-clip-text text-transparent">
+          <span className="text-[#D4845A]">
             DESERVES A STAGE.
           </span>
         </h2>
+
 
         <p className="text-base sm:text-lg text-[#C4A882] font-light max-w-xl mx-auto leading-relaxed mb-10">
           Whether you are a vocalist, actor, instrumentalist, dancer, or backstage technician — the Performing Arts Council is your platform to create, perform, and inspire.

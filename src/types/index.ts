@@ -9,6 +9,10 @@ export interface EventItem {
   image: string;
   badge?: string;
   isFeatured?: boolean;
+  videoUrl?: string;
+  gallery?: string[];
+  organizer?: string;
+  participants?: string;
 }
 
 export interface WinnerItem {

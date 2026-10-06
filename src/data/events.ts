@@ -66,6 +66,15 @@ export const pastEventsList: EventItem[] = [
     description:
       "A grand 2-day classical confluence featuring over 18 collegiate ensembles, celebrating traditional Indian rhythm repertoires.",
     image: "/images/placeholder-past-1.svg",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+    organizer: "Performing Arts Council — Dance Wing [PLACEHOLDER]",
+    participants: "18 Collegiate Teams (240+ Dancers) [PLACEHOLDER]",
+    gallery: [
+      "/images/placeholder-past-1.svg",
+      "/images/placeholder-event-1.svg",
+      "/images/placeholder-event-2.svg",
+      "/images/placeholder-event-3.svg",
+    ],
   },
   {
     id: "pe-02",
@@ -76,6 +85,14 @@ export const pastEventsList: EventItem[] = [
     description:
       "High-energy social narrative performances by council dramatists exploring grassroots storytelling and satire.",
     image: "/images/placeholder-past-2.svg",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+    organizer: "NIAT Theatrics Guild [PLACEHOLDER]",
+    participants: "12 Street Play Troupe Teams [PLACEHOLDER]",
+    gallery: [
+      "/images/placeholder-past-2.svg",
+      "/images/placeholder-event-3.svg",
+      "/images/placeholder-event-highlight.svg",
+    ],
   },
   {
     id: "pe-03",
@@ -86,6 +103,12 @@ export const pastEventsList: EventItem[] = [
     description:
       "Harmonic choral presentations featuring 8-part a cappella arrangements and university student compositions.",
     image: "/images/placeholder-past-3.svg",
+    organizer: "Classical Music Society [PLACEHOLDER]",
+    participants: "8-Part Choral Society Ensemble [PLACEHOLDER]",
+    gallery: [
+      "/images/placeholder-past-3.svg",
+      "/images/placeholder-event-2.svg",
+    ],
   },
   {
     id: "pe-04",
@@ -96,5 +119,14 @@ export const pastEventsList: EventItem[] = [
     description:
       "Multi-sensory shadow puppetry and ambient musical synthesis curated entirely by student lighting technicians.",
     image: "/images/placeholder-past-4.svg",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+    organizer: "Visual & Stagecraft Technical Team [PLACEHOLDER]",
+    participants: "Experimental Lighting & Sound Crew [PLACEHOLDER]",
+    gallery: [
+      "/images/placeholder-past-4.svg",
+      "/images/placeholder-event-1.svg",
+      "/images/placeholder-event-highlight.svg",
+      "/images/placeholder-past-1.svg",
+    ],
   },
 ];

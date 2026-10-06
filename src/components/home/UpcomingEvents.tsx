@@ -45,7 +45,7 @@ export const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
 
           <div className="mt-6 md:mt-0 shrink-0">
             <Button
-              href="#events"
+              href="/events/upcoming"
               variant="outline"
               size="md"
               icon={<ArrowRight className="w-4 h-4 text-[#D4845A]" />}
@@ -115,7 +115,7 @@ export const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
                   </div>
 
                   <Button
-                    href="#events"
+                    href={`/events/${featuredEvent.id}`}
                     variant="primary"
                     size="sm"
                     icon={<ArrowRight className="w-3.5 h-3.5" />}
@@ -168,7 +168,7 @@ export const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
                       {evt.venue}
                     </span>
                     <Button
-                      href="#events"
+                      href={`/events/${evt.id}`}
                       variant="ghost"
                       size="sm"
                       className="text-xs text-[#D4845A] hover:text-[#E8C87A] p-0"

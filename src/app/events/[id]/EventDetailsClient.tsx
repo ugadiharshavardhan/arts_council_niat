@@ -34,17 +34,21 @@ export default function EventDetailsClient({ event }: EventDetailsClientProps) {
       ? event.gallery
       : [event.image];
 
+  const isUpcoming = event.id.startsWith("ue-");
+  const backHref = isUpcoming ? "/events/upcoming" : "/events";
+  const backLabel = isUpcoming ? "Back to Upcoming Events" : "Back to Past Events";
+
   return (
     <div className="min-h-screen bg-[#1C0F0A] text-[#FAF0E6] flex flex-col font-sans selection:bg-[#D4845A]/30 selection:text-[#FAF0E6]">
       {/* Top Header / Sticky Bar */}
       <header className="sticky top-0 z-40 bg-[#1C0F0A]/90 backdrop-blur-md border-b border-[#3D2018] px-4 py-3">
         <Container size="wide" className="flex items-center justify-between">
           <Link
-            href="/events"
+            href={backHref}
             className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#D4845A] hover:text-[#E8C87A] transition-colors group px-3 py-1.5 rounded-full bg-[#2A1014] border border-[#3D2018]"
           >
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            <span>Back to Past Events</span>
+            <span>{backLabel}</span>
           </Link>
 
           <div className="flex items-center gap-2">
@@ -130,10 +134,12 @@ export default function EventDetailsClient({ event }: EventDetailsClientProps) {
                         <Film className="w-8 h-8 opacity-70" />
                       </div>
                       <span className="px-3 py-1 rounded-full text-xs font-mono uppercase bg-[#8B2E2E]/40 text-[#FAF0E6] border border-[#8B2E2E] mb-2">
-                        Event Reel Archiving in Progress
+                        {isUpcoming ? "Official Production Reel Coming Soon" : "Event Reel Archiving in Progress"}
                       </span>
                       <p className="text-xs sm:text-sm text-[#C4A882] max-w-md font-light leading-relaxed">
-                        Official multi-cam video footage for this showcase is being remastered by the Student Technical Crew.
+                        {isUpcoming
+                          ? "Official promotional reel and live coverage will be published following the event premiere."
+                          : "Official multi-cam video footage for this showcase is being remastered by the Student Technical Crew."}
                       </p>
                     </div>
                   </div>
@@ -152,7 +158,7 @@ export default function EventDetailsClient({ event }: EventDetailsClientProps) {
                 <div className="flex items-center gap-2 mb-3">
                   <span className="w-2 h-2 rounded-full bg-[#D4845A]" />
                   <span className="text-xs font-mono uppercase tracking-widest text-[#D4845A]">
-                    Archival Event Record
+                    {isUpcoming ? "Scheduled Production Record" : "Archival Event Record"}
                   </span>
                 </div>
 

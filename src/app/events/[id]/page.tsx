@@ -1,5 +1,5 @@
 import React from "react";
-import { pastEventsList, upcomingEventsList } from "@/data/events";
+import { pastEventsList, upcomingEventsList, upcomingEventHighlight } from "@/data/events";
 import EventDetailsClient from "./EventDetailsClient";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
@@ -8,8 +8,13 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
+const allEvents = [
+  ...pastEventsList,
+  ...upcomingEventsList,
+  ...(upcomingEventHighlight ? [upcomingEventHighlight] : []),
+];
+
 export async function generateStaticParams() {
-  const allEvents = [...pastEventsList, ...upcomingEventsList];
   return allEvents.map((event) => ({
     id: event.id,
   }));
@@ -17,7 +22,6 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const allEvents = [...pastEventsList, ...upcomingEventsList];
   const event = allEvents.find((e) => e.id === id);
 
   if (!event) {
@@ -34,7 +38,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function EventDetailPage({ params }: PageProps) {
   const { id } = await params;
-  const allEvents = [...pastEventsList, ...upcomingEventsList];
   const event = allEvents.find((e) => e.id === id);
 
   if (!event) {

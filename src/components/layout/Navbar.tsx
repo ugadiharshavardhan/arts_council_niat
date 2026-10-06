@@ -1,24 +1,29 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import PillNav from "./PillNav";
 
 interface NavbarProps {
   institutionName?: string;
 }
 
-const NAV_LINKS = [
-  { label: "About", href: "#about" },
-  { label: "Upcoming Events", href: "#events" },
-  { label: "Past Events", href: "#past-events" },
-  { label: "Winners", href: "#winners" },
-  { label: "Club Members", href: "#members" },
+const SECTION_LINKS = [
+  { label: "About", id: "about" },
+  { label: "Upcoming Events", id: "events" },
+  { label: "Past Events", id: "past-events" },
+  { label: "Winners", id: "winners" },
+  { label: "Club Members", id: "members" },
 ];
 
 export const Navbar: React.FC<NavbarProps> = () => {
   const [activeSection, setActiveSection] = useState("about");
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
 
   useEffect(() => {
+    if (!isHomePage) return;
+
     const handleScroll = () => {
       const sections = [
         "about",
@@ -44,7 +49,12 @@ export const Navbar: React.FC<NavbarProps> = () => {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHomePage]);
+
+  const navItems = SECTION_LINKS.map((item) => ({
+    label: item.label,
+    href: isHomePage ? `#${item.id}` : `/#${item.id}`,
+  }));
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40 flex justify-center pointer-events-none">
@@ -52,8 +62,8 @@ export const Navbar: React.FC<NavbarProps> = () => {
         <PillNav
           logo="/pac-logo.svg"
           logoAlt="Performing Arts Council Logo"
-          items={NAV_LINKS}
-          activeHref={`#${activeSection}`}
+          items={navItems}
+          activeHref={isHomePage ? `#${activeSection}` : ""}
           baseColor="#D4845A"
           pillColor="#2A1014"
           hoveredPillTextColor="#1C0F0A"
@@ -65,4 +75,3 @@ export const Navbar: React.FC<NavbarProps> = () => {
     </header>
   );
 };
-

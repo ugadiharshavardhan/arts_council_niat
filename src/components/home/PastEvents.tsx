@@ -49,7 +49,7 @@ export const PastEvents: React.FC<PastEventsProps> = ({ events }) => {
 
           <div className="mt-6 md:mt-0 shrink-0">
             <Button
-              href="/events"
+              href="/events/past"
               variant="outline"
               size="md"
               icon={<ArrowRight className="w-4 h-4 text-[#D4845A]" />}

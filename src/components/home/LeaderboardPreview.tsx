@@ -68,7 +68,8 @@ export const LeaderboardPreviewSection: React.FC<LeaderboardPreviewProps> = ({
                     <div
                       className={`w-12 h-12 rounded-xl flex items-center justify-center font-serif font-black text-xl shrink-0 ${
                         isFirst
-                          ? "bg-gradient-to-br from-[#D4845A] to-[#C5683C] text-[#1C0F0A] shadow-md shadow-[#D4845A]/20"
+                          ? "bg-[#D4845A] text-[#1C0F0A] font-bold shadow-md shadow-[#D4845A]/20"
+
                           : isSecond
                           ? "bg-[#3D2018] text-[#FAF0E6] font-bold"
                           : isThird

@@ -51,6 +51,7 @@ export const PillNav: React.FC<PillNavProps> = ({
   const mobileMenuRef = useRef<HTMLDivElement | null>(null);
   const navItemsRef = useRef<HTMLDivElement | null>(null);
   const logoRef = useRef<HTMLAnchorElement | null>(null);
+  const hasAnimatedRef = useRef<boolean>(false);
 
   useEffect(() => {
     const layout = () => {
@@ -113,7 +114,8 @@ export const PillNav: React.FC<PillNavProps> = ({
       gsap.set(menu, { visibility: 'hidden', opacity: 0, scaleY: 1 });
     }
 
-    if (initialLoadAnimation) {
+    if (initialLoadAnimation && !hasAnimatedRef.current) {
+      hasAnimatedRef.current = true;
       const logoEl = logoRef.current;
       const navItems = navItemsRef.current;
 

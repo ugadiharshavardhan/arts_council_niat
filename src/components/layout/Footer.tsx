@@ -14,7 +14,8 @@ export const Footer: React.FC = () => {
         { label: "Upcoming Events", href: "#events" },
         { label: "Past Festivals", href: "#past-events" },
         { label: "Hall of Winners", href: "#winners" },
-        { label: "Council Leaderboard", href: "#leaderboard" },
+        { label: "Club Members", href: "#members" },
+
       ],
     },
     {

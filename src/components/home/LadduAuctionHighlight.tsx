@@ -16,7 +16,7 @@ export const LadduAuctionHighlight: React.FC<LadduAuctionHighlightProps> = ({
     <section
       id="auction"
       aria-label="Ganesh Chaturthi Sacred Laddu Auction Highlight"
-      className="py-20 md:py-28 bg-gradient-to-b from-[#1C0F0A] via-[#2A1014] to-[#1C0F0A] relative overflow-hidden"
+      className="py-20 md:py-28 bg-[#1C0F0A] relative overflow-hidden border-t border-[#3D2018]"
     >
       {/* Decorative auspicious warm glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#8B2E2E]/20 rounded-full blur-[150px] pointer-events-none" />
@@ -37,9 +37,9 @@ export const LadduAuctionHighlight: React.FC<LadduAuctionHighlightProps> = ({
                   aspectRatio="portrait"
                   className="w-full h-[360px] sm:h-[440px]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1C0F0A] via-[#1C0F0A]/20 to-transparent" />
 
                 <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-[#1C0F0A]/90 backdrop-blur-md border border-[#D4845A]/40">
+
                   <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#D4845A] block mb-0.5">
                     SACRED PRASADAM LAUREATE
                   </span>

@@ -16,13 +16,9 @@ export const UpcomingEventFeature: React.FC<UpcomingEventFeatureProps> = ({
     <section
       id="upcoming-feature"
       aria-label="Upcoming Featured Event Spotlight"
-      className="py-16 md:py-24 bg-gradient-to-b from-[#1C0F0A] via-[#2A1014] to-[#1C0F0A] relative overflow-hidden"
+      className="py-16 md:py-24 bg-[#1C0F0A] relative overflow-hidden border-t border-[#3D2018]"
     >
-      {/* Decorative background lines */}
-      <div className="absolute inset-0 pointer-events-none opacity-20">
-        <div className="absolute top-0 left-1/3 w-px h-full bg-gradient-to-b from-[#D4845A]/0 via-[#D4845A]/40 to-transparent" />
-        <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-[#D4845A]/0 via-[#D4845A]/20 to-transparent" />
-      </div>
+
 
       <Container size="wide">
         {/* Section context eyebrow */}

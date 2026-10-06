@@ -44,15 +44,14 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
                 aspectRatio="portrait"
                 className="w-full h-full"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1C0F0A] via-[#1C0F0A]/20 to-transparent" />
-              
+
               <div className="absolute top-4 left-4">
                 <span className="px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#D4845A] text-[#1C0F0A] shadow-md">
                   President
                 </span>
               </div>
 
-              <div className="absolute bottom-4 left-6 right-6">
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-[#1C0F0A]/95 border-t border-[#3D2018]">
                 <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#D4845A] block mb-1">
                   OFFICIAL LEADERSHIP
                 </span>
@@ -64,6 +63,7 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
                 </p>
               </div>
             </div>
+
 
             <div className="p-6 sm:p-8 flex flex-col justify-between flex-1 bg-[#2A1014]/60">
               <div className="relative pl-6 border-l-2 border-[#D4845A]/60 mb-6">
@@ -101,15 +101,14 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
                 aspectRatio="portrait"
                 className="w-full h-full"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1C0F0A] via-[#1C0F0A]/20 to-transparent" />
-              
+
               <div className="absolute top-4 left-4">
                 <span className="px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#3D2018] text-[#FAF0E6] border border-[#3D2018] shadow-md">
                   Vice President
                 </span>
               </div>
 
-              <div className="absolute bottom-4 left-6 right-6">
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-[#1C0F0A]/95 border-t border-[#3D2018]">
                 <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#D4845A] block mb-1">
                   OPERATIONS & PRODUCTION
                 </span>
@@ -121,6 +120,7 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
                 </p>
               </div>
             </div>
+
 
             <div className="p-6 sm:p-8 flex flex-col justify-between flex-1 bg-[#2A1014]/60">
               <div className="relative pl-6 border-l-2 border-[#3D2018] mb-6">

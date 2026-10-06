@@ -40,7 +40,7 @@ export const Button: React.FC<ButtonProps> = ({
     ghost:
       "text-[#C4A882] hover:text-[#D4845A] hover:bg-[#2A1014]/50",
     gold:
-      "bg-gradient-to-r from-[#D4845A] via-[#E8C87A] to-[#D4845A] text-[#1C0F0A] font-semibold hover:shadow-lg hover:shadow-[#D4845A]/30",
+      "bg-[#D4845A] text-[#1C0F0A] font-semibold hover:bg-[#E8C87A] shadow-md shadow-[#D4845A]/30",
   };
 
   const combinedClasses = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;

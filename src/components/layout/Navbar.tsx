@@ -7,6 +7,14 @@ interface NavbarProps {
   institutionName?: string;
 }
 
+const NAV_LINKS = [
+  { label: "About", href: "#about" },
+  { label: "Upcoming Events", href: "#events" },
+  { label: "Past Events", href: "#past-events" },
+  { label: "Winners", href: "#winners" },
+  { label: "Club Members", href: "#members" },
+];
+
 export const Navbar: React.FC<NavbarProps> = () => {
   const [activeSection, setActiveSection] = useState("about");
 
@@ -38,30 +46,23 @@ export const Navbar: React.FC<NavbarProps> = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { label: "About", href: "#about" },
-    { label: "Upcoming Events", href: "#events" },
-    { label: "Past Events", href: "#past-events" },
-    { label: "Winners", href: "#winners" },
-    { label: "Club Members", href: "#members" },
-  ];
-
   return (
     <header className="fixed top-0 left-0 right-0 z-40 flex justify-center pointer-events-none">
       <div className="pointer-events-auto w-full flex justify-center">
         <PillNav
           logo="/pac-logo.svg"
           logoAlt="Performing Arts Council Logo"
-          items={navLinks}
+          items={NAV_LINKS}
           activeHref={`#${activeSection}`}
           baseColor="#D4845A"
           pillColor="#2A1014"
           hoveredPillTextColor="#1C0F0A"
           pillTextColor="#FAF0E6"
           ease="power3.easeOut"
-          initialLoadAnimation={true}
+          initialLoadAnimation={false}
         />
       </div>
     </header>
   );
 };
+

@@ -27,9 +27,6 @@ export const IntroLoader: React.FC = () => {
           exit={{ opacity: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }}
           className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#1C0F0A] text-[#FAF0E6] select-none pointer-events-auto"
         >
-          {/* Subtle radial ambient */}
-          <div className="absolute inset-0 bg-radial-gradient from-[#8B2E2E]/20 via-transparent to-transparent opacity-70" />
-
           <motion.div
             initial={{ scale: 0.88, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -41,10 +38,9 @@ export const IntroLoader: React.FC = () => {
               initial={{ rotate: -15, scale: 0.7 }}
               animate={{ rotate: 0, scale: 1 }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-[#D4845A]/70 bg-[#2A1014] shadow-2xl flex items-center justify-center mb-6 relative overflow-hidden"
+              className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-[#D4845A] bg-[#2A1014] shadow-2xl flex items-center justify-center mb-6 relative overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#8B2E2E]/40 to-transparent" />
-              <span className="font-serif text-2xl sm:text-3xl font-bold bg-gradient-to-r from-[#FAF0E6] via-[#D4845A] to-[#E8C87A] bg-clip-text text-transparent">
+              <span className="font-serif text-2xl sm:text-3xl font-bold text-[#FAF0E6]">
                 PAC
               </span>
             </motion.div>
@@ -72,7 +68,7 @@ export const IntroLoader: React.FC = () => {
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 1.1, ease: "easeInOut" }}
-              className="w-32 h-[2px] bg-gradient-to-r from-transparent via-[#D4845A] to-transparent mt-8"
+              className="w-32 h-[2px] bg-[#D4845A] mt-8"
             />
           </motion.div>
         </motion.div>

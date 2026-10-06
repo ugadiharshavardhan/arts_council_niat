@@ -21,7 +21,8 @@ export const ManifestoPreview: React.FC<ManifestoPreviewProps> = ({ pillars }) =
     <section
       id="manifesto"
       aria-label="President Manifesto Preview"
-      className="py-20 md:py-28 bg-gradient-to-b from-[#1C0F0A] via-[#2A1014] to-[#1C0F0A] relative"
+      className="py-20 md:py-28 bg-[#1C0F0A] border-t border-[#3D2018] relative"
+
     >
       <Container size="wide">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">

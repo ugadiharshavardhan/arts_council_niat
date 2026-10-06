@@ -35,7 +35,7 @@ export default function EventDetailsClient({ event }: EventDetailsClientProps) {
       : [event.image];
 
   const isUpcoming = event.id.startsWith("ue-");
-  const backHref = isUpcoming ? "/events/upcoming" : "/events";
+  const backHref = isUpcoming ? "/events/upcoming" : "/events/past";
   const backLabel = isUpcoming ? "Back to Upcoming Events" : "Back to Past Events";
 
   return (

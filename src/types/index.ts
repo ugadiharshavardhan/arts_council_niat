@@ -33,7 +33,9 @@ export interface CouncilMember {
   role: string;
   photo: string;
   department?: string;
+  studentId?: string;
   isLeadership?: boolean;
+  imagePosition?: string;
 }
 
 export interface LeaderboardEntry {

@@ -12,6 +12,7 @@ interface ImagePlaceholderProps {
   height?: number;
   priority?: boolean;
   aspectRatio?: "video" | "square" | "portrait" | "auto";
+  objectPosition?: string;
 }
 
 export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
@@ -23,6 +24,7 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
   height,
   priority = false,
   aspectRatio = "auto",
+  objectPosition,
 }) => {
   const [hasError, setHasError] = useState(false);
 
@@ -59,6 +61,7 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
           priority={priority}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-700 hover:scale-105"
+          style={objectPosition ? { objectPosition } : undefined}
           onError={() => setHasError(true)}
         />
       </div>
@@ -74,6 +77,7 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
         height={height || 400}
         priority={priority}
         className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+        style={objectPosition ? { objectPosition } : undefined}
         onError={() => setHasError(true)}
       />
     </div>

@@ -16,6 +16,7 @@ export const CouncilMemberCard: React.FC<CouncilMemberCardProps> = ({ member }) 
           alt={member.name}
           aspectRatio="portrait"
           className="w-full h-full"
+          objectPosition={member.imagePosition}
         />
 
         {member.department && (
@@ -38,7 +39,7 @@ export const CouncilMemberCard: React.FC<CouncilMemberCardProps> = ({ member }) 
         </div>
 
         <div className="pt-4 mt-4 border-t border-[#3D2018] flex items-center justify-between text-[11px] font-mono text-[#C4A882]/70">
-          <span>Student ID: [REDACTED/MOCK]</span>
+          <span>Student ID: {member.studentId || "—"}</span>
           <ArrowRight className="w-3.5 h-3.5 text-[#C4A882]/70 group-hover:text-[#D4845A] group-hover:translate-x-1 transition-all" />
         </div>
       </div>

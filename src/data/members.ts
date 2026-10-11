@@ -1,4 +1,4 @@
-import { CouncilMember } from "@/types";
+import { CouncilMember, VerticalsTeamData, FinanceTeamData } from "@/types";
 
 export const councilLeadership: { president: CouncilMember; vicePresident: CouncilMember } = {
   president: {
@@ -59,6 +59,7 @@ export const featuredCouncilMembers: CouncilMember[] = [
     studentId: "N24H01A0008",
     photo: "/images/members/ashrith-nanda.png",
     imagePosition: "center 35%",
+    teamUrl: "/club-members/finance",
   },
   {
     id: "mem-06",
@@ -67,6 +68,7 @@ export const featuredCouncilMembers: CouncilMember[] = [
     studentId: "N24H01A0365",
     photo: "/images/members/pindi-anila.jpg",
     imagePosition: "center 8%",
+    teamUrl: "/club-members/verticals",
   },
   {
     id: "mem-07",
@@ -77,3 +79,78 @@ export const featuredCouncilMembers: CouncilMember[] = [
     imagePosition: "center 15%",
   },
 ];
+
+export const verticalsTeamData: VerticalsTeamData = {
+  head: {
+    id: "vert-head",
+    name: "Pindi Anila",
+    role: "Verticals Head",
+    studentId: "N24H01A0365",
+    photo: "/images/members/pindi-anila.jpg",
+    imagePosition: "center 8%",
+  },
+  members: [
+    {
+      id: "vert-01",
+      name: "Palem Sri Charan",
+      role: "Verticals Member",
+      studentId: "N24H01A0240",
+      photo: "/images/members/palem-sri-charan.jpg",
+      imagePosition: "center 18%",
+    },
+    {
+      id: "vert-02",
+      name: "Kasini Pooja",
+      role: "Verticals Member",
+      studentId: "N24H01A0354",
+      photo: "/images/members/kasini-pooja.jpg",
+      imagePosition: "center 18%",
+    },
+  ],
+};
+
+export const financeTeamData: FinanceTeamData = {
+  head: {
+    id: "fin-head",
+    name: "Ashrith Nanda",
+    role: "Finance Head",
+    studentId: "N24H01A0008",
+    photo: "/images/members/ashrith-nanda.png",
+    imagePosition: "center 35%",
+  },
+  members: [
+    {
+      id: "fin-01",
+      name: "UGADI HARSHA VARDHAN",
+      role: "Finance Member",
+      studentId: "N24H01B0247",
+      photo: "/images/members/ugadi-harsha-vardhan.jpg",
+      imagePosition: "center 22%",
+    },
+    {
+      id: "fin-02",
+      name: "Neeripelly Vyshnavi",
+      role: "Finance Member",
+      studentId: "N24H01A0252",
+      photo: "/images/members/neeripelly-vyshnavi.jpg",
+      imagePosition: "center 18%",
+    },
+    {
+      id: "fin-03",
+      name: "Dhanya Sri",
+      role: "Finance Member",
+      studentId: "N24H01A0300",
+      photo: "/images/members/dhanya-sri.jpg",
+      imagePosition: "center 18%",
+    },
+    {
+      id: "fin-04",
+      name: "P.Parnika",
+      role: "Finance Member",
+      // Student ID unconfirmed: "P.Parnika" was provided in the ID field; kept configurable ready for correct ID
+      studentId: undefined,
+      photo: "/images/members/p-parnika.jpg",
+      imagePosition: "center 20%",
+    },
+  ],
+};

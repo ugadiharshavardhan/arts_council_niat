@@ -58,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
   //   - On a dedicated page, match by pathname.
   const activeHref = isHomePage
     ? (NAV_CONFIG.find((item) => item.sectionId === activeSection)?.pageRoute ?? "")
-    : (NAV_CONFIG.find((item) => item.pageRoute === pathname)?.pageRoute ?? "");
+    : (NAV_CONFIG.find((item) => pathname.startsWith(item.pageRoute))?.pageRoute ?? "");
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40 flex justify-center pointer-events-none">

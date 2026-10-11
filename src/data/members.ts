@@ -1,4 +1,4 @@
-import { CouncilMember, VerticalsTeamData, FinanceTeamData } from "@/types";
+import { CouncilMember, VerticalsTeamData, FinanceTeamData, SocialMediaTeamData, EventManagementTeamData } from "@/types";
 
 export const councilLeadership: { president: CouncilMember; vicePresident: CouncilMember } = {
   president: {
@@ -6,7 +6,8 @@ export const councilLeadership: { president: CouncilMember; vicePresident: Counc
     name: "President Name [PLACEHOLDER]",
     role: "President, Performing Arts Council",
     department: "Executive Leadership [PLACEHOLDER]",
-    photo: "/images/placeholder-president.svg",
+    photo: "/images/members/kranthi-kiran.jpg",
+    imagePosition: "center 65%",
     isLeadership: true,
   },
   vicePresident: {
@@ -14,7 +15,8 @@ export const councilLeadership: { president: CouncilMember; vicePresident: Counc
     name: "Vice President Name [PLACEHOLDER]",
     role: "Vice President, Performing Arts Council",
     department: "Operations & Production [PLACEHOLDER]",
-    photo: "/images/placeholder-vice-president.svg",
+    photo: "/images/members/akula-hasini.png",
+    imagePosition: "center 35%",
     isLeadership: true,
   },
 };
@@ -43,6 +45,7 @@ export const featuredCouncilMembers: CouncilMember[] = [
     studentId: "N24H01B0305",
     photo: "/images/members/ashwitha-jilla.jpg",
     imagePosition: "center 38%",
+    teamUrl: "/club-members/event-management",
   },
   {
     id: "mem-04",
@@ -76,7 +79,8 @@ export const featuredCouncilMembers: CouncilMember[] = [
     role: "Social Media Head",
     studentId: "N24H01A0522",
     photo: "/images/members/kambam-shashank.jpg",
-    imagePosition: "center 15%",
+    imagePosition: "center 25%",
+    teamUrl: "/club-members/social-media",
   },
 ];
 
@@ -154,3 +158,102 @@ export const financeTeamData: FinanceTeamData = {
     },
   ],
 };
+
+export const socialMediaTeamData: SocialMediaTeamData = {
+  head: {
+    id: "soc-head",
+    name: "Kambam Shashank",
+    role: "Social Media Head",
+    studentId: "N24H01A0522",
+    photo: "/images/members/kambam-shashank.jpg",
+    imagePosition: "center 15%",
+  },
+  members: [
+    {
+      id: "soc-01",
+      name: "MASETTY VEERA MANIKANTA DHEERAJ",
+      role: "Content Writer and Designer",
+      studentId: "N24H01A0087",
+      photo: "/images/members/masetty-veera-manikanta-dheeraj.jpg",
+      imagePosition: "30% 48%",
+    },
+    {
+      id: "soc-02",
+      name: "Avinash",
+      role: "Photography",
+      studentId: "N24H01B0022",
+      photo: "/images/members/avinash.jpg",
+      imagePosition: "55% 58%",
+    },
+    {
+      id: "soc-03",
+      name: "Rebbalapalli Pranav Maruthi",
+      role: "Editor",
+      studentId: "N24H01B0284",
+      photo: "/images/members/rebbalapalli-pranav-maruthi.jpg",
+      imagePosition: "center 18%",
+    },
+  ],
+};
+
+export const eventManagementTeamData: EventManagementTeamData = {
+  head: {
+    id: "evt-head",
+    name: "Ashwitha Jilla",
+    role: "Event Management Head",
+    studentId: "N24H01B0305",
+    photo: "/images/members/ashwitha-jilla.jpg",
+    imagePosition: "center 38%",
+  },
+  members: [
+    {
+      id: "evt-01",
+      name: "Heena Tabassum",
+      role: "Event Management Member",
+      studentId: "N24H01A037",
+      photo: "/images/members/heena-tabassum.jpg",
+      imagePosition: "center 15%",
+    },
+    {
+      id: "evt-02",
+      name: "Hasini",
+      role: "Event Management Member",
+      studentId: "N24H01A0136",
+      photo: "/images/members/hasini.jpg",
+      imagePosition: "center 20%",
+    },
+    {
+      id: "evt-03",
+      name: "Gourishetti Nandhini",
+      role: "Event Management Member",
+      studentId: "N24H01A0638",
+      photo: "/images/members/gourishetti-nandhini.jpg",
+      imagePosition: "center 15%",
+    },
+    {
+      id: "evt-04",
+      name: "Shaik Rehana Bi",
+      role: "Event Management Member",
+      studentId: "N24H01A0633",
+      photo: "/images/members/shaik-rehana-bi.jpg",
+      imagePosition: "center 75%",
+    },
+    {
+      id: "evt-05",
+      name: "Mulukuri Tejavardhan Reddy",
+      role: "Event Management Member",
+      studentId: "N24H01A0359",
+      photo: "/images/members/mulukuri-tejavardhan-reddy.png",
+      imagePosition: "center 15%",
+    },
+    {
+      id: "evt-06",
+      name: "Thriveda. P",
+      role: "Event Management Member",
+      studentId: "N24H01A0256",
+      photo: "/images/members/thriveda-p.jpg",
+      imagePosition: "center 2%",
+    },
+  ],
+};
+

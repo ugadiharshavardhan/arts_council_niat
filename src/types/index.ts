@@ -49,6 +49,16 @@ export interface FinanceTeamData {
   members: CouncilMember[];
 }
 
+export interface SocialMediaTeamData {
+  head: CouncilMember;
+  members: CouncilMember[];
+}
+
+export interface EventManagementTeamData {
+  head: CouncilMember;
+  members: CouncilMember[];
+}
+
 export interface LeaderboardEntry {
   rank: number;
   teamOrHouse: string;

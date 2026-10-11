@@ -36,6 +36,27 @@ export interface CouncilMember {
   studentId?: string;
   isLeadership?: boolean;
   imagePosition?: string;
+  teamUrl?: string;
+}
+
+export interface VerticalsTeamData {
+  head: CouncilMember;
+  members: CouncilMember[];
+}
+
+export interface FinanceTeamData {
+  head: CouncilMember;
+  members: CouncilMember[];
+}
+
+export interface SocialMediaTeamData {
+  head: CouncilMember;
+  members: CouncilMember[];
+}
+
+export interface EventManagementTeamData {
+  head: CouncilMember;
+  members: CouncilMember[];
 }
 
 export interface LeaderboardEntry {

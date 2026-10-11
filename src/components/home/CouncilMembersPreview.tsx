@@ -41,9 +41,9 @@ export const CouncilMembersPreview: React.FC<CouncilMembersPreviewProps> = ({
           </div>
         </div>
 
-        {/* 6 Featured Members Grid */}
+        {/* All Club Members Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {members.slice(0, 6).map((member) => (
+          {members.map((member) => (
             <CouncilMemberCard key={member.id} member={member} />
           ))}
         </div>

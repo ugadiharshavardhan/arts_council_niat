@@ -26,6 +26,7 @@ export const featuredCouncilMembers: CouncilMember[] = [
     role: "President",
     studentId: "N24H01A051",
     photo: "/images/members/kranthi-kiran.jpg",
+    imagePosition: "center 65%",
   },
   {
     id: "mem-02",
@@ -41,6 +42,7 @@ export const featuredCouncilMembers: CouncilMember[] = [
     role: "Event Management Head",
     studentId: "N24H01B0305",
     photo: "/images/members/ashwitha-jilla.jpg",
+    imagePosition: "center 38%",
   },
   {
     id: "mem-04",
@@ -56,12 +58,22 @@ export const featuredCouncilMembers: CouncilMember[] = [
     role: "Finance Head",
     studentId: "N24H01A0008",
     photo: "/images/members/ashrith-nanda.png",
+    imagePosition: "center 35%",
   },
   {
     id: "mem-06",
     name: "Pindi Anila",
     role: "Verticals Head",
     studentId: "N24H01A0365",
-    photo: "/images/placeholder-member-6.svg",
+    photo: "/images/members/pindi-anila.jpg",
+    imagePosition: "center 8%",
+  },
+  {
+    id: "mem-07",
+    name: "Kambam Shashank",
+    role: "Social Media Head",
+    studentId: "N24H01A0522",
+    photo: "/images/members/kambam-shashank.jpg",
+    imagePosition: "center 15%",
   },
 ];

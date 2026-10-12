@@ -51,6 +51,10 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
     );
   }
 
+  const isExternal = Boolean(
+    src && (src.startsWith("http://") || src.startsWith("https://"))
+  );
+
   if (fill) {
     return (
       <div className={`relative overflow-hidden ${aspectClass} ${className}`}>
@@ -58,6 +62,7 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
           src={src}
           alt={alt}
           fill
+          unoptimized={isExternal}
           priority={priority}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-700 hover:scale-105"
@@ -75,6 +80,7 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
         alt={alt}
         width={width || 600}
         height={height || 400}
+        unoptimized={isExternal}
         priority={priority}
         className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
         style={objectPosition ? { objectPosition } : undefined}

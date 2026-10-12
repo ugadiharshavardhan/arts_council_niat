@@ -32,6 +32,7 @@ import {
   Layers,
   Tag,
 } from "lucide-react";
+import { ImageUploadField } from "@/components/admin/ImageUploadField";
 import { EventItem, WinnerItem, CouncilMember } from "@/types";
 import {
   getUpcomingEvents,
@@ -97,6 +98,7 @@ export default function AdminPage() {
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [copiedSql, setCopiedSql] = useState<boolean>(false);
   const [showSqlModal, setShowSqlModal] = useState<boolean>(false);
+  const [initialEditingPhoto, setInitialEditingPhoto] = useState<string>("");
 
   // Data states
   const [upcomingEvents, setUpcomingEvents] = useState<EventItem[]>([]);
@@ -202,6 +204,7 @@ export default function AdminPage() {
   const openEditPastEvent = (event: EventItem) => {
     setEditingItemType("past");
     setModalMode("edit");
+    setInitialEditingPhoto(event.image || "");
     setEventForm({ ...event });
     setIsEditModalOpen(true);
   };
@@ -209,6 +212,7 @@ export default function AdminPage() {
   const openCreatePastEvent = () => {
     setEditingItemType("past");
     setModalMode("create");
+    setInitialEditingPhoto("");
     setEventForm({
       id: `pe-${Date.now().toString().slice(-4)}`,
       title: "",
@@ -227,6 +231,7 @@ export default function AdminPage() {
   const openEditUpcomingEvent = (event: EventItem) => {
     setEditingItemType("upcoming");
     setModalMode("edit");
+    setInitialEditingPhoto(event.image || "");
     setEventForm({ ...event });
     setIsEditModalOpen(true);
   };
@@ -234,6 +239,7 @@ export default function AdminPage() {
   const openCreateUpcomingEvent = () => {
     setEditingItemType("upcoming");
     setModalMode("create");
+    setInitialEditingPhoto("");
     setEventForm({
       id: `ue-${Date.now().toString().slice(-4)}`,
       title: "",
@@ -252,6 +258,7 @@ export default function AdminPage() {
   const openEditWinner = (winner: WinnerItem) => {
     setEditingItemType("winners");
     setModalMode("edit");
+    setInitialEditingPhoto(winner.photo || "");
     setWinnerForm({ ...winner });
     setIsEditModalOpen(true);
   };
@@ -259,6 +266,7 @@ export default function AdminPage() {
   const openCreateWinner = () => {
     setEditingItemType("winners");
     setModalMode("create");
+    setInitialEditingPhoto("");
     setWinnerForm({
       id: `win-${Date.now().toString().slice(-4)}`,
       name: "",
@@ -276,6 +284,7 @@ export default function AdminPage() {
   const openEditMember = (member: CouncilMember) => {
     setEditingItemType("members");
     setModalMode("edit");
+    setInitialEditingPhoto(member.photo || "");
     setMemberForm({ ...member });
     setIsEditModalOpen(true);
   };
@@ -283,12 +292,13 @@ export default function AdminPage() {
   const openCreateMember = () => {
     setEditingItemType("members");
     setModalMode("create");
+    setInitialEditingPhoto("");
     setMemberForm({
       id: `mem-${Date.now().toString().slice(-4)}`,
       name: "",
-      role: "Stage Coordinator",
-      studentId: "N24H01...",
-      department: "Performing Arts Directorate",
+      role: "Member",
+      studentId: "",
+      department: "Finance & Sponsorships",
       photo: "/images/members/kranthi-kiran.jpg",
       imagePosition: "center center",
       isLeadership: false,
@@ -443,7 +453,7 @@ export default function AdminPage() {
     };
 
     try {
-      const result = await saveClubMember(itemToSave);
+      const result = await saveClubMember(itemToSave, initialEditingPhoto);
       setMembers((prev) => {
         const exists = prev.some((m) => m.id === itemToSave.id);
         return exists ? prev.map((m) => (m.id === itemToSave.id ? itemToSave : m)) : [...prev, itemToSave];
@@ -1425,33 +1435,15 @@ export default function AdminPage() {
                   )}
 
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-mono uppercase text-[#E7C59F] mb-1.5">
-                      Image Path or URL
-                    </label>
-                    <input
-                      type="text"
+                    <ImageUploadField
+                      label="Event Cover Image"
                       value={eventForm.image || ""}
-                      onChange={(e) => setEventForm({ ...eventForm, image: e.target.value })}
-                      placeholder="e.g. /images/placeholder-past-1.svg"
-                      className="w-full px-4 py-2.5 rounded-xl bg-[#23120A] border border-[#6B3B23] text-sm text-[#F5E6D3] focus:border-[#D98C5B] focus:outline-none mb-2"
+                      onChange={(newUrl) => setEventForm({ ...eventForm, image: newUrl })}
+                      folder="events"
+                      presets={IMAGE_PRESETS[editingItemType]}
+                      aspectRatio="landscape"
+                      helperText="Upload event cover image. Directly uploaded to Supabase Storage and stored in database."
                     />
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-[10px] font-mono text-[#E7C59F]/60">Presets:</span>
-                      {IMAGE_PRESETS[editingItemType].map((img, idx) => (
-                        <button
-                          key={img}
-                          type="button"
-                          onClick={() => setEventForm({ ...eventForm, image: img })}
-                          className={`text-[10px] font-mono px-2 py-0.5 rounded border ${
-                            eventForm.image === img
-                              ? "bg-[#D98C5B] text-[#23120A] border-[#D98C5B]"
-                              : "bg-[#23120A] text-[#E7C59F] border-[#6B3B23]"
-                          }`}
-                        >
-                          Asset #{idx + 1}
-                        </button>
-                      ))}
-                    </div>
                   </div>
 
                   <div className="sm:col-span-2">
@@ -1559,32 +1551,15 @@ export default function AdminPage() {
                   </div>
 
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-mono uppercase text-[#E7C59F] mb-1.5">
-                      Photo Asset Path
-                    </label>
-                    <input
-                      type="text"
+                    <ImageUploadField
+                      label="Winner Photograph / Trophy Image"
                       value={winnerForm.photo || ""}
-                      onChange={(e) => setWinnerForm({ ...winnerForm, photo: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl bg-[#23120A] border border-[#6B3B23] text-sm text-[#F5E6D3] focus:border-[#D98C5B] focus:outline-none mb-2"
+                      onChange={(newUrl) => setWinnerForm({ ...winnerForm, photo: newUrl })}
+                      folder="winners"
+                      presets={IMAGE_PRESETS.winners}
+                      aspectRatio="portrait"
+                      helperText="Upload portrait of the winner or award ceremony photo."
                     />
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-[10px] font-mono text-[#E7C59F]/60">Presets:</span>
-                      {IMAGE_PRESETS.winners.map((img, idx) => (
-                        <button
-                          key={img}
-                          type="button"
-                          onClick={() => setWinnerForm({ ...winnerForm, photo: img })}
-                          className={`text-[10px] font-mono px-2 py-0.5 rounded border ${
-                            winnerForm.photo === img
-                              ? "bg-[#D98C5B] text-[#23120A] border-[#D98C5B]"
-                              : "bg-[#23120A] text-[#E7C59F] border-[#6B3B23]"
-                          }`}
-                        >
-                          Winner #{idx + 1}
-                        </button>
-                      ))}
-                    </div>
                   </div>
                 </div>
 
@@ -1651,43 +1626,51 @@ export default function AdminPage() {
 
                   <div>
                     <label className="block text-xs font-mono uppercase text-[#E7C59F] mb-1.5">
-                      Department
+                      Council / Department
                     </label>
                     <input
                       type="text"
+                      list="council-department-suggestions"
                       value={memberForm.department || ""}
                       onChange={(e) => setMemberForm({ ...memberForm, department: e.target.value })}
+                      placeholder="e.g. Finance & Sponsorships"
                       className="w-full px-4 py-2.5 rounded-xl bg-[#23120A] border border-[#6B3B23] text-sm text-[#F5E6D3] focus:border-[#D98C5B] focus:outline-none"
                     />
+                    <datalist id="council-department-suggestions">
+                      <option value="Executive Leadership" />
+                      <option value="Finance & Sponsorships" />
+                      <option value="Event Management" />
+                      <option value="Social Media & Design" />
+                      <option value="Club Verticals" />
+                      <option value="Public Relations & Media" />
+                      <option value="Operations & Production" />
+                    </datalist>
+                  </div>
+
+                  <div className="sm:col-span-2 flex items-center gap-3 py-1">
+                    <label className="relative flex items-center gap-2.5 cursor-pointer text-xs font-mono text-[#E7C59F]">
+                      <input
+                        type="checkbox"
+                        checked={Boolean(memberForm.isLeadership)}
+                        onChange={(e) => setMemberForm({ ...memberForm, isLeadership: e.target.checked })}
+                        className="w-4 h-4 rounded bg-[#23120A] border-[#6B3B23] text-[#D98C5B] focus:ring-0 cursor-pointer"
+                      />
+                      <span className="font-semibold text-[#F5E6D3]">
+                        Executive Directorate / Council Head
+                      </span>
+                    </label>
                   </div>
 
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-mono uppercase text-[#E7C59F] mb-1.5">
-                      Photo Asset Path
-                    </label>
-                    <input
-                      type="text"
+                    <ImageUploadField
+                      label="Member Profile Photo"
                       value={memberForm.photo || ""}
-                      onChange={(e) => setMemberForm({ ...memberForm, photo: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl bg-[#23120A] border border-[#6B3B23] text-sm text-[#F5E6D3] focus:border-[#D98C5B] focus:outline-none mb-2"
+                      onChange={(newUrl) => setMemberForm({ ...memberForm, photo: newUrl })}
+                      folder="members"
+                      presets={IMAGE_PRESETS.members}
+                      aspectRatio="portrait"
+                      helperText="Upload member portrait. Replacing this image automatically deletes the old file from Supabase Storage."
                     />
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-[10px] font-mono text-[#E7C59F]/60">Presets:</span>
-                      {IMAGE_PRESETS.members.map((img, idx) => (
-                        <button
-                          key={img}
-                          type="button"
-                          onClick={() => setMemberForm({ ...memberForm, photo: img })}
-                          className={`text-[10px] font-mono px-2 py-0.5 rounded border ${
-                            memberForm.photo === img
-                              ? "bg-[#D98C5B] text-[#23120A] border-[#D98C5B]"
-                              : "bg-[#23120A] text-[#E7C59F] border-[#6B3B23]"
-                          }`}
-                        >
-                          Member #{idx + 1}
-                        </button>
-                      ))}
-                    </div>
                   </div>
                 </div>
 

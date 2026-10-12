@@ -5,7 +5,7 @@ import {
   pastEventsList,
 } from "@/data/events";
 import { recentWinnersList } from "@/data/winners";
-import { featuredCouncilMembers } from "@/data/members";
+import { allClubMembers } from "@/data/members";
 import { supabase, isSupabaseConfigured } from "./supabase";
 
 // Storage keys for local fallback
@@ -20,7 +20,7 @@ const STORAGE_KEYS = {
 export const DEFAULT_UPCOMING: EventItem[] = upcomingEventsList;
 export const DEFAULT_PAST: EventItem[] = pastEventsList;
 export const DEFAULT_WINNERS: WinnerItem[] = recentWinnersList;
-export const DEFAULT_MEMBERS: CouncilMember[] = featuredCouncilMembers;
+export const DEFAULT_MEMBERS: CouncilMember[] = allClubMembers;
 
 function isClient(): boolean {
   return typeof window !== "undefined";
@@ -210,6 +210,13 @@ export async function deleteUpcomingEvent(
   id: string
 ): Promise<{ success: boolean; error?: string }> {
   let cloudError = "";
+
+  const current = getLocal<EventItem[]>(STORAGE_KEYS.UPCOMING_EVENTS, DEFAULT_UPCOMING);
+  const toDelete = current.find((e) => e.id === id);
+  if (toDelete?.image) {
+    deleteImageFromSupabase(toDelete.image);
+  }
+
   if (isSupabaseConfigured && supabase) {
     try {
       const { error } = await supabase.from("events").delete().eq("id", id);
@@ -223,7 +230,6 @@ export async function deleteUpcomingEvent(
     }
   }
 
-  const current = getLocal<EventItem[]>(STORAGE_KEYS.UPCOMING_EVENTS, DEFAULT_UPCOMING);
   const updated = current.filter((e) => e.id !== id);
   setLocal(STORAGE_KEYS.UPCOMING_EVENTS, updated);
 
@@ -323,6 +329,13 @@ export async function deletePastEvent(
   id: string
 ): Promise<{ success: boolean; error?: string }> {
   let cloudError = "";
+
+  const current = getLocal<EventItem[]>(STORAGE_KEYS.PAST_EVENTS, DEFAULT_PAST);
+  const toDelete = current.find((e) => e.id === id);
+  if (toDelete?.image) {
+    deleteImageFromSupabase(toDelete.image);
+  }
+
   if (isSupabaseConfigured && supabase) {
     try {
       const { error } = await supabase.from("events").delete().eq("id", id);
@@ -336,7 +349,6 @@ export async function deletePastEvent(
     }
   }
 
-  const current = getLocal<EventItem[]>(STORAGE_KEYS.PAST_EVENTS, DEFAULT_PAST);
   const updated = current.filter((e) => e.id !== id);
   setLocal(STORAGE_KEYS.PAST_EVENTS, updated);
 
@@ -428,6 +440,13 @@ export async function deleteWinner(
   id: string
 ): Promise<{ success: boolean; error?: string }> {
   let cloudError = "";
+
+  const current = getLocal<WinnerItem[]>(STORAGE_KEYS.WINNERS, DEFAULT_WINNERS);
+  const toDelete = current.find((w) => w.id === id);
+  if (toDelete?.photo) {
+    deleteImageFromSupabase(toDelete.photo);
+  }
+
   if (isSupabaseConfigured && supabase) {
     try {
       const { error } = await supabase.from("winners").delete().eq("id", id);
@@ -441,7 +460,6 @@ export async function deleteWinner(
     }
   }
 
-  const current = getLocal<WinnerItem[]>(STORAGE_KEYS.WINNERS, DEFAULT_WINNERS);
   const updated = current.filter((w) => w.id !== id);
   setLocal(STORAGE_KEYS.WINNERS, updated);
 
@@ -451,6 +469,93 @@ export async function deleteWinner(
 // ============================================================================
 // CLUB MEMBERS
 // ============================================================================
+export function getTeamUrlFromRole(
+  role?: string,
+  department?: string
+): string | undefined {
+  const r = (role || "").toLowerCase();
+  const d = (department || "").toLowerCase();
+  if (r.includes("finance") || d.includes("finance")) return "/club-members/finance";
+  if (r.includes("event") || d.includes("event")) return "/club-members/event-management";
+  if (
+    r.includes("social") ||
+    d.includes("social") ||
+    r.includes("photography") ||
+    r.includes("editor") ||
+    r.includes("content")
+  )
+    return "/club-members/social-media";
+  if (r.includes("vertical") || d.includes("vertical")) return "/club-members/verticals";
+  return undefined;
+}
+
+// ============================================================================
+// SUPABASE STORAGE - IMAGE UPLOAD & PURGE
+// ============================================================================
+
+/**
+ * Upload an image file directly to Supabase Storage.
+ * Automatically deletes the old Supabase image if provided to prevent storage bloat.
+ */
+export async function uploadImageToSupabase(
+  file: File,
+  folder: "members" | "events" | "winners" = "members",
+  oldImageUrl?: string
+): Promise<{ success: boolean; url?: string; error?: string }> {
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("folder", folder);
+    if (oldImageUrl) {
+      formData.append("oldImageUrl", oldImageUrl);
+    }
+
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      return {
+        success: false,
+        error: data.error || `Upload failed with status ${res.status}`,
+      };
+    }
+
+    return {
+      success: true,
+      url: data.url,
+    };
+  } catch (err: any) {
+    console.error("uploadImageToSupabase error:", err);
+    return {
+      success: false,
+      error: err?.message || "Network error while uploading image to Supabase",
+    };
+  }
+}
+
+/**
+ * Remove an image from Supabase Storage if it was uploaded to our bucket.
+ */
+export async function deleteImageFromSupabase(imageUrl?: string): Promise<boolean> {
+  if (!imageUrl || !imageUrl.includes("/storage/v1/object/public/arts-council/")) {
+    return false;
+  }
+  try {
+    const res = await fetch(
+      `/api/upload?url=${encodeURIComponent(imageUrl)}`,
+      { method: "DELETE" }
+    );
+    const data = await res.json().catch(() => ({}));
+    return Boolean(data.success);
+  } catch (err) {
+    console.warn("deleteImageFromSupabase error:", err);
+    return false;
+  }
+}
+
 export async function getClubMembers(): Promise<CouncilMember[]> {
   if (isSupabaseConfigured && supabase) {
     try {
@@ -470,6 +575,7 @@ export async function getClubMembers(): Promise<CouncilMember[]> {
             photo: d.photo,
             imagePosition: d.image_position || undefined,
             isLeadership: Boolean(d.is_leadership),
+            teamUrl: d.team_url || getTeamUrlFromRole(d.role, d.department),
           }));
           setLocalSilent(STORAGE_KEYS.MEMBERS, mapped);
           return mapped;
@@ -484,10 +590,16 @@ export async function getClubMembers(): Promise<CouncilMember[]> {
 }
 
 export async function saveClubMember(
-  member: CouncilMember
+  member: CouncilMember,
+  previousPhoto?: string
 ): Promise<{ success: boolean; syncedToCloud: boolean; error?: string }> {
   let syncedToCloud = false;
   let cloudError = "";
+
+  // If photo changed and old photo was on Supabase, remove old file
+  if (previousPhoto && previousPhoto !== member.photo) {
+    deleteImageFromSupabase(previousPhoto);
+  }
 
   if (isSupabaseConfigured && supabase) {
     try {
@@ -531,6 +643,14 @@ export async function deleteClubMember(
   id: string
 ): Promise<{ success: boolean; error?: string }> {
   let cloudError = "";
+
+  // Delete image from storage if hosted on Supabase
+  const current = getLocal<CouncilMember[]>(STORAGE_KEYS.MEMBERS, DEFAULT_MEMBERS);
+  const toDelete = current.find((m) => m.id === id);
+  if (toDelete?.photo) {
+    deleteImageFromSupabase(toDelete.photo);
+  }
+
   if (isSupabaseConfigured && supabase) {
     try {
       const { error } = await supabase.from("club_members").delete().eq("id", id);
@@ -544,7 +664,6 @@ export async function deleteClubMember(
     }
   }
 
-  const current = getLocal<CouncilMember[]>(STORAGE_KEYS.MEMBERS, DEFAULT_MEMBERS);
   const updated = current.filter((m) => m.id !== id);
   setLocal(STORAGE_KEYS.MEMBERS, updated);
 

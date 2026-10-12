@@ -59,6 +59,18 @@ export interface EventManagementTeamData {
   members: CouncilMember[];
 }
 
+export interface CouncilGroup {
+  id: string;
+  name: string;
+  shortName: string;
+  description: string;
+  badge: string;
+  route?: string;
+  head?: CouncilMember;
+  leadership?: CouncilMember[];
+  members: CouncilMember[];
+}
+
 export interface LeaderboardEntry {
   rank: number;
   teamOrHouse: string;

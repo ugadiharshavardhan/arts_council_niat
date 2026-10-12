@@ -1,4 +1,4 @@
-import { CouncilMember, VerticalsTeamData, FinanceTeamData, SocialMediaTeamData, EventManagementTeamData } from "@/types";
+import { CouncilMember, VerticalsTeamData, FinanceTeamData, SocialMediaTeamData, EventManagementTeamData, CouncilGroup } from "@/types";
 
 export const councilLeadership: { president: CouncilMember; vicePresident: CouncilMember } = {
   president: {
@@ -267,4 +267,134 @@ export const eventManagementTeamData: EventManagementTeamData = {
     },
   ],
 };
+
+/**
+ * Complete list of all 22 Performing Arts Council members
+ * across Executive Directorate and all Council Wings.
+ */
+export const allClubMembers: CouncilMember[] = [
+  // 1. Executive Leadership
+  councilLeadership.president,
+  councilLeadership.vicePresident,
+
+  // 2. Council Heads
+  featuredCouncilMembers[2], // Ashwitha Jilla (Event Management Head)
+  featuredCouncilMembers[3], // Thatikonda Swetcha (OutReach Head)
+  featuredCouncilMembers[4], // Ashrith Nanda (Finance Head)
+  featuredCouncilMembers[5], // Pindi Anila (Verticals Head)
+  featuredCouncilMembers[6], // Kambam Shashank (Social Media Head)
+
+  // 3. Finance Members
+  ...financeTeamData.members.map((m) => ({
+    ...m,
+    department: "Finance & Sponsorships",
+    teamUrl: "/club-members/finance",
+  })),
+
+  // 4. Event Management Members
+  ...eventManagementTeamData.members.map((m) => ({
+    ...m,
+    department: "Event Management",
+    teamUrl: "/club-members/event-management",
+  })),
+
+  // 5. Social Media Members
+  ...socialMediaTeamData.members.map((m) => ({
+    ...m,
+    department: "Social Media & Design",
+    teamUrl: "/club-members/social-media",
+  })),
+
+  // 6. Verticals Members
+  ...verticalsTeamData.members.map((m) => ({
+    ...m,
+    department: "Club Verticals",
+    teamUrl: "/club-members/verticals",
+  })),
+];
+
+/**
+ * Helper to build the hierarchical organizational tree dynamically,
+ * merging with live data from Supabase / localStorage if provided.
+ */
+export function buildCouncilsHierarchy(customMembers?: CouncilMember[]) {
+  const memberList = customMembers && customMembers.length > 0 ? customMembers : allClubMembers;
+
+  // Lookup map by ID
+  const map = new Map<string, CouncilMember>();
+  memberList.forEach((m) => map.set(m.id, m));
+
+  const getOrFallback = (defaultMember: CouncilMember): CouncilMember => {
+    return map.get(defaultMember.id) || defaultMember;
+  };
+
+  const president = getOrFallback(councilLeadership.president);
+  const vicePresident = getOrFallback(councilLeadership.vicePresident);
+
+  const councils: CouncilGroup[] = [
+    {
+      id: "finance",
+      name: "Finance & Budgeting Council",
+      shortName: "Finance",
+      badge: "Fiscal Directorate",
+      description:
+        "Managing resource allocations, sponsorships, proscenium vendor budgets, and financial governance powering every cultural production.",
+      route: "/club-members/finance",
+      head: getOrFallback(financeTeamData.head),
+      members: financeTeamData.members.map(getOrFallback),
+    },
+    {
+      id: "event-management",
+      name: "Event Management & Production Council",
+      shortName: "Event Management",
+      badge: "Stage & Operations",
+      description:
+        "Directing proscenium run-of-shows, stage protocols, artist greenrooms, acoustic orchestration, and venue crowd dynamics.",
+      route: "/club-members/event-management",
+      head: getOrFallback(eventManagementTeamData.head),
+      members: eventManagementTeamData.members.map(getOrFallback),
+    },
+    {
+      id: "social-media",
+      name: "Social Media, Content & Design Council",
+      shortName: "Social Media & Design",
+      badge: "Media & Digital Reach",
+      description:
+        "Curating visual branding, proscenium event cinematography, live coverage, editorial typography, and digital student outreach.",
+      route: "/club-members/social-media",
+      head: getOrFallback(socialMediaTeamData.head),
+      members: socialMediaTeamData.members.map(getOrFallback),
+    },
+    {
+      id: "verticals",
+      name: "Verticals & Cultural Wings Directorate",
+      shortName: "Verticals",
+      badge: "Artistic Guilds",
+      description:
+        "Powering cross-functional creative initiatives, multidisciplinary stage wings, monologue showcases, and student club coordination.",
+      route: "/club-members/verticals",
+      head: getOrFallback(verticalsTeamData.head),
+      members: verticalsTeamData.members.map(getOrFallback),
+    },
+    {
+      id: "outreach",
+      name: "Outreach & Public Relations Council",
+      shortName: "Outreach & PR",
+      badge: "Inter-Collegiate PR",
+      description:
+        "Fostering inter-university liaisons, guest artist invitations, academic council alliances, and public relations communications.",
+      head: getOrFallback(featuredCouncilMembers[3]), // Thatikonda Swetcha
+      members: [],
+    },
+  ];
+
+  return {
+    executiveLeadership: {
+      president,
+      vicePresident,
+    },
+    councils,
+  };
+}
+
 

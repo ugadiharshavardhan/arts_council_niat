@@ -7,7 +7,6 @@ import { IntroLoader } from "@/components/home/IntroLoader";
 import { Hero } from "@/components/home/Hero";
 import { LeadershipSection } from "@/components/home/LeadershipSection";
 import { UpcomingEvents } from "@/components/home/UpcomingEvents";
-import { RecentWinners } from "@/components/home/RecentWinners";
 import { PastEvents } from "@/components/home/PastEvents";
 import { LadduAuctionHighlight } from "@/components/home/LadduAuctionHighlight";
 import { CouncilMembersPreview } from "@/components/home/CouncilMembersPreview";
@@ -19,34 +18,29 @@ import {
   upcomingEventsList,
   pastEventsList as defaultPastEvents,
 } from "@/data/events";
-import { recentWinnersList as defaultWinners } from "@/data/winners";
 import { councilLeadership, featuredCouncilMembers as defaultMembers } from "@/data/members";
 import { ladduAuctionHighlight, siteMetadataInfo } from "@/data/home";
 import {
   getUpcomingEvents,
   getPastEvents,
-  getWinners,
   getClubMembers,
 } from "@/lib/dataService";
-import { EventItem, WinnerItem, CouncilMember } from "@/types";
+import { EventItem, CouncilMember } from "@/types";
 
 export default function Home() {
   const [upcomingEvents, setUpcomingEvents] = useState<EventItem[]>(upcomingEventsList);
   const [pastEvents, setPastEvents] = useState<EventItem[]>(defaultPastEvents);
-  const [winners, setWinners] = useState<WinnerItem[]>(defaultWinners);
   const [members, setMembers] = useState<CouncilMember[]>(defaultMembers);
 
   const loadData = async () => {
     try {
-      const [up, past, wins, mems] = await Promise.all([
+      const [up, past, mems] = await Promise.all([
         getUpcomingEvents(),
         getPastEvents(),
-        getWinners(),
         getClubMembers(),
       ]);
       if (up && up.length > 0) setUpcomingEvents(up);
       if (past && past.length > 0) setPastEvents(past);
-      if (wins && wins.length > 0) setWinners(wins);
       if (mems && mems.length > 0) setMembers(mems);
     } catch (err) {
       console.error("Error loading live PAC data:", err);
@@ -103,13 +97,10 @@ export default function Home() {
         {/* 6. Past events section (Infinite horizontal marquee) */}
         <PastEvents events={pastEvents} />
 
-        {/* 7. Recent winners section */}
-        <RecentWinners winners={winners} />
-
-        {/* 8. Club members preview */}
+        {/* 7. Club members preview */}
         <CouncilMembersPreview members={members} />
 
-        {/* 9. Ganesh Chaturthi Laddu Auction highlight */}
+        {/* 8. Ganesh Chaturthi Laddu Auction highlight */}
         <LadduAuctionHighlight data={ladduAuctionHighlight} />
       </main>
 

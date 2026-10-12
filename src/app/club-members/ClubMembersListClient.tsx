@@ -112,7 +112,7 @@ export function ClubMembersListClient() {
 
         {/* Page Heading */}
         <div className="mb-10 text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest text-[#D98C5B] bg-[#4E2E1E] border border-[#6B3B23] mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-sans uppercase tracking-widest text-[#D98C5B] bg-[#4E2E1E] border border-[#6B3B23] mb-4">
             <Shield className="w-3.5 h-3.5" />
             <span>Performing Arts Council Directorate · 2026-27</span>
           </div>
@@ -132,14 +132,14 @@ export function ClubMembersListClient() {
           <div className="absolute top-0 right-1/4 w-72 h-72 bg-[#D98C5B]/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-widest text-[#F5E6D3] bg-[#8B4513] border border-[#D98C5B]/50 mb-2 font-bold shadow-md">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[11px] font-sans uppercase tracking-widest text-[#F5E6D3] bg-[#8B4513] border border-[#D98C5B]/50 mb-2 font-bold shadow-md">
               <Crown className="w-3.5 h-3.5 text-[#F5E6D3]" />
               <span>Executive Directorate</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#F5E6D3]">
               President & Vice President
             </h2>
-            <p className="text-xs font-mono text-[#E7C59F]/70 mt-1">
+            <p className="text-xs font-sans text-[#E7C59F]/70 mt-1">
               Guiding council governance, proscenium staging, and student arts leadership
             </p>
           </div>
@@ -192,7 +192,7 @@ export function ClubMembersListClient() {
               <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#F5E6D3]">
                 Club Heads
               </h2>
-              <p className="text-xs font-mono text-[#E7C59F]/80 mt-0.5">
+              <p className="text-xs font-sans text-[#E7C59F]/80 mt-0.5">
                 Click any Head below to explore and view the members in their department
               </p>
             </div>
@@ -201,7 +201,7 @@ export function ClubMembersListClient() {
               <button
                 type="button"
                 onClick={() => setSelectedHeadId(null)}
-                className="inline-flex items-center gap-1.5 text-xs font-mono text-[#D98C5B] hover:text-[#E79E70] px-3 py-1.5 rounded-full bg-[#4E2E1E] border border-[#6B3B23] transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-xs font-sans text-[#D98C5B] hover:text-[#E79E70] px-3 py-1.5 rounded-full bg-[#4E2E1E] border border-[#6B3B23] transition-colors cursor-pointer"
               >
                 <X className="w-3.5 h-3.5" />
                 <span>Collapse Department</span>
@@ -219,10 +219,10 @@ export function ClubMembersListClient() {
                 <div key={head.id} className="flex flex-col">
                   {/* Badge indicating Head Role & Department */}
                   <div className="mb-2 flex items-center justify-between px-1">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#D98C5B] font-bold">
+                    <span className="text-[10px] font-sans uppercase tracking-wider text-[#D98C5B] font-bold">
                       {council.shortName}
                     </span>
-                    <span className="text-[10px] font-mono text-[#E7C59F]/70 bg-[#23120A] px-2 py-0.5 rounded-full border border-[#6B3B23]">
+                    <span className="text-[10px] font-sans text-[#E7C59F]/70 bg-[#23120A] px-2 py-0.5 rounded-full border border-[#6B3B23]">
                       {memberCount} {memberCount === 1 ? "member" : "members"}
                     </span>
                   </div>
@@ -253,7 +253,7 @@ export function ClubMembersListClient() {
               {/* Header of Active Department */}
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-8 border-b border-[#6B3B23]">
                 <div>
-                  <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase text-[#D98C5B] font-bold mb-1">
+                  <div className="inline-flex items-center gap-1.5 text-xs font-sans uppercase text-[#D98C5B] font-bold mb-1">
                     <Crown className="w-3.5 h-3.5" />
                     <span>
                       {activeSelection.council.badge} · Head: {activeSelection.head.name}
@@ -271,7 +271,7 @@ export function ClubMembersListClient() {
                   {activeSelection.council.route && (
                     <Link
                       href={activeSelection.council.route}
-                      className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#23120A] bg-[#D98C5B] hover:bg-[#E79E70] transition-colors px-3.5 py-1.5 rounded-xl font-bold"
+                      className="inline-flex items-center gap-1.5 text-xs font-sans uppercase tracking-wider text-[#23120A] bg-[#D98C5B] hover:bg-[#E79E70] transition-colors px-3.5 py-1.5 rounded-xl font-bold"
                     >
                       <span>Dedicated Team Page</span>
                       <ExternalLink className="w-3.5 h-3.5" />

@@ -182,7 +182,7 @@ export const RecentWinners: React.FC<RecentWinnersProps> = ({ winners }) => {
 
                   <div className="p-5 flex flex-col justify-between flex-1">
                     <div>
-                      <h4 className="text-lg font-serif font-bold text-[#F5E6D3] group-hover:text-[#D98C5B] transition-colors mb-1">
+                      <h4 className="text-lg font-sans font-semibold text-[#F5E6D3] group-hover:text-[#D98C5B] transition-colors mb-1 leading-snug">
                         {winner.name}
                       </h4>
                       <p className="text-xs font-mono text-[#D98C5B] mb-2 truncate">

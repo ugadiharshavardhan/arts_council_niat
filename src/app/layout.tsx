@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 
-const serifFont = Cormorant_Garamond({
+const playfairDisplay = Playfair_Display({
   variable: "--font-serif",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
 });
 
-const sansFont = Plus_Jakarta_Sans({
+const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -54,7 +56,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sansFont.variable} ${serifFont.variable} scroll-smooth antialiased dark`}
+      className={`${inter.variable} ${playfairDisplay.variable} scroll-smooth antialiased dark`}
     >
       <body className="min-h-screen bg-[#23120A] text-[#F5E6D3] flex flex-col selection:bg-[#D98C5B]/40 selection:text-[#F5E6D3]">
         {children}

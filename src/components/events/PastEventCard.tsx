@@ -23,7 +23,7 @@ export const PastEventCard: React.FC<PastEventCardProps> = ({ event }) => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#23120A] via-[#23120A]/20 to-transparent" />
         <div className="absolute top-3 left-3">
-          <span className="px-2.5 py-0.5 rounded text-[10px] font-mono uppercase bg-[#23120A]/85 text-[#D98C5B] border border-[#6B3B23] backdrop-blur-sm">
+          <span className="px-2.5 py-0.5 rounded text-[10px] font-sans font-medium uppercase tracking-wider bg-[#23120A]/85 text-[#D98C5B] border border-[#6B3B23] backdrop-blur-sm">
             {event.category || "Archive"}
           </span>
         </div>
@@ -31,27 +31,27 @@ export const PastEventCard: React.FC<PastEventCardProps> = ({ event }) => {
 
       <div className="p-5 flex flex-col justify-between flex-1">
         <div>
-          <div className="flex items-center gap-2 text-[11px] font-mono text-[#E7C59F] mb-1.5">
+          <div className="flex items-center gap-2 text-[11px] font-sans font-medium text-[#E7C59F] mb-1.5">
             <Calendar className="w-3.5 h-3.5 text-[#D98C5B]" />
             <span>{event.date}</span>
           </div>
 
-          <h4 className="text-base font-serif font-bold text-[#F5E6D3] group-hover:text-[#D98C5B] transition-colors mb-2 line-clamp-1">
+          <h4 className="text-base font-sans font-semibold text-[#F5E6D3] group-hover:text-[#D98C5B] transition-colors mb-2 line-clamp-1">
             {event.title}
           </h4>
 
-          <p className="text-xs text-[#E7C59F] font-light line-clamp-3 leading-relaxed mb-4">
+          <p className="text-xs font-sans font-normal text-[#E7C59F] line-clamp-3 leading-relaxed mb-4">
             {event.description}
           </p>
         </div>
 
         <div className="pt-3 border-t border-[#6B3B23] flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#E7C59F]/80 truncate max-w-[140px]">
+          <div className="flex items-center gap-1.5 text-[10px] font-sans text-[#E7C59F]/80 truncate max-w-[140px]">
             <MapPin className="w-3 h-3 text-[#E7C59F]/50 shrink-0" />
             <span className="truncate">{event.venue}</span>
           </div>
 
-          <span className="inline-flex items-center gap-1 text-xs text-[#D98C5B] group-hover:text-[#E79E70] p-0 transition-colors font-medium">
+          <span className="inline-flex items-center gap-1 text-xs font-sans text-[#D98C5B] group-hover:text-[#E79E70] p-0 transition-colors font-medium">
             <span>View Event</span>
             <ArrowRight className="w-3 h-3" />
           </span>

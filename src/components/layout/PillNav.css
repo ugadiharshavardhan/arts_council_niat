@@ -109,6 +109,7 @@
   border-radius: 9999px;
   border: 1.5px solid transparent;
   box-sizing: border-box;
+  font-family: var(--font-sans), Inter, sans-serif;
   font-weight: 600;
   font-size: 13px;
   line-height: 0;
@@ -262,6 +263,7 @@
   color: #E7C59F;
   background-color: rgba(78, 46, 30, 0.8);
   text-decoration: none;
+  font-family: var(--font-sans), Inter, sans-serif;
   font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;

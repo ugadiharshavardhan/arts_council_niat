@@ -23,7 +23,7 @@ export const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({ event }) =
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#23120A]/80 via-transparent to-transparent" />
         <div className="absolute top-3 left-3">
-          <span className="px-2.5 py-0.5 rounded text-[10px] font-mono uppercase bg-[#23120A] text-[#D98C5B] border border-[#6B3B23]">
+          <span className="px-2.5 py-0.5 rounded text-[10px] font-sans font-medium uppercase tracking-wider bg-[#23120A] text-[#D98C5B] border border-[#6B3B23]">
             {event.category || "Calendar"}
           </span>
         </div>
@@ -31,23 +31,23 @@ export const UpcomingEventCard: React.FC<UpcomingEventCardProps> = ({ event }) =
 
       <div className="p-5 flex flex-col justify-between flex-1">
         <div>
-          <div className="flex items-center gap-2 text-xs font-mono text-[#D98C5B] mb-1">
+          <div className="flex items-center gap-2 text-xs font-sans font-medium text-[#D98C5B] mb-1">
             <Calendar className="w-3.5 h-3.5" />
             <span>{event.date}</span>
           </div>
-          <h4 className="text-lg font-serif font-bold text-[#F5E6D3] group-hover:text-[#D98C5B] transition-colors mb-2">
+          <h4 className="text-lg font-sans font-semibold text-[#F5E6D3] group-hover:text-[#D98C5B] transition-colors mb-2 leading-snug">
             {event.title}
           </h4>
-          <p className="text-xs text-[#E7C59F] font-light line-clamp-2 leading-relaxed mb-4">
+          <p className="text-xs font-sans text-[#E7C59F] font-normal line-clamp-2 leading-relaxed mb-4">
             {event.description}
           </p>
         </div>
 
         <div className="flex items-center justify-between pt-3 border-t border-[#6B3B23]">
-          <span className="text-[11px] font-mono text-[#E7C59F]/80 truncate max-w-[180px]">
+          <span className="text-[11px] font-sans text-[#E7C59F]/80 truncate max-w-[180px]">
             {event.venue}
           </span>
-          <span className="inline-flex items-center gap-1 text-xs text-[#D98C5B] group-hover:text-[#E79E70] p-0 transition-colors font-medium">
+          <span className="inline-flex items-center gap-1 text-xs font-sans text-[#D98C5B] group-hover:text-[#E79E70] p-0 transition-colors font-medium">
             <span>View Details</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </span>

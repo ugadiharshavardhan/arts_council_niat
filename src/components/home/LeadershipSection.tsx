@@ -43,6 +43,7 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
                 alt={president.name}
                 aspectRatio="portrait"
                 className="w-full h-full"
+                objectPosition={president.imagePosition}
               />
 
               <div className="absolute top-4 left-4">
@@ -99,6 +100,7 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
                 alt={vicePresident.name}
                 aspectRatio="portrait"
                 className="w-full h-full"
+                objectPosition={vicePresident.imagePosition}
               />
 
               <div className="absolute top-4 left-4">

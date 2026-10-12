@@ -1,13 +1,17 @@
 import React from "react";
+import Link from "next/link";
 import { ImagePlaceholder } from "../ui/ImagePlaceholder";
 import { CouncilMember } from "@/types";
 import { ArrowRight } from "lucide-react";
 
 interface CouncilMemberCardProps {
   member: CouncilMember;
+  teamUrl?: string;
 }
 
-export const CouncilMemberCard: React.FC<CouncilMemberCardProps> = ({ member }) => {
+export const CouncilMemberCard: React.FC<CouncilMemberCardProps> = ({ member, teamUrl }) => {
+  const destinationUrl = teamUrl !== undefined ? teamUrl : member.teamUrl;
+
   return (
     <div className="flex flex-col bg-[#4E2E1E]/80 border border-[#6B3B23] rounded-2xl overflow-hidden group hover:border-[#D98C5B]/60 hover:bg-[#4E2E1E] transition-all duration-300 shadow-lg">
       <div className="relative h-64 bg-[#23120A] overflow-hidden">
@@ -40,7 +44,18 @@ export const CouncilMemberCard: React.FC<CouncilMemberCardProps> = ({ member }) 
 
         <div className="pt-4 mt-4 border-t border-[#6B3B23] flex items-center justify-between text-[11px] font-mono text-[#E7C59F]/80">
           <span>Student ID: {member.studentId || "—"}</span>
-          <ArrowRight className="w-3.5 h-3.5 text-[#E7C59F]/80 group-hover:text-[#D98C5B] group-hover:translate-x-1 transition-all" />
+          {destinationUrl ? (
+            <Link
+              href={destinationUrl}
+              aria-label={`View ${member.name}'s team`}
+              title={`View ${member.name}'s team`}
+              className="p-1 -mr-1 rounded-full text-[#E7C59F]/80 hover:text-[#D98C5B] hover:bg-[#351C11] transition-all cursor-pointer group/arrow"
+            >
+              <ArrowRight className="w-3.5 h-3.5 text-[#E7C59F]/80 group-hover:text-[#D98C5B] group-hover/arrow:text-[#F5E6D3] group-hover:translate-x-1 transition-all" />
+            </Link>
+          ) : (
+            <ArrowRight className="w-3.5 h-3.5 text-[#E7C59F]/80 group-hover:text-[#D98C5B] group-hover:translate-x-1 transition-all" />
+          )}
         </div>
       </div>
     </div>

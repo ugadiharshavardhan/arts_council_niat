@@ -14,6 +14,8 @@ export interface PillNavItem {
 export interface PillNavProps {
   logo?: string;
   logoAlt?: string;
+  /** Explicit href for the logo (e.g. "/"). When provided, logo always uses Next.js Link. */
+  logoHref?: string;
   items: PillNavItem[];
   activeHref?: string;
   className?: string;
@@ -29,6 +31,7 @@ export interface PillNavProps {
 export const PillNav: React.FC<PillNavProps> = ({
   logo = '/pac-logo.svg',
   logoAlt = 'PAC Logo',
+  logoHref,
   items,
   activeHref,
   className = '',
@@ -246,31 +249,23 @@ export const PillNav: React.FC<PillNavProps> = ({
     ['--pill-text' as any]: resolvedPillTextColor
   };
 
+  // Resolve the logo destination: prefer explicit logoHref, otherwise fall back to first item href.
+  const resolvedLogoHref = logoHref ?? items?.[0]?.href ?? '/';
+
   return (
     <div className="pill-nav-container">
       <nav className={`pill-nav ${className}`} aria-label="Primary" style={cssVars}>
-        {isRouterLink(items?.[0]?.href) ? (
-          <Link
-            className="pill-logo"
-            href={items[0]?.href || '#'}
-            aria-label="Home"
-            onMouseEnter={handleLogoEnter}
-            role="menuitem"
-            ref={logoRef}
-          >
-            <img src={logo} alt={logoAlt} ref={logoImgRef} />
-          </Link>
-        ) : (
-          <a
-            className="pill-logo"
-            href={items?.[0]?.href || '#hero'}
-            aria-label="Home"
-            onMouseEnter={handleLogoEnter}
-            ref={logoRef}
-          >
-            <img src={logo} alt={logoAlt} ref={logoImgRef} />
-          </a>
-        )}
+        {/* Logo always uses Next.js Link when a page route is available */}
+        <Link
+          className="pill-logo"
+          href={resolvedLogoHref}
+          aria-label="Home"
+          onMouseEnter={handleLogoEnter}
+          role="menuitem"
+          ref={logoRef}
+        >
+          <img src={logo} alt={logoAlt} ref={logoImgRef} />
+        </Link>
 
         <div className="pill-nav-items desktop-only" ref={navItemsRef}>
           <ul className="pill-list" role="menubar">

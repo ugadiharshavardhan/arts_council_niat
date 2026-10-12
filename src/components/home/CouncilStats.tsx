@@ -15,7 +15,7 @@ export const CouncilStatsSection: React.FC<CouncilStatsProps> = ({ stats }) => {
       label: stats.eventsConducted.label,
       confirmed: stats.eventsConducted.isConfirmed,
       note: "Confirmed count across theatrical, dance, & musical events",
-      icon: <CalendarCheck className="w-5 h-5 text-[#D4845A]" />,
+      icon: <CalendarCheck className="w-5 h-5 text-[#D98C5B]" />,
     },
     {
       key: "members",
@@ -23,7 +23,7 @@ export const CouncilStatsSection: React.FC<CouncilStatsProps> = ({ stats }) => {
       label: stats.members.label,
       confirmed: stats.members.isConfirmed,
       note: "Elected council conveners and wing coordinators",
-      icon: <Users className="w-5 h-5 text-[#D4845A]" />,
+      icon: <Users className="w-5 h-5 text-[#D98C5B]" />,
     },
     {
       key: "winners",
@@ -31,7 +31,7 @@ export const CouncilStatsSection: React.FC<CouncilStatsProps> = ({ stats }) => {
       label: stats.winners.label,
       confirmed: stats.winners.isConfirmed,
       note: "Laureates & medalists across academic competitions",
-      icon: <Trophy className="w-5 h-5 text-[#D4845A]" />,
+      icon: <Trophy className="w-5 h-5 text-[#D98C5B]" />,
     },
     {
       key: "participants",
@@ -39,7 +39,7 @@ export const CouncilStatsSection: React.FC<CouncilStatsProps> = ({ stats }) => {
       label: stats.participants.label,
       confirmed: stats.participants.isConfirmed,
       note: "Active collegiate performers across rounds",
-      icon: <Award className="w-5 h-5 text-[#D4845A]" />,
+      icon: <Award className="w-5 h-5 text-[#D98C5B]" />,
     },
   ];
 
@@ -47,7 +47,7 @@ export const CouncilStatsSection: React.FC<CouncilStatsProps> = ({ stats }) => {
     <section
       id="statistics"
       aria-label="Performing Arts Council Statistics"
-      className="py-16 bg-[#1C0F0A] border-y border-[#3D2018] relative"
+      className="py-16 bg-[#23120A] border-y border-[#6B3B23] relative"
     >
       <Container size="wide">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
@@ -56,12 +56,12 @@ export const CouncilStatsSection: React.FC<CouncilStatsProps> = ({ stats }) => {
               key={item.key}
               className={`flex flex-col p-6 rounded-xl border transition-all duration-300 ${
                 item.confirmed
-                  ? "bg-[#2A1014] border-[#D4845A]/40 shadow-lg shadow-[#8B2E2E]/10 ring-1 ring-[#D4845A]/20"
-                  : "bg-[#2A1014]/60 border-[#3D2018] hover:border-[#D4845A]/30"
+                  ? "bg-[#4E2E1E] border-[#D98C5B]/40 shadow-lg shadow-[#D98C5B]/10 ring-1 ring-[#D98C5B]/20"
+                  : "bg-[#4E2E1E]/60 border-[#6B3B23] hover:border-[#D98C5B]/30"
               }`}
             >
               <div className="flex items-center justify-between mb-4">
-                <div className="p-2.5 rounded-lg bg-[#3D2018]/50 border border-[#3D2018]">
+                <div className="p-2.5 rounded-lg bg-[#6B3B23]/50 border border-[#6B3B23]">
                   {item.icon}
                 </div>
                 {item.confirmed ? (
@@ -69,21 +69,21 @@ export const CouncilStatsSection: React.FC<CouncilStatsProps> = ({ stats }) => {
                     Verified
                   </span>
                 ) : (
-                  <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-[#3D2018]/60 text-[#C4A882] border border-[#3D2018]">
+                  <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-[#6B3B23]/60 text-[#E7C59F] border border-[#6B3B23]">
                     Awaiting Council Data
                   </span>
                 )}
               </div>
 
-              <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FAF0E6] font-serif tracking-tight mb-2">
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#F5E6D3] font-serif tracking-tight mb-2">
                 {item.value}
               </div>
 
-              <div className="text-xs uppercase font-bold tracking-[0.2em] text-[#D4845A] mb-2">
+              <div className="text-xs uppercase font-bold tracking-[0.2em] text-[#D98C5B] mb-2 font-mono">
                 {item.label}
               </div>
 
-              <p className="text-xs text-[#C4A882] font-light leading-relaxed mt-auto">
+              <p className="text-xs text-[#E7C59F] font-light leading-relaxed mt-auto">
                 {item.note}
               </p>
             </div>

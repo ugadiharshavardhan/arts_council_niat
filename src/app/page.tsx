@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { IntroLoader } from "@/components/home/IntroLoader";
@@ -10,27 +11,63 @@ import { RecentWinners } from "@/components/home/RecentWinners";
 import { PastEvents } from "@/components/home/PastEvents";
 import { LadduAuctionHighlight } from "@/components/home/LadduAuctionHighlight";
 import { CouncilMembersPreview } from "@/components/home/CouncilMembersPreview";
-import { ManifestoPreview } from "@/components/home/ManifestoPreview";
-import { FinalCTA } from "@/components/home/FinalCTA";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
-// Data layers
+// Data layers & Service
 import {
   upcomingEventHighlight,
   upcomingEventsList,
-  pastEventsList,
+  pastEventsList as defaultPastEvents,
 } from "@/data/events";
-import { recentWinnersList } from "@/data/winners";
-import { councilLeadership, featuredCouncilMembers } from "@/data/members";
-
+import { recentWinnersList as defaultWinners } from "@/data/winners";
+import { councilLeadership, featuredCouncilMembers as defaultMembers } from "@/data/members";
+import { ladduAuctionHighlight, siteMetadataInfo } from "@/data/home";
 import {
-  ladduAuctionHighlight,
-  manifestoPillars,
-  siteMetadataInfo,
-} from "@/data/home";
+  getUpcomingEvents,
+  getPastEvents,
+  getWinners,
+  getClubMembers,
+} from "@/lib/dataService";
+import { EventItem, WinnerItem, CouncilMember } from "@/types";
 
 export default function Home() {
-  const allUpcomingEvents = [upcomingEventHighlight, ...upcomingEventsList];
+  const [upcomingEvents, setUpcomingEvents] = useState<EventItem[]>(upcomingEventsList);
+  const [pastEvents, setPastEvents] = useState<EventItem[]>(defaultPastEvents);
+  const [winners, setWinners] = useState<WinnerItem[]>(defaultWinners);
+  const [members, setMembers] = useState<CouncilMember[]>(defaultMembers);
+
+  const loadData = async () => {
+    try {
+      const [up, past, wins, mems] = await Promise.all([
+        getUpcomingEvents(),
+        getPastEvents(),
+        getWinners(),
+        getClubMembers(),
+      ]);
+      if (up && up.length > 0) setUpcomingEvents(up);
+      if (past && past.length > 0) setPastEvents(past);
+      if (wins && wins.length > 0) setWinners(wins);
+      if (mems && mems.length > 0) setMembers(mems);
+    } catch (err) {
+      console.error("Error loading live PAC data:", err);
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+
+    // Listen for custom data updates from Admin page or other tabs
+    const handleUpdate = () => {
+      loadData();
+    };
+    window.addEventListener("pac-data-updated", handleUpdate);
+    window.addEventListener("storage", handleUpdate);
+
+    return () => {
+      window.removeEventListener("pac-data-updated", handleUpdate);
+      window.removeEventListener("storage", handleUpdate);
+    };
+  }, []);
 
   return (
     <>
@@ -41,7 +78,7 @@ export default function Home() {
       <Navbar institutionName={siteMetadataInfo.institutionNamePlaceholder} />
 
       <main className="flex-1 w-full flex flex-col">
-        {/* 3. Hero section (Title only) */}
+        {/* 3. Hero section */}
         <Hero
           tagline={siteMetadataInfo.tagline}
           institutionName={siteMetadataInfo.institutionNamePlaceholder}
@@ -50,39 +87,37 @@ export default function Home() {
 
         {/* 4. About the Council (Leadership) */}
         <LeadershipSection
-          president={councilLeadership.president}
-          vicePresident={councilLeadership.vicePresident}
+          president={
+            members.find((m) => m.role.toLowerCase() === "president") ||
+            councilLeadership.president
+          }
+          vicePresident={
+            members.find((m) => m.role.toLowerCase().includes("vice")) ||
+            councilLeadership.vicePresident
+          }
         />
 
         {/* 5. Upcoming events section (Infinite horizontal marquee) */}
-        <UpcomingEvents events={allUpcomingEvents} />
+        <UpcomingEvents events={upcomingEvents} />
 
         {/* 6. Past events section (Infinite horizontal marquee) */}
-        <PastEvents events={pastEventsList} />
+        <PastEvents events={pastEvents} />
 
         {/* 7. Recent winners section */}
-        <RecentWinners winners={recentWinnersList} />
+        <RecentWinners winners={winners} />
 
         {/* 8. Club members preview */}
-        <CouncilMembersPreview members={featuredCouncilMembers} />
+        <CouncilMembersPreview members={members} />
 
         {/* 9. Ganesh Chaturthi Laddu Auction highlight */}
         <LadduAuctionHighlight data={ladduAuctionHighlight} />
-
-
-        {/* 11. President's Manifesto preview */}
-        <ManifestoPreview pillars={manifestoPillars} />
-
-        {/* 12. Final CTA */}
-        <FinalCTA />
       </main>
 
       {/* Floating Scroll To Top Button */}
       <ScrollToTop />
 
-      {/* 13. Footer */}
+      {/* Footer */}
       <Footer />
     </>
   );
 }
-

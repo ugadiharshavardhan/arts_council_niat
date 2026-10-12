@@ -3,10 +3,10 @@
 import React, { useRef } from "react";
 import { Container } from "../ui/Container";
 import { SectionHeading } from "../ui/SectionHeading";
-import { Button } from "../ui/Button";
 import { ImagePlaceholder } from "../ui/ImagePlaceholder";
+import { Button } from "../ui/Button";
 import { WinnerItem } from "@/types";
-import { Trophy, ChevronLeft, ChevronRight, Award, Calendar, Sparkles } from "lucide-react";
+import { Award, Trophy, Calendar, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface RecentWinnersProps {
   winners: WinnerItem[];
@@ -15,6 +15,23 @@ interface RecentWinnersProps {
 export const RecentWinners: React.FC<RecentWinnersProps> = ({ winners }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+  if (!winners || winners.length === 0) {
+    return (
+      <section id="winners" className="py-20 bg-[#23120A]">
+        <Container size="wide">
+          <SectionHeading
+            eyebrow="Hall of Laureates"
+            title="Recent Winners"
+            description="No winner records currently logged."
+          />
+        </Container>
+      </section>
+    );
+  }
+
+  const featuredWinner = winners.find((w) => w.isFeatured) || winners[0];
+  const carouselWinners = winners.filter((w) => w.id !== featuredWinner?.id);
+
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
       const offset = direction === "left" ? -340 : 340;
@@ -22,31 +39,14 @@ export const RecentWinners: React.FC<RecentWinnersProps> = ({ winners }) => {
     }
   };
 
-  if (!winners || winners.length === 0) {
-    return (
-      <section id="winners" className="py-20 bg-[#1C0F0A]">
-        <Container size="wide">
-          <SectionHeading
-            eyebrow="Hall of Fame"
-            title="Recent Winners"
-            description="No recent winners recorded at this moment."
-          />
-        </Container>
-      </section>
-    );
-  }
-
-  const [featuredWinner, ...carouselWinners] = winners;
-
   return (
     <section
       id="winners"
       aria-label="Recent Winners and Laureates"
-      className="py-20 md:py-28 bg-[#1C0F0A] border-t border-[#3D2018] relative overflow-hidden"
+      className="py-20 md:py-28 bg-[#23120A] border-t border-[#6B3B23] relative overflow-hidden"
     >
-
-      {/* Decorative warm backdrop halo */}
-      <div className="absolute top-1/3 right-10 w-96 h-96 bg-[#8B2E2E]/15 rounded-full blur-[140px] pointer-events-none" />
+      {/* Decorative Burnt Sienna backdrop halo */}
+      <div className="absolute top-1/3 right-10 w-96 h-96 bg-[#D98C5B]/14 rounded-full blur-[140px] pointer-events-none" />
 
       <Container size="wide">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
@@ -65,7 +65,7 @@ export const RecentWinners: React.FC<RecentWinnersProps> = ({ winners }) => {
                 type="button"
                 onClick={() => scroll("left")}
                 aria-label="Scroll winners left"
-                className="w-10 h-10 rounded-full border border-[#3D2018] bg-[#2A1014] flex items-center justify-center text-[#C4A882] hover:text-[#D4845A] hover:border-[#D4845A]/50 transition-colors"
+                className="w-10 h-10 rounded-full border border-[#6B3B23] bg-[#4E2E1E] flex items-center justify-center text-[#E7C59F] hover:text-[#D98C5B] hover:border-[#D98C5B]/50 transition-colors cursor-pointer"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -73,19 +73,19 @@ export const RecentWinners: React.FC<RecentWinnersProps> = ({ winners }) => {
                 type="button"
                 onClick={() => scroll("right")}
                 aria-label="Scroll winners right"
-                className="w-10 h-10 rounded-full border border-[#3D2018] bg-[#2A1014] flex items-center justify-center text-[#C4A882] hover:text-[#D4845A] hover:border-[#D4845A]/50 transition-colors"
+                className="w-10 h-10 rounded-full border border-[#6B3B23] bg-[#4E2E1E] flex items-center justify-center text-[#E7C59F] hover:text-[#D98C5B] hover:border-[#D98C5B]/50 transition-colors cursor-pointer"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
             </div>
 
             <Button
-              href="#winners"
+              href="/admin"
               variant="gold"
               size="md"
-              icon={<Trophy className="w-4 h-4 text-[#1C0F0A]" />}
+              icon={<Trophy className="w-4 h-4 text-[#23120A]" />}
             >
-              View All Winners
+              Update / Manage Winners
             </Button>
           </div>
         </div>
@@ -94,8 +94,8 @@ export const RecentWinners: React.FC<RecentWinnersProps> = ({ winners }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Featured Large Winner Column */}
           {featuredWinner && (
-            <div className="lg:col-span-5 flex flex-col bg-[#2A1014] border border-[#D4845A]/50 rounded-2xl overflow-hidden shadow-2xl relative">
-              <div className="relative h-[320px] sm:h-[380px] bg-[#1C0F0A] overflow-hidden">
+            <div className="lg:col-span-5 flex flex-col bg-[#4E2E1E] border border-[#D98C5B]/50 rounded-2xl overflow-hidden shadow-2xl relative">
+              <div className="relative h-[320px] sm:h-[380px] bg-[#23120A] overflow-hidden">
                 <ImagePlaceholder
                   src={featuredWinner.photo}
                   alt={featuredWinner.name}
@@ -104,49 +104,48 @@ export const RecentWinners: React.FC<RecentWinnersProps> = ({ winners }) => {
                 />
 
                 <div className="absolute top-4 left-4">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#D4845A] text-[#1C0F0A] shadow-md">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#D98C5B] text-[#23120A] shadow-md font-bold">
                     <Sparkles className="w-3.5 h-3.5" />
                     Featured Laureate
                   </span>
                 </div>
 
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-[#1C0F0A]/95 border-t border-[#3D2018]">
-                  <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#D4845A] block mb-1">
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-[#23120A]/95 border-t border-[#6B3B23]">
+                  <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#D98C5B] block mb-1">
                     {featuredWinner.position}
                   </span>
-                  <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#FAF0E6]">
+                  <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#F5E6D3]">
                     {featuredWinner.name}
                   </h3>
                 </div>
-
               </div>
 
-              <div className="p-6 sm:p-7 flex flex-col justify-between flex-1 bg-[#2A1014]/60">
+              <div className="p-6 sm:p-7 flex flex-col justify-between flex-1 bg-[#4E2E1E]/90">
                 <div className="space-y-3">
                   <div>
-                    <span className="text-[11px] font-mono uppercase text-[#C4A882]/70 block">Competition</span>
-                    <h4 className="text-lg font-serif font-semibold text-[#FAF0E6]">
+                    <span className="text-[11px] font-mono uppercase text-[#E7C59F]/70 block">Competition</span>
+                    <h4 className="text-lg font-serif font-semibold text-[#F5E6D3]">
                       {featuredWinner.eventName}
                     </h4>
                   </div>
 
-                  <div className="p-3.5 rounded-lg bg-[#1C0F0A] border border-[#D4845A]/30 flex items-start gap-3">
-                    <Award className="w-5 h-5 text-[#D4845A] shrink-0 mt-0.5" />
+                  <div className="p-3.5 rounded-lg bg-[#23120A] border border-[#D98C5B]/30 flex items-start gap-3">
+                    <Award className="w-5 h-5 text-[#D98C5B] shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-[10px] font-mono uppercase text-[#D4845A] block font-semibold">Prize & Distinction</span>
-                      <p className="text-xs text-[#FAF0E6] font-medium">
+                      <span className="text-[10px] font-mono uppercase text-[#D98C5B] block font-semibold">Prize & Distinction</span>
+                      <p className="text-xs text-[#F5E6D3] font-medium">
                         {featuredWinner.prizeOrAchievement}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-[#3D2018] flex items-center justify-between text-xs font-mono text-[#C4A882]">
+                <div className="pt-4 mt-4 border-t border-[#6B3B23] flex items-center justify-between text-xs font-mono text-[#E7C59F]">
                   <span className="inline-flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-[#C4A882]/70" />
+                    <Calendar className="w-3.5 h-3.5 text-[#E7C59F]/70" />
                     {featuredWinner.date}
                   </span>
-                  <span className="text-[#D4845A] font-semibold uppercase">
+                  <span className="text-[#D98C5B] font-semibold uppercase">
                     {featuredWinner.category}
                   </span>
                 </div>
@@ -165,9 +164,9 @@ export const RecentWinners: React.FC<RecentWinnersProps> = ({ winners }) => {
               {carouselWinners.map((winner) => (
                 <div
                   key={winner.id}
-                  className="w-[280px] sm:w-[320px] shrink-0 snap-start flex flex-col bg-[#2A1014] border border-[#3D2018] rounded-2xl overflow-hidden group hover:border-[#D4845A]/40 transition-all duration-300 shadow-lg"
+                  className="w-[280px] sm:w-[320px] shrink-0 snap-start flex flex-col bg-[#4E2E1E] border border-[#6B3B23] rounded-2xl overflow-hidden group hover:border-[#D98C5B]/40 transition-all duration-300 shadow-lg"
                 >
-                  <div className="relative h-56 bg-[#1C0F0A] overflow-hidden">
+                  <div className="relative h-56 bg-[#23120A] overflow-hidden">
                     <ImagePlaceholder
                       src={winner.photo}
                       alt={winner.name}
@@ -175,30 +174,29 @@ export const RecentWinners: React.FC<RecentWinnersProps> = ({ winners }) => {
                       className="w-full h-full"
                     />
                     <div className="absolute top-3 left-3">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-[#2A1014] text-[#D4845A] border border-[#D4845A]/30">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-[#23120A] text-[#D98C5B] border border-[#D98C5B]/30">
                         {winner.position}
                       </span>
                     </div>
-
                   </div>
 
                   <div className="p-5 flex flex-col justify-between flex-1">
                     <div>
-                      <h4 className="text-lg font-serif font-bold text-[#FAF0E6] group-hover:text-[#E8C87A] transition-colors mb-1">
+                      <h4 className="text-lg font-serif font-bold text-[#F5E6D3] group-hover:text-[#D98C5B] transition-colors mb-1">
                         {winner.name}
                       </h4>
-                      <p className="text-xs font-mono text-[#D4845A] mb-2 truncate">
+                      <p className="text-xs font-mono text-[#D98C5B] mb-2 truncate">
                         {winner.eventName}
                       </p>
-                      <div className="p-2.5 rounded bg-[#1C0F0A] border border-[#3D2018] text-xs text-[#C4A882] font-light">
-                        <span className="text-[10px] font-mono text-[#C4A882]/70 block uppercase">Achievement</span>
+                      <div className="p-2.5 rounded bg-[#23120A] border border-[#6B3B23] text-xs text-[#E7C59F] font-light">
+                        <span className="text-[10px] font-mono text-[#E7C59F]/70 block uppercase">Achievement</span>
                         {winner.prizeOrAchievement}
                       </div>
                     </div>
 
-                    <div className="pt-4 mt-3 border-t border-[#3D2018] flex items-center justify-between text-[11px] font-mono text-[#C4A882]">
+                    <div className="pt-4 mt-3 border-t border-[#6B3B23] flex items-center justify-between text-[11px] font-mono text-[#E7C59F]">
                       <span>{winner.date}</span>
-                      <span className="text-[#C4A882]/70">{winner.category}</span>
+                      <span className="text-[#E7C59F]/70">{winner.category}</span>
                     </div>
                   </div>
                 </div>
@@ -206,7 +204,7 @@ export const RecentWinners: React.FC<RecentWinnersProps> = ({ winners }) => {
             </div>
 
             <div className="sm:hidden flex justify-center gap-2 mt-2">
-              <span className="text-xs font-mono text-[#C4A882]/70">← Swipe for more laureates →</span>
+              <span className="text-xs font-mono text-[#E7C59F]/70">← Swipe for more laureates →</span>
             </div>
           </div>
         </div>

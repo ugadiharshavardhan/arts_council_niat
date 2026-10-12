@@ -1,93 +1,86 @@
 import { EventItem } from "@/types";
 
-export const upcomingEventHighlight: EventItem = {
-  id: "ue-featured-01",
-  title: "ANNUAL CULTURAL SYMPHONY [PLACEHOLDER]",
-  date: "15 OCTOBER 2026",
-  time: "6:00 PM IST",
-  venue: "MAIN UNIVERSITY AUDITORIUM [PLACEHOLDER]",
-  category: "Flagship Showcase",
-  badge: "Next Major Event",
-  description:
-    "An evening bringing together classical orchestration, contemporary theater, rhythmic folk expressions, and inter-collegiate performing troupes under one grand stage.",
-  image: "/images/placeholder-event-highlight.svg",
-  isFeatured: true,
-};
-
 export const upcomingEventsList: EventItem[] = [
   {
     id: "ue-01",
-    title: "INTER-DEPARTMENT DRAMA PROSCENIUM [PLACEHOLDER]",
+    title: "ANNUAL CULTURAL SYMPHONY 2026",
+    date: "15 OCTOBER 2026",
+    time: "6:00 PM IST",
+    venue: "Main University Auditorium",
+    category: "Flagship Showcase",
+    badge: "Next Major Event",
+    description:
+      "An evening bringing together classical orchestration, contemporary theater, rhythmic folk expressions, and inter-collegiate performing troupes under one grand stage.",
+    image: "/images/placeholder-event-highlight.svg",
+    isFeatured: true,
+    organizer: "Performing Arts Council Executive",
+    participants: "300+ Performers",
+  },
+  {
+    id: "ue-02",
+    title: "INTER-DEPARTMENT DRAMA PROSCENIUM",
     date: "28 OCTOBER 2026",
     time: "5:30 PM IST",
-    venue: "Black Box Studio Theater [PLACEHOLDER]",
+    venue: "Black Box Studio Theater",
     category: "Theatrics & Monologue",
     badge: "Auditions Open",
     description:
       "Original student script competition focusing on experimental proscenium staging, character work, and collaborative sound design.",
     image: "/images/placeholder-event-1.svg",
-    isFeatured: true,
+    isFeatured: false,
+    organizer: "Theatrics Guild",
+    participants: "8 Departments",
   },
   {
-    id: "ue-02",
-    title: "WESTERN & CLASSICAL ACOUSTICS [PLACEHOLDER]",
+    id: "ue-03",
+    title: "WESTERN & CLASSICAL ACOUSTICS",
     date: "08 NOVEMBER 2026",
     time: "6:30 PM IST",
-    venue: "Amphitheater East [PLACEHOLDER]",
+    venue: "Amphitheater East",
     category: "Instrumental & Vocal",
     badge: "Live Showcase",
     description:
       "Acoustic unplugged session bridging Indian classical ragas with contemporary orchestral compositions.",
     image: "/images/placeholder-event-2.svg",
     isFeatured: false,
-  },
-  {
-    id: "ue-03",
-    title: "FUSION CHOREOGRAPHY NIGHT [PLACEHOLDER]",
-    date: "19 NOVEMBER 2026",
-    time: "7:00 PM IST",
-    venue: "Open Air Complex [PLACEHOLDER]",
-    category: "Dance Ensemble",
-    badge: "House Championship",
-    description:
-      "Inter-house dance battle featuring contemporary jazz, Kathak, Bharatanatyam, and hip-hop team formations.",
-    image: "/images/placeholder-event-3.svg",
-    isFeatured: false,
+    organizer: "Acoustics & Rhythm Wing",
+    participants: "16 Solo & Duet Acts",
   },
 ];
+
+export const upcomingEventHighlight: EventItem = upcomingEventsList[0];
 
 export const pastEventsList: EventItem[] = [
   {
     id: "pe-01",
-    title: "NATYA PRAVAHA DANCE FESTIVAL [PLACEHOLDER]",
+    title: "NATYA PRAVAHA DANCE FESTIVAL",
     date: "14 AUGUST 2026",
-    venue: "Main University Auditorium [PLACEHOLDER]",
+    venue: "Main University Auditorium",
     category: "Classical Dance",
     description:
       "A grand 2-day classical confluence featuring over 18 collegiate ensembles, celebrating traditional Indian rhythm repertoires.",
     image: "/images/placeholder-past-1.svg",
     videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    organizer: "Performing Arts Council — Dance Wing [PLACEHOLDER]",
-    participants: "18 Collegiate Teams (240+ Dancers) [PLACEHOLDER]",
+    organizer: "Performing Arts Council — Dance Wing",
+    participants: "18 Collegiate Teams (240+ Dancers)",
     gallery: [
       "/images/placeholder-past-1.svg",
       "/images/placeholder-event-1.svg",
       "/images/placeholder-event-2.svg",
-      "/images/placeholder-event-3.svg",
     ],
   },
   {
     id: "pe-02",
-    title: "MONOLOGUE SLAM & STREET PLAY [PLACEHOLDER]",
+    title: "MONOLOGUE SLAM & STREET PLAY",
     date: "22 JULY 2026",
-    venue: "Central Quadrangle [PLACEHOLDER]",
+    venue: "Central Quadrangle",
     category: "Street Theater",
     description:
       "High-energy social narrative performances by council dramatists exploring grassroots storytelling and satire.",
     image: "/images/placeholder-past-2.svg",
     videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    organizer: "NIAT Theatrics Guild [PLACEHOLDER]",
-    participants: "12 Street Play Troupe Teams [PLACEHOLDER]",
+    organizer: "NIAT Theatrics Guild",
+    participants: "12 Street Play Troupe Teams",
     gallery: [
       "/images/placeholder-past-2.svg",
       "/images/placeholder-event-3.svg",
@@ -96,37 +89,19 @@ export const pastEventsList: EventItem[] = [
   },
   {
     id: "pe-03",
-    title: "SPRING CHORAL CONVERGENCE [PLACEHOLDER]",
+    title: "SPRING CHORAL CONVERGENCE",
     date: "10 APRIL 2026",
-    venue: "Acoustics Chamber Hall [PLACEHOLDER]",
+    venue: "Acoustics Chamber Hall",
     category: "Vocal Ensemble",
     description:
       "Harmonic choral presentations featuring 8-part a cappella arrangements and university student compositions.",
     image: "/images/placeholder-past-3.svg",
-    organizer: "Classical Music Society [PLACEHOLDER]",
-    participants: "8-Part Choral Society Ensemble [PLACEHOLDER]",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+    organizer: "Classical Music Society",
+    participants: "8-Part Choral Society Ensemble",
     gallery: [
       "/images/placeholder-past-3.svg",
       "/images/placeholder-event-2.svg",
-    ],
-  },
-  {
-    id: "pe-04",
-    title: "LIGHT & SHADOW THEATER NIGHT [PLACEHOLDER]",
-    date: "18 FEBRUARY 2026",
-    venue: "Fine Arts Courtyard [PLACEHOLDER]",
-    category: "Experimental Visuals",
-    description:
-      "Multi-sensory shadow puppetry and ambient musical synthesis curated entirely by student lighting technicians.",
-    image: "/images/placeholder-past-4.svg",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-    organizer: "Visual & Stagecraft Technical Team [PLACEHOLDER]",
-    participants: "Experimental Lighting & Sound Crew [PLACEHOLDER]",
-    gallery: [
-      "/images/placeholder-past-4.svg",
-      "/images/placeholder-event-1.svg",
-      "/images/placeholder-event-highlight.svg",
-      "/images/placeholder-past-1.svg",
     ],
   },
 ];

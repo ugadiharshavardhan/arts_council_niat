@@ -64,10 +64,10 @@ export const Navbar: React.FC<NavbarProps> = () => {
           logoAlt="Performing Arts Council Logo"
           items={navItems}
           activeHref={isHomePage ? `#${activeSection}` : ""}
-          baseColor="#D4845A"
-          pillColor="#2A1014"
-          hoveredPillTextColor="#1C0F0A"
-          pillTextColor="#FAF0E6"
+          baseColor="#D98C5B"
+          pillColor="#4E2E1E"
+          hoveredPillTextColor="#23120A"
+          pillTextColor="#F5E6D3"
           ease="power3.easeOut"
           initialLoadAnimation={false}
         />

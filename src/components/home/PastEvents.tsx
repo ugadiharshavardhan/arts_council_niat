@@ -16,7 +16,7 @@ interface PastEventsProps {
 export const PastEvents: React.FC<PastEventsProps> = ({ events }) => {
   if (!events || events.length === 0) {
     return (
-      <section id="past-events" className="py-20 bg-[#1C0F0A]">
+      <section id="past-events" className="py-20 bg-[#23120A]">
         <Container size="wide">
           <SectionHeading
             eyebrow="Archival Showcase"
@@ -35,7 +35,7 @@ export const PastEvents: React.FC<PastEventsProps> = ({ events }) => {
     <section
       id="past-events"
       aria-label="Past Cultural Events and Festivals"
-      className="py-20 md:py-28 bg-[#1C0F0A] border-t border-[#3D2018] relative overflow-hidden"
+      className="py-20 md:py-28 bg-[#23120A] border-t border-[#6B3B23] relative overflow-hidden"
     >
       <Container size="wide" className="mb-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between">
@@ -52,7 +52,7 @@ export const PastEvents: React.FC<PastEventsProps> = ({ events }) => {
               href="/events/past"
               variant="outline"
               size="md"
-              icon={<ArrowRight className="w-4 h-4 text-[#D4845A]" />}
+              icon={<ArrowRight className="w-4 h-4 text-[#D98C5B]" />}
             >
               Explore Past Events
             </Button>
@@ -67,10 +67,10 @@ export const PastEvents: React.FC<PastEventsProps> = ({ events }) => {
             <Link
               href={`/events/${evt.id}`}
               key={`${evt.id}-past-${idx}`}
-              className="w-[280px] sm:w-[320px] md:w-[360px] shrink-0 bg-[#2A1014] border border-[#3D2018] hover:border-[#D4845A] rounded-2xl overflow-hidden transition-all duration-300 shadow-xl group cursor-pointer flex flex-col"
+              className="w-[280px] sm:w-[320px] md:w-[360px] shrink-0 bg-[#4E2E1E] border border-[#6B3B23] hover:border-[#D98C5B] rounded-2xl overflow-hidden transition-all duration-300 shadow-xl group cursor-pointer flex flex-col"
             >
-              {/* Event Image ONLY */}
-              <div className="relative h-52 sm:h-60 w-full bg-[#1C0F0A] overflow-hidden">
+              {/* Event Image */}
+              <div className="relative h-52 sm:h-60 w-full bg-[#23120A] overflow-hidden">
                 <ImagePlaceholder
                   src={evt.image}
                   alt={evt.title}
@@ -79,9 +79,9 @@ export const PastEvents: React.FC<PastEventsProps> = ({ events }) => {
                 />
               </div>
 
-              {/* Event Title ONLY */}
-              <div className="p-5 bg-[#2A1014] border-t border-[#3D2018] flex items-center min-h-[76px]">
-                <h3 className="text-base sm:text-lg font-serif font-bold text-[#FAF0E6] group-hover:text-[#D4845A] transition-colors leading-snug line-clamp-2">
+              {/* Event Title */}
+              <div className="p-5 bg-[#4E2E1E] border-t border-[#6B3B23] flex items-center min-h-[76px]">
+                <h3 className="text-base sm:text-lg font-serif font-bold text-[#F5E6D3] group-hover:text-[#D98C5B] transition-colors leading-snug line-clamp-2">
                   {evt.title}
                 </h3>
               </div>

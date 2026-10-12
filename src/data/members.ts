@@ -2,19 +2,23 @@ import { CouncilMember } from "@/types";
 
 export const councilLeadership: { president: CouncilMember; vicePresident: CouncilMember } = {
   president: {
-    id: "lead-01",
-    name: "President Name [PLACEHOLDER]",
+    id: "mem-01",
+    name: "B Kranthi Kiran",
     role: "President, Performing Arts Council",
-    department: "Executive Leadership [PLACEHOLDER]",
-    photo: "/images/placeholder-president.svg",
+    department: "Executive Leadership",
+    studentId: "N24H01A051",
+    photo: "/images/members/kranthi-kiran.jpg",
+    imagePosition: "center center",
     isLeadership: true,
   },
   vicePresident: {
-    id: "lead-02",
-    name: "Vice President Name [PLACEHOLDER]",
+    id: "mem-02",
+    name: "Akula Hasini",
     role: "Vice President, Performing Arts Council",
-    department: "Operations & Production [PLACEHOLDER]",
-    photo: "/images/placeholder-vice-president.svg",
+    department: "Operations & Production",
+    studentId: "N24H01B0273",
+    photo: "/images/members/akula-hasini.png",
+    imagePosition: "center 35%",
     isLeadership: true,
   },
 };
@@ -26,6 +30,9 @@ export const featuredCouncilMembers: CouncilMember[] = [
     role: "President",
     studentId: "N24H01A051",
     photo: "/images/members/kranthi-kiran.jpg",
+    department: "Executive Leadership",
+    imagePosition: "center center",
+    isLeadership: true,
   },
   {
     id: "mem-02",
@@ -33,7 +40,9 @@ export const featuredCouncilMembers: CouncilMember[] = [
     role: "Vice President",
     studentId: "N24H01B0273",
     photo: "/images/members/akula-hasini.png",
+    department: "Operations & Production",
     imagePosition: "center 35%",
+    isLeadership: true,
   },
   {
     id: "mem-03",
@@ -41,6 +50,8 @@ export const featuredCouncilMembers: CouncilMember[] = [
     role: "Event Management Head",
     studentId: "N24H01B0305",
     photo: "/images/members/ashwitha-jilla.jpg",
+    department: "Events & Logistics",
+    imagePosition: "center center",
   },
   {
     id: "mem-04",
@@ -48,6 +59,7 @@ export const featuredCouncilMembers: CouncilMember[] = [
     role: "OutReach Head",
     studentId: "N24H01A0504",
     photo: "/images/members/thatikonda-swetcha.png",
+    department: "Public Relations & Media",
     imagePosition: "center 10%",
   },
   {
@@ -56,6 +68,8 @@ export const featuredCouncilMembers: CouncilMember[] = [
     role: "Finance Head",
     studentId: "N24H01A0008",
     photo: "/images/members/ashrith-nanda.png",
+    department: "Finance & Sponsorships",
+    imagePosition: "center center",
   },
   {
     id: "mem-06",
@@ -63,5 +77,7 @@ export const featuredCouncilMembers: CouncilMember[] = [
     role: "Verticals Head",
     studentId: "N24H01A0365",
     photo: "/images/placeholder-member-6.svg",
+    department: "Club Verticals",
+    imagePosition: "center center",
   },
 ];

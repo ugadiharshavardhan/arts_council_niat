@@ -17,7 +17,7 @@ export const CouncilMembersPreview: React.FC<CouncilMembersPreviewProps> = ({
     <section
       id="members"
       aria-label="Meet the Council Members"
-      className="py-20 md:py-28 bg-[#1C0F0A] relative border-t border-[#3D2018]"
+      className="py-20 md:py-28 bg-[#23120A] relative border-t border-[#6B3B23]"
     >
       <Container size="wide">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
@@ -34,7 +34,7 @@ export const CouncilMembersPreview: React.FC<CouncilMembersPreviewProps> = ({
               href="/club-members"
               variant="outline"
               size="md"
-              icon={<Users className="w-4 h-4 text-[#D4845A]" />}
+              icon={<Users className="w-4 h-4 text-[#D98C5B]" />}
             >
               Meet Club Members
             </Button>

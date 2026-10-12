@@ -128,11 +128,27 @@ export default function AdminPage() {
   const [winnerForm, setWinnerForm] = useState<Partial<WinnerItem>>({});
   const [memberForm, setMemberForm] = useState<Partial<CouncilMember>>({});
 
-  // Check persisted session
+  const AUTH_STORAGE_KEY = "pac_admin_auth_v2";
+  const ONE_DAY_MS = 24 * 60 * 60 * 1000; // 1 day in milliseconds
+
+  // Check persisted session with 1-day token expiry
   useEffect(() => {
-    const sessionAuth = sessionStorage.getItem("pac_admin_authenticated");
-    if (sessionAuth === "true") {
-      setIsAuthenticated(true);
+    try {
+      const stored = localStorage.getItem(AUTH_STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed?.authenticated && parsed?.expiresAt && Date.now() < parsed.expiresAt) {
+          setIsAuthenticated(true);
+          return;
+        } else {
+          localStorage.removeItem(AUTH_STORAGE_KEY);
+        }
+      }
+      if (sessionStorage.getItem("pac_admin_authenticated") === "true") {
+        setIsAuthenticated(true);
+      }
+    } catch {
+      localStorage.removeItem(AUTH_STORAGE_KEY);
     }
   }, []);
 
@@ -143,11 +159,17 @@ export default function AdminPage() {
     }, 3800);
   };
 
-  // Auth handler
+  // Auth handler with 1-day token expiry
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (verifyAdminPasscode(passcode)) {
       setIsAuthenticated(true);
+      const authSession = {
+        authenticated: true,
+        loginAt: Date.now(),
+        expiresAt: Date.now() + ONE_DAY_MS,
+      };
+      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authSession));
       sessionStorage.setItem("pac_admin_authenticated", "true");
       setAuthError("");
     } else {
@@ -157,6 +179,7 @@ export default function AdminPage() {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
+    localStorage.removeItem(AUTH_STORAGE_KEY);
     sessionStorage.removeItem("pac_admin_authenticated");
     setPasscode("");
   };

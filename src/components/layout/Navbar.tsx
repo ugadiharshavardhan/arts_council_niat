@@ -64,8 +64,8 @@ export const Navbar: React.FC<NavbarProps> = () => {
     <header className="fixed top-0 left-0 right-0 z-40 flex justify-center pointer-events-none">
       <div className="pointer-events-auto w-full flex justify-center">
         <PillNav
-          logo="/pac-logo.svg"
-          logoAlt="Performing Arts Council Logo"
+          logo="/arts_logo.jpeg"
+          logoAlt="Performing Arts Council - Arts Council NIAT"
           logoHref="/"
           items={navItems}
           activeHref={activeHref}

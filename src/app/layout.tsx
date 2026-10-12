@@ -15,22 +15,34 @@ const sansFont = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Performing Arts Council | [Institution Name]",
+  title: {
+    default: "Performing Arts Council | Arts Council NIAT",
+    template: "%s | Performing Arts Council - Arts Council NIAT",
+  },
   description:
-    "Official website of the Performing Arts Council at [Institution Name]. Celebrating student talent, classical theater, musical showcases, dance ensembles, and cultural heritage.",
+    "Official portal of the Performing Arts Council at Arts Council NIAT. Celebrating collegiate talent, classical theater, proscenium staging, musical showcases, and cultural heritage.",
   keywords: [
     "Performing Arts Council",
-    "University Cultural Council",
+    "Arts Council NIAT",
     "Campus Theater",
     "Music and Dance",
     "Student Performers",
+    "Cultural Council",
   ],
+  icons: {
+    icon: [
+      { url: "/arts_logo.jpeg", type: "image/jpeg" },
+    ],
+    shortcut: "/arts_logo.jpeg",
+    apple: "/arts_logo.jpeg",
+  },
   openGraph: {
-    title: "Performing Arts Council | [Institution Name]",
+    title: "Performing Arts Council | Arts Council NIAT",
     description:
-      "Official website of the Performing Arts Council at [Institution Name]. Celebrating student talent, culture, and collegiate stagecraft.",
-    siteName: "Performing Arts Council",
+      "Official portal of the Performing Arts Council at Arts Council NIAT. Celebrating student talent, culture, and collegiate stagecraft.",
+    siteName: "Performing Arts Council NIAT",
     type: "website",
+    images: [{ url: "/arts_logo.jpeg" }],
   },
 };
 

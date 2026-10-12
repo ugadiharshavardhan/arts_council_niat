@@ -29,8 +29,8 @@ export interface PillNavProps {
 }
 
 export const PillNav: React.FC<PillNavProps> = ({
-  logo = '/pac-logo.svg',
-  logoAlt = 'PAC Logo',
+  logo = '/arts_logo.jpeg',
+  logoAlt = 'Arts Council NIAT Logo',
   logoHref,
   items,
   activeHref,

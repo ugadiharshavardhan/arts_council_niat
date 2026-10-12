@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CouncilMemberCard } from "@/components/members/CouncilMemberCard";
 import { getClubMembers } from "@/lib/dataService";
 import { CouncilMember, CouncilGroup } from "@/types";
@@ -16,14 +15,17 @@ import {
   Users,
   Sparkles,
   ExternalLink,
-  ChevronRight,
-  Layers,
+  ChevronDown,
+  ChevronUp,
+  X,
   ArrowRight,
+  Info,
 } from "lucide-react";
 
 export function ClubMembersListClient() {
   const [members, setMembers] = useState<CouncilMember[]>(allClubMembers);
-  const [selectedCouncilId, setSelectedCouncilId] = useState<string>("all");
+  const [selectedHeadId, setSelectedHeadId] = useState<string | null>(null);
+  const departmentSectionRef = useRef<HTMLDivElement>(null);
 
   const load = async () => {
     try {
@@ -54,11 +56,37 @@ export function ClubMembersListClient() {
 
   const { executiveLeadership, councils } = hierarchy;
 
-  // Active filtered council (if one is selected)
-  const activeCouncil = useMemo(() => {
-    if (selectedCouncilId === "all") return null;
-    return councils.find((c) => c.id === selectedCouncilId) || null;
-  }, [selectedCouncilId, councils]);
+  // The 5 Club Heads
+  const clubHeads = useMemo(() => {
+    return councils
+      .map((c) => ({
+        council: c,
+        head: c.head,
+      }))
+      .filter((item): item is { council: CouncilGroup; head: CouncilMember } => Boolean(item.head));
+  }, [councils]);
+
+  // Active selected head and their department
+  const activeSelection = useMemo(() => {
+    if (!selectedHeadId) return null;
+    return clubHeads.find((h) => h.head.id === selectedHeadId) || null;
+  }, [selectedHeadId, clubHeads]);
+
+  const handleHeadClick = (headId: string) => {
+    if (selectedHeadId === headId) {
+      // Toggle off if already selected
+      setSelectedHeadId(null);
+    } else {
+      setSelectedHeadId(headId);
+      // Smooth scroll into department view on mobile
+      setTimeout(() => {
+        departmentSectionRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      }, 100);
+    }
+  };
 
   return (
     <main className="flex-1 w-full pt-28 pb-20 md:pt-36 md:pb-28">
@@ -89,31 +117,30 @@ export function ClubMembersListClient() {
             <span>Performing Arts Council Directorate · 2026-27</span>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-[#F5E6D3] tracking-tight">
-            Club Members & Council Directorate
+            Council Leadership & Club Heads
           </h1>
           <p className="mt-3 text-sm md:text-base text-[#E7C59F]/80 font-sans leading-relaxed">
-            Organized hierarchy of our executive leadership, department heads, and
-            specialized student members powering stage productions, acoustics, and finance.
+            Meet our executive leadership and department heads. Click on any Club Head below
+            to view the members working in that department.
           </p>
         </div>
 
         {/* ========================================================================= */}
-        {/* LEVEL 1: TOP EXECUTIVE LEADERSHIP (President & Vice President)             */}
+        {/* 1. TOP TIER: PRESIDENT & VICE PRESIDENT ONLY                              */}
         {/* ========================================================================= */}
-        <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#4E2E1E]/80 to-[#23120A] border-2 border-[#8B4513] shadow-2xl relative overflow-hidden">
-          {/* Subtle glow */}
+        <div className="mb-12 p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#4E2E1E]/80 to-[#23120A] border-2 border-[#8B4513] shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-1/4 w-72 h-72 bg-[#D98C5B]/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-widest text-[#F5E6D3] bg-[#8B4513] border border-[#D98C5B]/50 mb-2 font-bold shadow-md">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-widest text-[#F5E6D3] bg-[#8B4513] border border-[#D98C5B]/50 mb-2 font-bold shadow-md">
               <Crown className="w-3.5 h-3.5 text-[#F5E6D3]" />
-              <span>Executive Directorate (Top Leadership)</span>
+              <span>Executive Directorate</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#F5E6D3]">
               President & Vice President
             </h2>
             <p className="text-xs font-mono text-[#E7C59F]/70 mt-1">
-              Directing council governance, proscenium staging standards, and inter-collegiate artistic prestige
+              Guiding council governance, proscenium staging, and student arts leadership
             </p>
           </div>
 
@@ -146,258 +173,162 @@ export function ClubMembersListClient() {
           </div>
         </div>
 
-        {/* Visual Connecting Stem */}
+        {/* Visual Connector Stem */}
         <div className="flex flex-col items-center justify-center my-6">
           <div className="w-0.5 h-8 bg-gradient-to-b from-[#8B4513] to-[#D98C5B]" />
-          <div className="px-3 py-1 rounded-full bg-[#4E2E1E] border border-[#D98C5B] text-[10px] font-mono uppercase text-[#D98C5B] tracking-widest font-semibold shadow-md">
-            Council Wings & Verticals
+          <div className="px-3.5 py-1 rounded-full bg-[#4E2E1E] border border-[#D98C5B] text-[10px] font-mono uppercase text-[#D98C5B] tracking-widest font-semibold shadow-md flex items-center gap-1.5">
+            <Users className="w-3 h-3" />
+            <span>Club Department Heads</span>
           </div>
           <div className="w-0.5 h-8 bg-gradient-to-b from-[#D98C5B] to-[#8B4513]" />
         </div>
 
         {/* ========================================================================= */}
-        {/* INTERACTIVE COUNCIL SELECTOR TABS                                          */}
+        {/* 2. CLUB HEADS ONLY (Clickable to reveal Department Members)                */}
         {/* ========================================================================= */}
         <div className="mb-10">
-          <div className="flex items-center justify-between mb-3 px-1">
-            <span className="text-xs font-mono uppercase tracking-wider text-[#E7C59F]">
-              Select Council to View Head & Members:
-            </span>
-            {selectedCouncilId !== "all" && (
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-2 mb-6">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#F5E6D3]">
+                Club Heads
+              </h2>
+              <p className="text-xs font-mono text-[#E7C59F]/80 mt-0.5">
+                Click any Head below to explore and view the members in their department
+              </p>
+            </div>
+
+            {selectedHeadId && (
               <button
                 type="button"
-                onClick={() => setSelectedCouncilId("all")}
-                className="text-xs font-mono text-[#D98C5B] hover:text-[#E79E70] underline cursor-pointer"
+                onClick={() => setSelectedHeadId(null)}
+                className="inline-flex items-center gap-1.5 text-xs font-mono text-[#D98C5B] hover:text-[#E79E70] px-3 py-1.5 rounded-full bg-[#4E2E1E] border border-[#6B3B23] transition-colors cursor-pointer"
               >
-                View All Councils
+                <X className="w-3.5 h-3.5" />
+                <span>Collapse Department</span>
               </button>
             )}
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5 p-2 rounded-2xl bg-[#4E2E1E]/60 border border-[#6B3B23]">
-            <button
-              type="button"
-              onClick={() => setSelectedCouncilId("all")}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono uppercase tracking-wider transition-all cursor-pointer font-semibold ${
-                selectedCouncilId === "all"
-                  ? "bg-[#D98C5B] text-[#23120A] shadow-md font-bold"
-                  : "bg-[#23120A] text-[#E7C59F] hover:text-[#F5E6D3] hover:bg-[#351C11] border border-[#6B3B23]"
-              }`}
-            >
-              <Layers className="w-3.5 h-3.5" />
-              <span>All Councils ({members.length})</span>
-            </button>
-
-            {councils.map((council) => {
-              const count = (council.head ? 1 : 0) + council.members.length;
-              const isSelected = selectedCouncilId === council.id;
+          {/* Grid of the 5 Club Heads */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 sm:gap-6">
+            {clubHeads.map(({ council, head }) => {
+              const isSelected = selectedHeadId === head.id;
+              const memberCount = council.members.length;
 
               return (
-                <button
-                  key={council.id}
-                  type="button"
-                  onClick={() => setSelectedCouncilId(council.id)}
-                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono uppercase tracking-wider transition-all cursor-pointer font-semibold ${
-                    isSelected
-                      ? "bg-[#D98C5B] text-[#23120A] shadow-md font-bold"
-                      : "bg-[#23120A] text-[#E7C59F] hover:text-[#F5E6D3] hover:bg-[#351C11] border border-[#6B3B23]"
-                  }`}
-                >
-                  <span>{council.shortName}</span>
-                  <span
-                    className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
+                <div key={head.id} className="flex flex-col">
+                  {/* Badge indicating Head Role & Department */}
+                  <div className="mb-2 flex items-center justify-between px-1">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#D98C5B] font-bold">
+                      {council.shortName}
+                    </span>
+                    <span className="text-[10px] font-mono text-[#E7C59F]/70 bg-[#23120A] px-2 py-0.5 rounded-full border border-[#6B3B23]">
+                      {memberCount} {memberCount === 1 ? "member" : "members"}
+                    </span>
+                  </div>
+
+                  {/* Interactive Card */}
+                  <CouncilMemberCard
+                    member={head}
+                    onClick={() => handleHeadClick(head.id)}
+                    isActive={isSelected}
+                    actionLabel={
                       isSelected
-                        ? "bg-[#23120A] text-[#D98C5B]"
-                        : "bg-[#4E2E1E] text-[#E7C59F]"
-                    }`}
-                  >
-                    {count}
-                  </span>
-                </button>
+                        ? "Viewing Members"
+                        : `View ${council.shortName} (${memberCount})`
+                    }
+                  />
+                </div>
               );
             })}
           </div>
         </div>
 
         {/* ========================================================================= */}
-        {/* VIEW A: SINGLE COUNCIL DRILL-DOWN (HEAD ON TOP, MEMBERS BELOW)            */}
+        {/* 3. REVEALED DEPARTMENT MEMBERS (Shown ONLY when a Head is clicked)        */}
         {/* ========================================================================= */}
-        {activeCouncil && (
-          <div className="space-y-12 animate-in fade-in duration-300">
-            {/* Council Header Card */}
-            <div className="p-6 md:p-8 rounded-2xl bg-[#4E2E1E]/80 border border-[#8B4513] flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div>
-                <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase text-[#D98C5B] font-bold mb-1">
-                  <Shield className="w-3.5 h-3.5" />
-                  <span>{activeCouncil.badge}</span>
-                </div>
-                <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#F5E6D3]">
-                  {activeCouncil.name}
-                </h2>
-                <p className="text-xs md:text-sm text-[#E7C59F]/80 font-sans mt-1 max-w-2xl">
-                  {activeCouncil.description}
-                </p>
-              </div>
-
-              {activeCouncil.route && (
-                <Link
-                  href={activeCouncil.route}
-                  className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#D98C5B] hover:text-[#23120A] hover:bg-[#D98C5B] transition-all px-4 py-2 rounded-xl bg-[#23120A] border border-[#6B3B23] shrink-0 font-bold"
-                >
-                  <span>Dedicated Team Page</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              )}
-            </div>
-
-            {/* LEVEL 2: COUNCIL HEAD */}
-            {activeCouncil.head && (
-              <div className="flex flex-col items-center">
-                <div className="mb-3 text-center">
-                  <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono uppercase tracking-widest text-[#23120A] bg-[#D98C5B] font-bold shadow-md">
+        <div ref={departmentSectionRef}>
+          {activeSelection ? (
+            <div className="mt-8 p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#4E2E1E]/90 to-[#23120A] border-2 border-[#D98C5B]/60 shadow-2xl relative overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
+              {/* Header of Active Department */}
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-8 border-b border-[#6B3B23]">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase text-[#D98C5B] font-bold mb-1">
                     <Crown className="w-3.5 h-3.5" />
-                    <span>Council Head</span>
-                  </span>
-                  <p className="text-[11px] font-mono text-[#E7C59F]/70 mt-1">
-                    Directing {activeCouncil.shortName} Operations & Strategy
+                    <span>
+                      {activeSelection.council.badge} · Head: {activeSelection.head.name}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#F5E6D3]">
+                    {activeSelection.council.name}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#E7C59F]/80 font-sans mt-1 max-w-2xl">
+                    {activeSelection.council.description}
                   </p>
                 </div>
 
-                <div className="w-full max-w-sm">
-                  <CouncilMemberCard member={activeCouncil.head} />
-                </div>
+                <div className="flex items-center gap-3">
+                  {activeSelection.council.route && (
+                    <Link
+                      href={activeSelection.council.route}
+                      className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#23120A] bg-[#D98C5B] hover:bg-[#E79E70] transition-colors px-3.5 py-1.5 rounded-xl font-bold"
+                    >
+                      <span>Dedicated Team Page</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </Link>
+                  )}
 
-                {/* Connecting branch down to members */}
-                {activeCouncil.members.length > 0 && (
-                  <div className="flex flex-col items-center my-6">
-                    <div className="w-0.5 h-10 bg-gradient-to-b from-[#D98C5B] to-[#8B4513]" />
-                    <div className="px-3 py-0.5 rounded-full bg-[#4E2E1E] border border-[#6B3B23] text-[10px] font-mono uppercase text-[#E7C59F]">
-                      Council Members ({activeCouncil.members.length})
-                    </div>
-                    <div className="w-0.5 h-8 bg-gradient-to-b from-[#8B4513] to-transparent" />
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* LEVEL 3: COUNCIL MEMBERS */}
-            {activeCouncil.members.length > 0 ? (
-              <div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 justify-items-center">
-                  {activeCouncil.members.map((member) => (
-                    <div key={member.id} className="w-full max-w-sm">
-                      <CouncilMemberCard member={member} />
-                    </div>
-                  ))}
+                  <button
+                    type="button"
+                    onClick={() => setSelectedHeadId(null)}
+                    className="p-1.5 rounded-xl bg-[#23120A] text-[#E7C59F] hover:text-[#F5E6D3] border border-[#6B3B23] transition-colors cursor-pointer"
+                    title="Close department members"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
-            ) : (
-              <div className="text-center py-10 bg-[#4E2E1E]/30 rounded-2xl border border-[#6B3B23] max-w-md mx-auto">
-                <p className="text-xs font-mono text-[#E7C59F]">
-                  All responsibilities in this council are coordinated directly by the Council Head.
-                </p>
-              </div>
-            )}
-          </div>
-        )}
 
-        {/* ========================================================================= */}
-        {/* VIEW B: ALL COUNCILS (FULL TREE HIERARCHY)                                */}
-        {/* ========================================================================= */}
-        {selectedCouncilId === "all" && (
-          <div className="space-y-16">
-            {councils.map((council) => {
-              return (
-                <div
-                  key={council.id}
-                  id={`council-${council.id}`}
-                  className="p-6 sm:p-8 rounded-3xl bg-[#4E2E1E]/40 border border-[#6B3B23] hover:border-[#D98C5B]/40 transition-colors"
-                >
-                  {/* Council Title Row */}
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-6 mb-8 border-b border-[#6B3B23]">
-                    <div>
-                      <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase text-[#D98C5B] font-bold mb-1">
-                        <Shield className="w-3 h-3" />
-                        <span>{council.badge}</span>
-                      </div>
-                      <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#F5E6D3]">
-                        {council.name}
-                      </h3>
-                      <p className="text-xs md:text-sm text-[#E7C59F]/80 font-sans mt-0.5 max-w-2xl">
-                        {council.description}
-                      </p>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <button
-                        type="button"
-                        onClick={() => setSelectedCouncilId(council.id)}
-                        className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#23120A] bg-[#D98C5B] hover:bg-[#E79E70] transition-colors px-3.5 py-1.5 rounded-xl font-bold cursor-pointer"
-                      >
-                        <span>Focus on {council.shortName}</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
-                      </button>
-
-                      {council.route && (
-                        <Link
-                          href={council.route}
-                          className="p-2 rounded-xl bg-[#23120A] text-[#E7C59F] hover:text-[#F5E6D3] border border-[#6B3B23] transition-colors"
-                          title={`Open ${council.name} dedicated page`}
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                        </Link>
-                      )}
-                    </div>
+              {/* Members in this Department */}
+              {activeSelection.council.members.length > 0 ? (
+                <div>
+                  <div className="mb-4 flex items-center justify-between">
+                    <span className="text-xs font-mono uppercase tracking-widest text-[#E7C59F] flex items-center gap-1.5">
+                      <Users className="w-3.5 h-3.5 text-[#D98C5B]" />
+                      <span>
+                        Department Members ({activeSelection.council.members.length})
+                      </span>
+                    </span>
                   </div>
 
-                  {/* Hierarchical Structure: Head First, Members Below */}
-                  <div className="w-full flex flex-col items-center">
-                    {/* Council Head */}
-                    {council.head && (
-                      <div className="w-full flex flex-col items-center mb-6">
-                        <div className="mb-3 text-center">
-                          <span className="inline-flex items-center gap-1 px-3 py-0.5 rounded-full text-[11px] font-mono uppercase tracking-widest text-[#23120A] bg-[#D98C5B] font-bold shadow-sm">
-                            <Crown className="w-3 h-3" />
-                            <span>Council Head</span>
-                          </span>
-                        </div>
-                        <div className="w-full max-w-sm">
-                          <CouncilMemberCard member={council.head} />
-                        </div>
-
-                        {/* Connector down to members */}
-                        {council.members.length > 0 && (
-                          <div className="flex flex-col items-center my-4">
-                            <div className="w-0.5 h-6 bg-gradient-to-b from-[#D98C5B] to-[#8B4513]" />
-                            <div className="px-2.5 py-0.5 rounded-full bg-[#23120A] border border-[#6B3B23] text-[10px] font-mono uppercase text-[#E7C59F]/80">
-                              Council Members ({council.members.length})
-                            </div>
-                            <div className="w-0.5 h-4 bg-gradient-to-b from-[#8B4513] to-transparent" />
-                          </div>
-                        )}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {activeSelection.council.members.map((member) => (
+                      <div key={member.id} className="w-full max-w-sm">
+                        <CouncilMemberCard member={member} />
                       </div>
-                    )}
-
-                    {/* Council Members Grid */}
-                    {council.members.length > 0 ? (
-                      <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 justify-items-center">
-                        {council.members.map((member) => (
-                          <div key={member.id} className="w-full max-w-sm">
-                            <CouncilMemberCard member={member} />
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="text-center py-4 text-xs font-mono text-[#E7C59F]/60">
-                        Council directed by Head
-                      </div>
-                    )}
+                    ))}
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        )}
+              ) : (
+                <div className="text-center py-8 bg-[#23120A]/60 rounded-2xl border border-[#6B3B23]">
+                  <p className="text-xs font-mono text-[#E7C59F]">
+                    All responsibilities in this department are coordinated directly by {activeSelection.head.name}.
+                  </p>
+                </div>
+              )}
+            </div>
+          ) : (
+            /* Subtle Help Hint when no Head is selected yet */
+            <div className="text-center py-6 px-4 bg-[#4E2E1E]/30 rounded-2xl border border-[#6B3B23]/60 max-w-lg mx-auto">
+              <p className="text-xs font-mono text-[#E7C59F]/70 flex items-center justify-center gap-2">
+                <Info className="w-4 h-4 text-[#D98C5B]" />
+                <span>
+                  Click any Club Head above to reveal the student members in that department.
+                </span>
+              </p>
+            </div>
+          )}
+        </div>
       </Container>
     </main>
   );

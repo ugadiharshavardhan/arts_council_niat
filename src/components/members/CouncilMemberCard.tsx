@@ -43,7 +43,7 @@ export const CouncilMemberCard: React.FC<CouncilMemberCardProps> = ({
 
         {member.department && (
           <div className="absolute top-3 left-3 z-10">
-            <span className="px-2.5 py-0.5 rounded text-[10px] font-mono uppercase bg-[#23120A]/90 text-[#F5E6D3] border border-[#6B3B23] backdrop-blur-sm">
+            <span className="px-2.5 py-0.5 rounded text-[10px] font-sans font-medium uppercase tracking-wider bg-[#23120A]/90 text-[#F5E6D3] border border-[#6B3B23] backdrop-blur-sm">
               {member.department}
             </span>
           </div>
@@ -51,7 +51,7 @@ export const CouncilMemberCard: React.FC<CouncilMemberCardProps> = ({
 
         {isActive && (
           <div className="absolute top-3 right-3 z-10">
-            <span className="px-2.5 py-0.5 rounded text-[10px] font-mono uppercase bg-[#D98C5B] text-[#23120A] font-bold shadow-md">
+            <span className="px-2.5 py-0.5 rounded text-[10px] font-sans font-semibold uppercase tracking-wider bg-[#D98C5B] text-[#23120A] shadow-md">
               Selected
             </span>
           </div>
@@ -60,15 +60,15 @@ export const CouncilMemberCard: React.FC<CouncilMemberCardProps> = ({
 
       <div className="p-5 flex flex-col justify-between flex-1">
         <div>
-          <h4 className="text-lg font-serif font-bold text-[#F5E6D3] group-hover:text-[#D98C5B] transition-colors">
+          <h4 className="text-lg font-sans font-semibold text-[#F5E6D3] group-hover:text-[#D98C5B] transition-colors leading-snug">
             {member.name}
           </h4>
-          <p className="text-xs font-mono text-[#D98C5B] mt-1 font-semibold">
+          <p className="text-xs font-sans text-[#D98C5B] mt-1 font-medium tracking-wide">
             {member.role}
           </p>
         </div>
 
-        <div className="pt-4 mt-4 border-t border-[#6B3B23] flex items-center justify-between text-[11px] font-mono text-[#E7C59F]/80">
+        <div className="pt-4 mt-4 border-t border-[#6B3B23] flex items-center justify-between text-[11px] font-sans text-[#E7C59F]/80">
           <span>Student ID: {member.studentId || "—"}</span>
 
           {actionLabel ? (

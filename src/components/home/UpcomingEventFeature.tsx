@@ -23,11 +23,11 @@ export const UpcomingEventFeature: React.FC<UpcomingEventFeatureProps> = ({
         <div className="flex items-center justify-between gap-4 mb-8 border-b border-[#6B3B23]/80 pb-4">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-[#D98C5B] animate-pulse" />
-            <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#D98C5B] font-semibold">
+            <span className="text-xs font-sans uppercase tracking-[0.2em] text-[#D98C5B] font-semibold">
               FEATURED UPCOMING SPOTLIGHT
             </span>
           </div>
-          <span className="text-xs font-mono text-[#E7C59F]/70 hidden sm:inline">
+          <span className="text-xs font-sans text-[#E7C59F]/70 hidden sm:inline">
             NEXT STAGE ENGAGEMENT
           </span>
         </div>
@@ -51,7 +51,7 @@ export const UpcomingEventFeature: React.FC<UpcomingEventFeatureProps> = ({
               </div>
             )}
             <div className="absolute bottom-4 right-4 z-10">
-              <span className="px-2.5 py-1 rounded bg-black/75 backdrop-blur-md text-[11px] font-mono text-[#E7C59F] border border-white/10">
+              <span className="px-2.5 py-1 rounded bg-black/75 backdrop-blur-md text-[11px] font-sans font-medium text-[#E7C59F] border border-white/10">
                 {event.category || "University Gala"}
               </span>
             </div>
@@ -59,7 +59,7 @@ export const UpcomingEventFeature: React.FC<UpcomingEventFeatureProps> = ({
 
           {/* Editorial Info Column */}
           <div className="lg:col-span-5 flex flex-col justify-center">
-            <span className="text-xs font-mono font-medium tracking-[0.25em] text-[#D98C5B] uppercase mb-2">
+            <span className="text-xs font-sans font-medium tracking-[0.2em] text-[#D98C5B] uppercase mb-2">
               FLAGSHIP EVENT PREVIEW
             </span>
 
@@ -67,7 +67,7 @@ export const UpcomingEventFeature: React.FC<UpcomingEventFeatureProps> = ({
               {event.title}
             </h3>
 
-            <p className="text-sm sm:text-base text-[#E7C59F] font-light leading-relaxed mb-6">
+            <p className="text-sm sm:text-base text-[#E7C59F] font-sans font-normal leading-relaxed mb-6">
               {event.description}
             </p>
 
@@ -78,7 +78,7 @@ export const UpcomingEventFeature: React.FC<UpcomingEventFeatureProps> = ({
                   <Calendar className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="block text-[11px] text-[#E7C59F] uppercase font-mono">Date</span>
+                  <span className="block text-[11px] text-[#E7C59F] uppercase font-sans font-medium">Date</span>
                   <span className="font-semibold tracking-wide">{event.date}</span>
                 </div>
               </div>
@@ -89,7 +89,7 @@ export const UpcomingEventFeature: React.FC<UpcomingEventFeatureProps> = ({
                     <Clock className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="block text-[11px] text-[#E7C59F] uppercase font-mono">Time</span>
+                    <span className="block text-[11px] text-[#E7C59F] uppercase font-sans font-medium">Time</span>
                     <span className="font-semibold tracking-wide">{event.time}</span>
                   </div>
                 </div>
@@ -101,7 +101,7 @@ export const UpcomingEventFeature: React.FC<UpcomingEventFeatureProps> = ({
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="block text-[11px] text-[#E7C59F] uppercase font-mono">Venue</span>
+                    <span className="block text-[11px] text-[#E7C59F] uppercase font-sans font-medium">Venue</span>
                     <span className="font-semibold tracking-wide">{event.venue}</span>
                   </div>
                 </div>

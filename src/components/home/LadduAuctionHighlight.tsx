@@ -39,10 +39,10 @@ export const LadduAuctionHighlight: React.FC<LadduAuctionHighlightProps> = ({
                 />
 
                 <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-[#23120A]/90 backdrop-blur-md border border-[#D98C5B]/40">
-                  <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#D98C5B] block mb-0.5 font-bold">
+                  <span className="text-[10px] font-sans uppercase tracking-[0.2em] text-[#D98C5B] block mb-0.5 font-bold">
                     SACRED PRASADAM LAUREATE
                   </span>
-                  <p className="text-sm font-serif font-bold text-[#F5E6D3]">
+                  <p className="text-sm font-sans font-semibold text-[#F5E6D3]">
                     {data.winnerName}
                   </p>
                 </div>
@@ -58,7 +58,7 @@ export const LadduAuctionHighlight: React.FC<LadduAuctionHighlightProps> = ({
 
             {/* Editorial Information & Highlight Details */}
             <div className="lg:col-span-7 flex flex-col justify-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D98C5B]/15 border border-[#D98C5B]/30 text-[#D98C5B] text-xs font-mono uppercase tracking-widest w-fit mb-4 font-semibold">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D98C5B]/15 border border-[#D98C5B]/30 text-[#D98C5B] text-xs font-sans uppercase tracking-wider w-fit mb-4 font-semibold">
                 SPECIAL TRADITION & PHILANTHROPY
               </div>
 
@@ -66,41 +66,41 @@ export const LadduAuctionHighlight: React.FC<LadduAuctionHighlightProps> = ({
                 {data.title}
               </h3>
 
-              <p className="text-xs sm:text-sm font-mono tracking-wider text-[#D98C5B] uppercase mb-5 font-semibold">
+              <p className="text-xs sm:text-sm font-sans tracking-wide text-[#D98C5B] uppercase mb-5 font-medium">
                 {data.subtitle}
               </p>
 
-              <p className="text-sm sm:text-base text-[#E7C59F] font-light leading-relaxed mb-8">
+              <p className="text-sm sm:text-base text-[#E7C59F] font-sans font-normal leading-relaxed mb-8">
                 {data.description}
               </p>
 
               {/* Distinction Stat Strip */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-5 rounded-2xl bg-[#23120A] border border-[#6B3B23] mb-8">
                 <div>
-                  <span className="text-[10px] font-mono uppercase text-[#E7C59F]/70 block mb-1">
+                  <span className="text-[10px] font-sans uppercase text-[#E7C59F]/70 block mb-1 font-medium">
                     WINNER / BENEFIT HOUSE
                   </span>
-                  <p className="text-base font-serif font-bold text-[#F5E6D3]">
+                  <p className="text-base font-sans font-semibold text-[#F5E6D3]">
                     {data.winnerName}
                   </p>
                 </div>
 
                 <div>
-                  <span className="text-[10px] font-mono uppercase text-[#D98C5B] block mb-1 flex items-center gap-1 font-semibold">
+                  <span className="text-[10px] font-sans uppercase text-[#D98C5B] block mb-1 flex items-center gap-1 font-semibold">
                     <IndianRupee className="w-3 h-3 text-[#D98C5B]" />
                     WINNING SACRED BID
                   </span>
-                  <p className="text-lg font-mono font-black text-[#D98C5B]">
+                  <p className="text-lg font-sans font-bold text-[#D98C5B]">
                     {data.winningBid}
                   </p>
                 </div>
 
                 <div>
-                  <span className="text-[10px] font-mono uppercase text-[#E7C59F]/70 block mb-1 flex items-center gap-1">
+                  <span className="text-[10px] font-sans uppercase text-[#E7C59F]/70 block mb-1 flex items-center gap-1 font-medium">
                     <Calendar className="w-3 h-3 text-[#E7C59F]/50" />
                     EVENT DATE
                   </span>
-                  <p className="text-sm font-mono text-[#E7C59F]">
+                  <p className="text-sm font-sans text-[#E7C59F]">
                     {data.eventDate}
                   </p>
                 </div>
@@ -116,7 +116,7 @@ export const LadduAuctionHighlight: React.FC<LadduAuctionHighlightProps> = ({
                   View Cultural Events
                 </Button>
 
-                <div className="flex items-center gap-2 text-xs font-mono text-[#E7C59F]/70">
+                <div className="flex items-center gap-2 text-xs font-sans text-[#E7C59F]/70">
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
                   <span>Verified Collegiate Tradition</span>
                 </div>

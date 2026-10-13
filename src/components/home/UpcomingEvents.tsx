@@ -81,7 +81,7 @@ export const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ events }) => {
 
               {/* Event Title */}
               <div className="p-5 bg-[#4E2E1E] border-t border-[#6B3B23] flex items-center min-h-[76px]">
-                <h3 className="text-base sm:text-lg font-serif font-bold text-[#F5E6D3] group-hover:text-[#D98C5B] transition-colors leading-snug line-clamp-2">
+                <h3 className="text-base sm:text-lg font-sans font-semibold text-[#F5E6D3] group-hover:text-[#D98C5B] transition-colors leading-snug line-clamp-2">
                   {evt.title}
                 </h3>
               </div>

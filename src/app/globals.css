@@ -51,8 +51,10 @@
   --color-amber-300: #E7C59F;
   --color-amber-200: #F5E6D3;
 
-  --font-serif: var(--font-serif), Georgia, Cambria, serif;
-  --font-sans: var(--font-sans), system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-serif), "Playfair Display", Georgia, Cambria, serif;
+  --font-heading: var(--font-serif), "Playfair Display", Georgia, Cambria, serif;
+  --font-sans: var(--font-sans), Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-sans), Inter, system-ui, -apple-system, sans-serif;
 }
 
 body {

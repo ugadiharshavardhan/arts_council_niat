@@ -35,7 +35,7 @@ export const Hero: React.FC<HeroProps> = () => {
             <div className="w-full max-w-4xl h-[75px] sm:h-[105px] md:h-[135px] lg:h-[160px] relative mt-1 sm:mt-2">
               <TechText
                 text="ARTS COUNCIL"
-                fontFamily="'Cormorant Garamond', Georgia, serif"
+                fontFamily="'Playfair Display', Georgia, serif"
                 fontWeight={700}
                 fontSize={130}
                 color="#D98C5B"

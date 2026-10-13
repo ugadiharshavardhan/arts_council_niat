@@ -53,7 +53,7 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
               </div>
 
               <div className="absolute bottom-0 left-0 right-0 p-4 bg-[#23120A]/95 border-t border-[#6B3B23]">
-                <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#D98C5B] block mb-1">
+                <span className="text-[11px] font-sans font-medium uppercase tracking-[0.2em] text-[#D98C5B] block mb-1">
                   OFFICIAL LEADERSHIP
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#F5E6D3]">
@@ -71,7 +71,7 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
                 <p className="text-sm text-[#F5E6D3] italic font-serif leading-relaxed">
                   &ldquo;Art has the transformative power to unite our university community. Our administration is dedicated to providing transparent adjudication, modern proscenium infrastructure, and equal stage opportunities for every passionate performer.&rdquo;
                 </p>
-                <span className="text-[10px] text-[#E7C59F]/70 font-mono block mt-2">
+                <span className="text-[10px] text-[#E7C59F]/70 font-sans block mt-2">
                   [Visionary Address · Performing Arts Council]
                 </span>
               </div>
@@ -85,7 +85,7 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
                 >
                   View Directorate Board
                 </Button>
-                <span className="text-[11px] font-mono text-[#E7C59F]/70 hidden sm:inline">
+                <span className="text-[11px] font-sans text-[#E7C59F]/70 hidden sm:inline">
                   Tenure: 2026-2027
                 </span>
               </div>
@@ -110,7 +110,7 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
               </div>
 
               <div className="absolute bottom-0 left-0 right-0 p-4 bg-[#23120A]/95 border-t border-[#6B3B23]">
-                <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#D98C5B] block mb-1">
+                <span className="text-[11px] font-sans font-medium uppercase tracking-[0.2em] text-[#D98C5B] block mb-1">
                   OPERATIONS & PRODUCTION
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#F5E6D3]">
@@ -128,7 +128,7 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
                 <p className="text-sm text-[#F5E6D3] italic font-serif leading-relaxed">
                   &ldquo;Behind every grand performance lies weeks of meticulous stagecraft, sound balancing, and volunteer coordination. We are establishing structured workshops and production labs for all incoming students.&rdquo;
                 </p>
-                <span className="text-[10px] text-[#E7C59F]/70 font-mono block mt-2">
+                <span className="text-[10px] text-[#E7C59F]/70 font-sans block mt-2">
                   [Production & Stagecraft Leadership]
                 </span>
               </div>
@@ -142,7 +142,7 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
                 >
                   Meet Council Wings
                 </Button>
-                <span className="text-[11px] font-mono text-[#E7C59F]/70 hidden sm:inline">
+                <span className="text-[11px] font-sans text-[#E7C59F]/70 hidden sm:inline">
                   Tenure: 2026-2027
                 </span>
               </div>

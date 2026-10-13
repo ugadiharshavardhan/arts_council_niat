@@ -164,7 +164,7 @@ export const TechText: React.FC<TechTextProps> = ({
           }
         }
       }
-      return f || getComputedStyle(container).fontFamily || "'Cormorant Garamond', Georgia, serif";
+      return f || getComputedStyle(container).fontFamily || "'Playfair Display', Georgia, serif";
     };
 
     const fontFor = (s: any, size: number) => `${s.fontWeight} ${Math.round(size)}px ${family(s)}`;

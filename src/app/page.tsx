@@ -18,34 +18,29 @@ import {
   upcomingEventsList,
   pastEventsList as defaultPastEvents,
 } from "@/data/events";
-import { recentWinnersList as defaultWinners } from "@/data/winners";
 import { councilLeadership, featuredCouncilMembers as defaultMembers } from "@/data/members";
 import { ladduAuctionHighlight, siteMetadataInfo } from "@/data/home";
 import {
   getUpcomingEvents,
   getPastEvents,
-  getWinners,
   getClubMembers,
 } from "@/lib/dataService";
-import { EventItem, WinnerItem, CouncilMember } from "@/types";
+import { EventItem, CouncilMember } from "@/types";
 
 export default function Home() {
   const [upcomingEvents, setUpcomingEvents] = useState<EventItem[]>(upcomingEventsList);
   const [pastEvents, setPastEvents] = useState<EventItem[]>(defaultPastEvents);
-  const [winners, setWinners] = useState<WinnerItem[]>(defaultWinners);
   const [members, setMembers] = useState<CouncilMember[]>(defaultMembers);
 
   const loadData = async () => {
     try {
-      const [up, past, wins, mems] = await Promise.all([
+      const [up, past, mems] = await Promise.all([
         getUpcomingEvents(),
         getPastEvents(),
-        getWinners(),
         getClubMembers(),
       ]);
       if (Array.isArray(up)) setUpcomingEvents(up);
       if (Array.isArray(past)) setPastEvents(past);
-      if (Array.isArray(wins)) setWinners(wins);
       if (Array.isArray(mems)) setMembers(mems);
     } catch (err) {
       console.error("Error loading live PAC data:", err);
@@ -105,7 +100,7 @@ export default function Home() {
         {/* 7. Club members preview */}
         <CouncilMembersPreview members={members} />
 
-        {/* 9. Ganesh Chaturthi Laddu Auction highlight */}
+        {/* 8. Ganesh Chaturthi Laddu Auction highlight */}
         <LadduAuctionHighlight data={ladduAuctionHighlight} />
       </main>
 

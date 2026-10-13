@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { CouncilMemberCard } from "@/components/members/CouncilMemberCard";
@@ -13,24 +13,16 @@ import {
   Shield,
   Crown,
   Users,
-  Sparkles,
   ExternalLink,
-  ChevronDown,
-  ChevronUp,
-  X,
-  ArrowRight,
-  Info,
 } from "lucide-react";
 
 export function ClubMembersListClient() {
   const [members, setMembers] = useState<CouncilMember[]>(allClubMembers);
-  const [selectedHeadId, setSelectedHeadId] = useState<string | null>(null);
-  const departmentSectionRef = useRef<HTMLDivElement>(null);
 
   const load = async () => {
     try {
       const live = await getClubMembers();
-      if (live && live.length > 0) {
+      if (Array.isArray(live)) {
         setMembers(live);
       }
     } catch (e) {
@@ -56,7 +48,7 @@ export function ClubMembersListClient() {
 
   const { executiveLeadership, councils } = hierarchy;
 
-  // The 5 Club Heads
+  // The Club Heads
   const clubHeads = useMemo(() => {
     return councils
       .map((c) => ({
@@ -65,28 +57,6 @@ export function ClubMembersListClient() {
       }))
       .filter((item): item is { council: CouncilGroup; head: CouncilMember } => Boolean(item.head));
   }, [councils]);
-
-  // Active selected head and their department
-  const activeSelection = useMemo(() => {
-    if (!selectedHeadId) return null;
-    return clubHeads.find((h) => h.head.id === selectedHeadId) || null;
-  }, [selectedHeadId, clubHeads]);
-
-  const handleHeadClick = (headId: string) => {
-    if (selectedHeadId === headId) {
-      // Toggle off if already selected
-      setSelectedHeadId(null);
-    } else {
-      setSelectedHeadId(headId);
-      // Smooth scroll into department view on mobile
-      setTimeout(() => {
-        departmentSectionRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-        });
-      }, 100);
-    }
-  };
 
   return (
     <main className="flex-1 w-full pt-28 pb-20 md:pt-36 md:pb-28">
@@ -100,14 +70,6 @@ export function ClubMembersListClient() {
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             <span>Back to Home</span>
           </Link>
-
-          <Link
-            href="/admin"
-            className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#D98C5B] hover:text-[#23120A] hover:bg-[#D98C5B] transition-all px-3.5 py-1.5 rounded-full bg-[#4E2E1E] border border-[#6B3B23]"
-          >
-            <Plus className="w-3.5 h-3.5" />
-            <span>Manage Roster & Upload in Admin</span>
-          </Link>
         </div>
 
         {/* Page Heading */}
@@ -120,15 +82,15 @@ export function ClubMembersListClient() {
             Council Leadership & Club Heads
           </h1>
           <p className="mt-3 text-sm md:text-base text-[#E7C59F]/80 font-sans leading-relaxed">
-            Meet our executive leadership and department heads. Click on any Club Head below
-            to view the members working in that department.
+            Meet our executive leadership and department directors. Click on any Club Head below
+            to open their dedicated department team page.
           </p>
         </div>
 
         {/* ========================================================================= */}
         {/* 1. TOP TIER: PRESIDENT & VICE PRESIDENT ONLY                              */}
         {/* ========================================================================= */}
-        <div className="mb-12 p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#4E2E1E]/80 to-[#23120A] border-2 border-[#8B4513] shadow-2xl relative overflow-hidden">
+        <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#4E2E1E]/80 to-[#23120A] border-2 border-[#8B4513] shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-1/4 w-72 h-72 bg-[#D98C5B]/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="text-center mb-8">
@@ -173,47 +135,24 @@ export function ClubMembersListClient() {
           </div>
         </div>
 
-        {/* Visual Connector Stem */}
-        <div className="flex flex-col items-center justify-center my-6">
-          <div className="w-0.5 h-8 bg-gradient-to-b from-[#8B4513] to-[#D98C5B]" />
-          <div className="px-3.5 py-1 rounded-full bg-[#4E2E1E] border border-[#D98C5B] text-[10px] font-mono uppercase text-[#D98C5B] tracking-widest font-semibold shadow-md flex items-center gap-1.5">
-            <Users className="w-3 h-3" />
-            <span>Club Department Heads</span>
-          </div>
-          <div className="w-0.5 h-8 bg-gradient-to-b from-[#D98C5B] to-[#8B4513]" />
-        </div>
-
         {/* ========================================================================= */}
-        {/* 2. CLUB HEADS ONLY (Clickable to reveal Department Members)                */}
+        {/* 2. CLUB HEADS (Each links directly to their dedicated team page)           */}
         {/* ========================================================================= */}
         <div className="mb-10">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-2 mb-6">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#F5E6D3]">
-                Club Heads
-              </h2>
-              <p className="text-xs font-mono text-[#E7C59F]/80 mt-0.5">
-                Click any Head below to explore and view the members in their department
-              </p>
-            </div>
-
-            {selectedHeadId && (
-              <button
-                type="button"
-                onClick={() => setSelectedHeadId(null)}
-                className="inline-flex items-center gap-1.5 text-xs font-mono text-[#D98C5B] hover:text-[#E79E70] px-3 py-1.5 rounded-full bg-[#4E2E1E] border border-[#6B3B23] transition-colors cursor-pointer"
-              >
-                <X className="w-3.5 h-3.5" />
-                <span>Collapse Department</span>
-              </button>
-            )}
+          <div className="mb-8 text-center max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#F5E6D3]">
+              Club Heads
+            </h2>
+            <p className="text-xs sm:text-sm text-[#E7C59F]/80 font-sans mt-1.5">
+              Click any Club Head below to visit their dedicated team page and view all members in their department.
+            </p>
           </div>
 
-          {/* Grid of the 5 Club Heads */}
+          {/* Grid of the Club Heads */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 sm:gap-6">
             {clubHeads.map(({ council, head }) => {
-              const isSelected = selectedHeadId === head.id;
               const memberCount = council.members.length;
+              const targetRoute = council.route || "/club-members";
 
               return (
                 <div key={head.id} className="flex flex-col">
@@ -227,107 +166,20 @@ export function ClubMembersListClient() {
                     </span>
                   </div>
 
-                  {/* Interactive Card */}
-                  <CouncilMemberCard
-                    member={head}
-                    onClick={() => handleHeadClick(head.id)}
-                    isActive={isSelected}
-                    actionLabel={
-                      isSelected
-                        ? "Viewing Members"
-                        : `View ${council.shortName} (${memberCount})`
-                    }
-                  />
+                  {/* Direct Link to Dedicated Team Page */}
+                  <Link
+                    href={targetRoute}
+                    className="block group h-full no-underline transition-transform hover:-translate-y-1 duration-200"
+                  >
+                    <CouncilMemberCard
+                      member={head}
+                      actionLabel={`View ${council.shortName} Team (${memberCount})`}
+                    />
+                  </Link>
                 </div>
               );
             })}
           </div>
-        </div>
-
-        {/* ========================================================================= */}
-        {/* 3. REVEALED DEPARTMENT MEMBERS (Shown ONLY when a Head is clicked)        */}
-        {/* ========================================================================= */}
-        <div ref={departmentSectionRef}>
-          {activeSelection ? (
-            <div className="mt-8 p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#4E2E1E]/90 to-[#23120A] border-2 border-[#D98C5B]/60 shadow-2xl relative overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
-              {/* Header of Active Department */}
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-8 border-b border-[#6B3B23]">
-                <div>
-                  <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase text-[#D98C5B] font-bold mb-1">
-                    <Crown className="w-3.5 h-3.5" />
-                    <span>
-                      {activeSelection.council.badge} · Head: {activeSelection.head.name}
-                    </span>
-                  </div>
-                  <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#F5E6D3]">
-                    {activeSelection.council.name}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#E7C59F]/80 font-sans mt-1 max-w-2xl">
-                    {activeSelection.council.description}
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  {activeSelection.council.route && (
-                    <Link
-                      href={activeSelection.council.route}
-                      className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#23120A] bg-[#D98C5B] hover:bg-[#E79E70] transition-colors px-3.5 py-1.5 rounded-xl font-bold"
-                    >
-                      <span>Dedicated Team Page</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </Link>
-                  )}
-
-                  <button
-                    type="button"
-                    onClick={() => setSelectedHeadId(null)}
-                    className="p-1.5 rounded-xl bg-[#23120A] text-[#E7C59F] hover:text-[#F5E6D3] border border-[#6B3B23] transition-colors cursor-pointer"
-                    title="Close department members"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-
-              {/* Members in this Department */}
-              {activeSelection.council.members.length > 0 ? (
-                <div>
-                  <div className="mb-4 flex items-center justify-between">
-                    <span className="text-xs font-mono uppercase tracking-widest text-[#E7C59F] flex items-center gap-1.5">
-                      <Users className="w-3.5 h-3.5 text-[#D98C5B]" />
-                      <span>
-                        Department Members ({activeSelection.council.members.length})
-                      </span>
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
-                    {activeSelection.council.members.map((member) => (
-                      <div key={member.id} className="w-full max-w-sm">
-                        <CouncilMemberCard member={member} />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <div className="text-center py-8 bg-[#23120A]/60 rounded-2xl border border-[#6B3B23]">
-                  <p className="text-xs font-mono text-[#E7C59F]">
-                    All responsibilities in this department are coordinated directly by {activeSelection.head.name}.
-                  </p>
-                </div>
-              )}
-            </div>
-          ) : (
-            /* Subtle Help Hint when no Head is selected yet */
-            <div className="text-center py-6 px-4 bg-[#4E2E1E]/30 rounded-2xl border border-[#6B3B23]/60 max-w-lg mx-auto">
-              <p className="text-xs font-mono text-[#E7C59F]/70 flex items-center justify-center gap-2">
-                <Info className="w-4 h-4 text-[#D98C5B]" />
-                <span>
-                  Click any Club Head above to reveal the student members in that department.
-                </span>
-              </p>
-            </div>
-          )}
         </div>
       </Container>
     </main>

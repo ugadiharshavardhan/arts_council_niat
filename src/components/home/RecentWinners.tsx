@@ -78,15 +78,6 @@ export const RecentWinners: React.FC<RecentWinnersProps> = ({ winners }) => {
                 <ChevronRight className="w-5 h-5" />
               </button>
             </div>
-
-            <Button
-              href="/admin"
-              variant="gold"
-              size="md"
-              icon={<Trophy className="w-4 h-4 text-[#23120A]" />}
-            >
-              Update / Manage Winners
-            </Button>
           </div>
         </div>
 

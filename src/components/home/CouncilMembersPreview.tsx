@@ -6,6 +6,7 @@ import { Button } from "../ui/Button";
 import { CouncilMemberCard } from "../members/CouncilMemberCard";
 import { CouncilMember } from "@/types";
 import { buildCouncilsHierarchy } from "@/data/members";
+import { getTeamUrlFromRole } from "@/lib/dataService";
 import { Users } from "lucide-react";
 
 interface CouncilMembersPreviewProps {
@@ -64,20 +65,27 @@ export const CouncilMembersPreview: React.FC<CouncilMembersPreviewProps> = ({
           </div>
         </div>
 
-        {/* Club Heads Grid (Shows only Department Heads, not all club members) */}
+        {/* Club Heads Grid (Shows only Department Heads, each linking directly to their dedicated team page) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {clubHeads.map((member) => (
-            <Link
-              key={member.id}
-              href="/club-members"
-              className="block group h-full no-underline"
-            >
-              <CouncilMemberCard
-                member={member}
-                actionLabel="View Department"
-              />
-            </Link>
-          ))}
+          {clubHeads.map((member) => {
+            const targetUrl =
+              member.teamUrl ||
+              getTeamUrlFromRole(member.role, member.department) ||
+              "/club-members";
+
+            return (
+              <Link
+                key={member.id}
+                href={targetUrl}
+                className="block group h-full no-underline"
+              >
+                <CouncilMemberCard
+                  member={member}
+                  actionLabel="View Dedicated Team"
+                />
+              </Link>
+            );
+          })}
         </div>
       </Container>
     </section>

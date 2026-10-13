@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Container } from "../ui/Container";
 import { siteMetadataInfo } from "@/data/home";
-import { ArrowUpRight, Heart, Sparkles, Shield } from "lucide-react";
+import { ArrowUpRight, Heart, Sparkles } from "lucide-react";
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -23,7 +23,6 @@ export const Footer: React.FC = () => {
         { label: "Council Leadership", href: "#about" },
         { label: "Featured Members", href: "#members" },
         { label: "Special Laddu Auction", href: "#auction" },
-        { label: "Executive Admin Portal", href: "/admin", isSpecial: true },
       ],
     },
     {
@@ -64,14 +63,6 @@ export const Footer: React.FC = () => {
                 <Sparkles className="w-3 h-3" />
                 Academic Term: {siteMetadataInfo.academicYear} [PLACEHOLDER]
               </span>
-
-              <Link
-                href="/admin"
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-[#6B3B23]/60 hover:bg-[#D98C5B] text-[#D98C5B] hover:text-[#23120A] border border-[#6B3B23] transition-all"
-              >
-                <Shield className="w-3 h-3" />
-                Admin Suite
-              </Link>
             </div>
           </div>
 
@@ -86,11 +77,7 @@ export const Footer: React.FC = () => {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className={`text-sm transition-colors inline-flex items-center gap-1 group ${
-                        link.isSpecial
-                          ? "text-[#D98C5B] font-semibold hover:text-[#E79E70]"
-                          : "text-[#E7C59F] hover:text-[#D98C5B]"
-                      }`}
+                      className="text-sm transition-colors inline-flex items-center gap-1 group text-[#E7C59F] hover:text-[#D98C5B]"
                     >
                       <span>{link.label}</span>
                       <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-[#D98C5B]" />

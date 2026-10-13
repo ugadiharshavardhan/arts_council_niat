@@ -7,7 +7,6 @@ import { IntroLoader } from "@/components/home/IntroLoader";
 import { Hero } from "@/components/home/Hero";
 import { LeadershipSection } from "@/components/home/LeadershipSection";
 import { UpcomingEvents } from "@/components/home/UpcomingEvents";
-import { RecentWinners } from "@/components/home/RecentWinners";
 import { PastEvents } from "@/components/home/PastEvents";
 import { LadduAuctionHighlight } from "@/components/home/LadduAuctionHighlight";
 import { CouncilMembersPreview } from "@/components/home/CouncilMembersPreview";
@@ -44,10 +43,10 @@ export default function Home() {
         getWinners(),
         getClubMembers(),
       ]);
-      if (up && up.length > 0) setUpcomingEvents(up);
-      if (past && past.length > 0) setPastEvents(past);
-      if (wins && wins.length > 0) setWinners(wins);
-      if (mems && mems.length > 0) setMembers(mems);
+      if (Array.isArray(up)) setUpcomingEvents(up);
+      if (Array.isArray(past)) setPastEvents(past);
+      if (Array.isArray(wins)) setWinners(wins);
+      if (Array.isArray(mems)) setMembers(mems);
     } catch (err) {
       console.error("Error loading live PAC data:", err);
     }
@@ -103,10 +102,7 @@ export default function Home() {
         {/* 6. Past events section (Infinite horizontal marquee) */}
         <PastEvents events={pastEvents} />
 
-        {/* 7. Recent winners section */}
-        <RecentWinners winners={winners} />
-
-        {/* 8. Club members preview */}
+        {/* 7. Club members preview */}
         <CouncilMembersPreview members={members} />
 
         {/* 9. Ganesh Chaturthi Laddu Auction highlight */}

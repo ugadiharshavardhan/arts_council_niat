@@ -1,82 +1,112 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import PillNav from "./PillNav";
+import { Menu, X } from "lucide-react";
 
 interface NavbarProps {
   institutionName?: string;
 }
 
-// Nav items — all have dedicated pages now; use clean page routes.
-// sectionId is retained for homepage scroll-spy active-state detection only.
-const NAV_CONFIG = [
-  { label: "About",           pageRoute: "/about",           sectionId: "about"      },
-  { label: "Upcoming Events", pageRoute: "/events/upcoming", sectionId: "events"     },
-  { label: "Past Events",     pageRoute: "/events/past",     sectionId: "past-events"},
-  { label: "Winners",         pageRoute: "/winners",         sectionId: "winners"    },
-  { label: "Club Members",    pageRoute: "/club-members",    sectionId: "members"    },
+const NAV_ITEMS = [
+  { label: "About", href: "/about" },
+  { label: "Upcoming Events", href: "/events/upcoming" },
+  { label: "Past Events", href: "/events/past" },
+  { label: "Club Members", href: "/club-members" },
+  { label: "Winners", href: "/winners" },
 ] as const;
 
-
 export const Navbar: React.FC<NavbarProps> = () => {
-  const [activeSection, setActiveSection] = useState("about");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const isHomePage = pathname === "/";
 
-  // Scroll-spy: only active on the homepage
+  // Close mobile menu on route change
   useEffect(() => {
-    if (!isHomePage) return;
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 220;
-      for (const item of NAV_CONFIG) {
-        const el = document.getElementById(item.sectionId);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(item.sectionId);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomePage]);
-
-  // All items have dedicated pages — always use the page route.
-  const navItems = NAV_CONFIG.map((item) => ({
-    label: item.label,
-    href: item.pageRoute,
-  }));
-
-  // Determine the active href:
-  //   - On the homepage, find the pageRoute for the currently scrolled-to section.
-  //   - On a dedicated page, match by pathname.
-  const activeHref = isHomePage
-    ? (NAV_CONFIG.find((item) => item.sectionId === activeSection)?.pageRoute ?? "")
-    : (NAV_CONFIG.find((item) => pathname.startsWith(item.pageRoute))?.pageRoute ?? "");
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 flex justify-center pointer-events-none">
-      <div className="pointer-events-auto w-full flex justify-center">
-        <PillNav
-          logo="/arts_logo.jpeg"
-          logoAlt="Performing Arts Council - Arts Council NIAT"
-          logoHref="/"
-          items={navItems}
-          activeHref={activeHref}
-          baseColor="#D98C5B"
-          pillColor="#4E2E1E"
-          hoveredPillTextColor="#23120A"
-          pillTextColor="#F5E6D3"
-          ease="power3.easeOut"
-          initialLoadAnimation={false}
-        />
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#23120A]/95 backdrop-blur-md border-b border-[#6B3B23] shadow-lg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        {/* Brand / Logo (Static normal crest, no rotation) */}
+        <Link href="/" className="flex items-center gap-3.5 group no-underline">
+          <img
+            src="/arts_logo.jpeg"
+            alt="Arts Council NIAT Logo"
+            className="w-11 h-11 rounded-full object-cover border border-[#D98C5B]/50 shadow-md group-hover:border-[#D98C5B] transition-colors"
+          />
+          <div className="flex flex-col">
+            <span className="font-serif font-bold text-base sm:text-lg text-[#F5E6D3] tracking-tight group-hover:text-[#D98C5B] transition-colors leading-tight">
+              Performing Arts Council
+            </span>
+            <span className="text-[11px] font-mono tracking-widest text-[#D98C5B] uppercase font-bold">
+              NIAT
+            </span>
+          </div>
+        </Link>
+
+        {/* Desktop Navigation Links */}
+        <nav className="hidden lg:flex items-center gap-1.5" aria-label="Main Navigation">
+          {NAV_ITEMS.map((item) => {
+            const active = isActive(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`px-3.5 py-2 rounded-xl text-xs font-mono uppercase tracking-wider transition-all ${
+                  active
+                    ? "text-[#F5E6D3] bg-[#4E2E1E] border border-[#8B4513] font-bold shadow-sm"
+                    : "text-[#E7C59F]/80 hover:text-[#F5E6D3] hover:bg-[#4E2E1E]/50 border border-transparent"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Mobile Hamburger Button */}
+        <button
+          type="button"
+          onClick={() => setMobileMenuOpen((prev) => !prev)}
+          className="lg:hidden p-2 rounded-xl text-[#E7C59F] hover:text-[#F5E6D3] bg-[#4E2E1E] border border-[#6B3B23] transition-colors cursor-pointer"
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileMenuOpen}
+        >
+          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
       </div>
+
+      {/* Mobile Drawer */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden bg-[#23120A] border-t border-[#6B3B23] px-4 pt-3 pb-6 animate-in slide-in-from-top-2 duration-200">
+          <nav className="flex flex-col gap-2" aria-label="Mobile Navigation">
+            {NAV_ITEMS.map((item) => {
+              const active = isActive(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`px-4 py-2.5 rounded-xl text-xs font-mono uppercase tracking-wider transition-colors ${
+                    active
+                      ? "text-[#F5E6D3] bg-[#4E2E1E] border border-[#8B4513] font-bold"
+                      : "text-[#E7C59F] hover:text-[#F5E6D3] hover:bg-[#4E2E1E]/50"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+      )}
     </header>
   );
 };

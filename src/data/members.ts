@@ -97,7 +97,7 @@ export const featuredCouncilMembers: CouncilMember[] = [
 
 export const verticalsTeamData: VerticalsTeamData = {
   head: {
-    id: "vert-head",
+    id: "mem-06",
     name: "Pindi Anila",
     role: "Verticals Head",
     studentId: "N24H01A0365",
@@ -126,7 +126,7 @@ export const verticalsTeamData: VerticalsTeamData = {
 
 export const financeTeamData: FinanceTeamData = {
   head: {
-    id: "fin-head",
+    id: "mem-05",
     name: "Ashrith Nanda",
     role: "Finance Head",
     studentId: "N24H01A0008",
@@ -172,7 +172,7 @@ export const financeTeamData: FinanceTeamData = {
 
 export const socialMediaTeamData: SocialMediaTeamData = {
   head: {
-    id: "soc-head",
+    id: "mem-07",
     name: "Kambam Shashank",
     role: "Social Media Head",
     studentId: "N24H01A0522",
@@ -189,14 +189,6 @@ export const socialMediaTeamData: SocialMediaTeamData = {
       imagePosition: "30% 48%",
     },
     {
-      id: "soc-02",
-      name: "Avinash",
-      role: "Photography",
-      studentId: "N24H01B0022",
-      photo: "/images/members/avinash.jpg",
-      imagePosition: "55% 58%",
-    },
-    {
       id: "soc-03",
       name: "Rebbalapalli Pranav Maruthi",
       role: "Editor",
@@ -209,7 +201,7 @@ export const socialMediaTeamData: SocialMediaTeamData = {
 
 export const eventManagementTeamData: EventManagementTeamData = {
   head: {
-    id: "evt-head",
+    id: "mem-03",
     name: "Ashwitha Jilla",
     role: "Event Management Head",
     studentId: "N24H01B0305",
@@ -313,23 +305,151 @@ export const allClubMembers: CouncilMember[] = [
   })),
 ];
 
+// ============================================================================
+// DYNAMIC TEAM EXTRACTORS
+// ============================================================================
+
+export function getFinanceTeamFromMembers(memberList: CouncilMember[]): FinanceTeamData {
+  const head =
+    memberList.find(
+      (m) =>
+        m.id === "mem-05" ||
+        m.id === "fin-head" ||
+        m.role.toLowerCase() === "finance head" ||
+        (m.role.toLowerCase().includes("finance") && m.role.toLowerCase().includes("head"))
+    ) || financeTeamData.head;
+
+  const members = memberList.filter((m) => {
+    if (m.id === head.id) return false;
+    const role = (m.role || "").toLowerCase();
+    const dept = (m.department || "").toLowerCase();
+    return (
+      m.id.startsWith("fin-") ||
+      dept.includes("finance") ||
+      (role.includes("finance") && !role.includes("head"))
+    );
+  });
+
+  return { head, members };
+}
+
+export function getEventManagementTeamFromMembers(memberList: CouncilMember[]): EventManagementTeamData {
+  const head =
+    memberList.find(
+      (m) =>
+        m.id === "mem-03" ||
+        m.id === "evt-head" ||
+        m.role.toLowerCase() === "event management head" ||
+        (m.role.toLowerCase().includes("event") && m.role.toLowerCase().includes("head"))
+    ) || eventManagementTeamData.head;
+
+  const members = memberList.filter((m) => {
+    if (m.id === head.id) return false;
+    const role = (m.role || "").toLowerCase();
+    const dept = (m.department || "").toLowerCase();
+    return (
+      m.id.startsWith("evt-") ||
+      dept.includes("event") ||
+      (role.includes("event") && !role.includes("head"))
+    );
+  });
+
+  return { head, members };
+}
+
+export function getSocialMediaTeamFromMembers(memberList: CouncilMember[]): SocialMediaTeamData {
+  const head =
+    memberList.find(
+      (m) =>
+        m.id === "mem-07" ||
+        m.id === "soc-head" ||
+        m.role.toLowerCase() === "social media head" ||
+        (m.role.toLowerCase().includes("social") && m.role.toLowerCase().includes("head"))
+    ) || socialMediaTeamData.head;
+
+  const members = memberList.filter((m) => {
+    if (m.id === head.id) return false;
+    const role = (m.role || "").toLowerCase();
+    const dept = (m.department || "").toLowerCase();
+    return (
+      m.id.startsWith("soc-") ||
+      dept.includes("social") ||
+      role.includes("content") ||
+      role.includes("writer") ||
+      role.includes("designer") ||
+      role.includes("photography") ||
+      role.includes("editor") ||
+      (role.includes("social") && !role.includes("head"))
+    );
+  });
+
+  return { head, members };
+}
+
+export function getVerticalsTeamFromMembers(memberList: CouncilMember[]): VerticalsTeamData {
+  const head =
+    memberList.find(
+      (m) =>
+        m.id === "mem-06" ||
+        m.id === "vert-head" ||
+        m.role.toLowerCase() === "verticals head" ||
+        (m.role.toLowerCase().includes("vertical") && m.role.toLowerCase().includes("head"))
+    ) || verticalsTeamData.head;
+
+  const members = memberList.filter((m) => {
+    if (m.id === head.id) return false;
+    const role = (m.role || "").toLowerCase();
+    const dept = (m.department || "").toLowerCase();
+    return (
+      m.id.startsWith("vert-") ||
+      dept.includes("vertical") ||
+      (role.includes("vertical") && !role.includes("head"))
+    );
+  });
+
+  return { head, members };
+}
+
 /**
  * Helper to build the hierarchical organizational tree dynamically,
- * merging with live data from Supabase / localStorage if provided.
+ * deriving exclusively from the live members list without resurrecting deleted members.
  */
 export function buildCouncilsHierarchy(customMembers?: CouncilMember[]) {
   const memberList = customMembers && customMembers.length > 0 ? customMembers : allClubMembers;
 
-  // Lookup map by ID
-  const map = new Map<string, CouncilMember>();
-  memberList.forEach((m) => map.set(m.id, m));
+  const president =
+    memberList.find(
+      (m) =>
+        m.id === "mem-01" ||
+        m.role.toLowerCase() === "president" ||
+        m.role.toLowerCase().startsWith("president,")
+    ) || councilLeadership.president;
 
-  const getOrFallback = (defaultMember: CouncilMember): CouncilMember => {
-    return map.get(defaultMember.id) || defaultMember;
-  };
+  const vicePresident =
+    memberList.find(
+      (m) =>
+        m.id === "mem-02" ||
+        m.role.toLowerCase().includes("vice")
+    ) || councilLeadership.vicePresident;
 
-  const president = getOrFallback(councilLeadership.president);
-  const vicePresident = getOrFallback(councilLeadership.vicePresident);
+  const fin = getFinanceTeamFromMembers(memberList);
+  const evt = getEventManagementTeamFromMembers(memberList);
+  const soc = getSocialMediaTeamFromMembers(memberList);
+  const vert = getVerticalsTeamFromMembers(memberList);
+
+  const outreachHead =
+    memberList.find(
+      (m) =>
+        m.id === "mem-04" ||
+        m.role.toLowerCase().includes("outreach head") ||
+        (m.role.toLowerCase().includes("outreach") && m.role.toLowerCase().includes("head"))
+    ) || memberList.find((m) => m.id === "mem-04") || featuredCouncilMembers[3];
+
+  const outreachMembers = memberList.filter((m) => {
+    if (m.id === outreachHead.id || m.id === president.id || m.id === vicePresident.id) return false;
+    const dept = (m.department || "").toLowerCase();
+    return dept.includes("outreach") || dept.includes("public relations");
+  });
 
   const councils: CouncilGroup[] = [
     {
@@ -340,8 +460,8 @@ export function buildCouncilsHierarchy(customMembers?: CouncilMember[]) {
       description:
         "Managing resource allocations, sponsorships, proscenium vendor budgets, and financial governance powering every cultural production.",
       route: "/club-members/finance",
-      head: getOrFallback(financeTeamData.head),
-      members: financeTeamData.members.map(getOrFallback),
+      head: fin.head,
+      members: fin.members,
     },
     {
       id: "event-management",
@@ -351,8 +471,8 @@ export function buildCouncilsHierarchy(customMembers?: CouncilMember[]) {
       description:
         "Directing proscenium run-of-shows, stage protocols, artist greenrooms, acoustic orchestration, and venue crowd dynamics.",
       route: "/club-members/event-management",
-      head: getOrFallback(eventManagementTeamData.head),
-      members: eventManagementTeamData.members.map(getOrFallback),
+      head: evt.head,
+      members: evt.members,
     },
     {
       id: "social-media",
@@ -362,8 +482,8 @@ export function buildCouncilsHierarchy(customMembers?: CouncilMember[]) {
       description:
         "Curating visual branding, proscenium event cinematography, live coverage, editorial typography, and digital student outreach.",
       route: "/club-members/social-media",
-      head: getOrFallback(socialMediaTeamData.head),
-      members: socialMediaTeamData.members.map(getOrFallback),
+      head: soc.head,
+      members: soc.members,
     },
     {
       id: "verticals",
@@ -373,8 +493,8 @@ export function buildCouncilsHierarchy(customMembers?: CouncilMember[]) {
       description:
         "Powering cross-functional creative initiatives, multidisciplinary stage wings, monologue showcases, and student club coordination.",
       route: "/club-members/verticals",
-      head: getOrFallback(verticalsTeamData.head),
-      members: verticalsTeamData.members.map(getOrFallback),
+      head: vert.head,
+      members: vert.members,
     },
     {
       id: "outreach",
@@ -383,8 +503,8 @@ export function buildCouncilsHierarchy(customMembers?: CouncilMember[]) {
       badge: "Inter-Collegiate PR",
       description:
         "Fostering inter-university liaisons, guest artist invitations, academic council alliances, and public relations communications.",
-      head: getOrFallback(featuredCouncilMembers[3]), // Thatikonda Swetcha
-      members: [],
+      head: outreachHead,
+      members: outreachMembers,
     },
   ];
 

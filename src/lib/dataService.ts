@@ -132,24 +132,20 @@ export async function getUpcomingEvents(): Promise<EventItem[]> {
         .order("created_at", { ascending: false });
 
       if (!error && Array.isArray(data)) {
-        // Table exists in Supabase - return rows directly from Supabase!
-        if (data.length > 0) {
-          const mapped = data.map((d) => ({
-            id: d.id,
-            title: d.title,
-            date: d.date,
-            time: d.time || undefined,
-            venue: d.venue || undefined,
-            description: d.description,
-            category: d.category || undefined,
-            image: d.image,
-            badge: d.badge || undefined,
-            isFeatured: Boolean(d.is_featured),
-          }));
-          setLocalSilent(STORAGE_KEYS.UPCOMING_EVENTS, mapped);
-          return mapped;
-        }
-        return [];
+        const mapped = data.map((d) => ({
+          id: d.id,
+          title: d.title,
+          date: d.date,
+          time: d.time || undefined,
+          venue: d.venue || undefined,
+          description: d.description,
+          category: d.category || undefined,
+          image: d.image,
+          badge: d.badge || undefined,
+          isFeatured: Boolean(d.is_featured),
+        }));
+        setLocalSilent(STORAGE_KEYS.UPCOMING_EVENTS, mapped);
+        return mapped;
       }
     } catch (err) {
       console.warn("Error querying Supabase upcoming events, using fallback:", err);
@@ -249,25 +245,21 @@ export async function getPastEvents(): Promise<EventItem[]> {
         .order("created_at", { ascending: false });
 
       if (!error && Array.isArray(data)) {
-        // Table exists in Supabase - return rows directly from Supabase!
-        if (data.length > 0) {
-          const mapped = data.map((d) => ({
-            id: d.id,
-            title: d.title,
-            date: d.date,
-            venue: d.venue || undefined,
-            description: d.description,
-            category: d.category || undefined,
-            image: d.image,
-            videoUrl: d.video_url || undefined,
-            gallery: d.gallery || undefined,
-            organizer: d.organizer || undefined,
-            participants: d.participants || undefined,
-          }));
-          setLocalSilent(STORAGE_KEYS.PAST_EVENTS, mapped);
-          return mapped;
-        }
-        return [];
+        const mapped = data.map((d) => ({
+          id: d.id,
+          title: d.title,
+          date: d.date,
+          venue: d.venue || undefined,
+          description: d.description,
+          category: d.category || undefined,
+          image: d.image,
+          videoUrl: d.video_url || undefined,
+          gallery: d.gallery || undefined,
+          organizer: d.organizer || undefined,
+          participants: d.participants || undefined,
+        }));
+        setLocalSilent(STORAGE_KEYS.PAST_EVENTS, mapped);
+        return mapped;
       }
     } catch (err) {
       console.warn("Error querying Supabase past events, using fallback:", err);
@@ -367,22 +359,19 @@ export async function getWinners(): Promise<WinnerItem[]> {
         .order("created_at", { ascending: false });
 
       if (!error && Array.isArray(data)) {
-        if (data.length > 0) {
-          const mapped = data.map((d) => ({
-            id: d.id,
-            name: d.name,
-            eventName: d.event_name,
-            position: d.position,
-            date: d.date,
-            prizeOrAchievement: d.prize_or_achievement,
-            category: d.category || undefined,
-            photo: d.photo,
-            isFeatured: Boolean(d.is_featured),
-          }));
-          setLocalSilent(STORAGE_KEYS.WINNERS, mapped);
-          return mapped;
-        }
-        return [];
+        const mapped = data.map((d) => ({
+          id: d.id,
+          name: d.name,
+          eventName: d.event_name,
+          position: d.position,
+          date: d.date,
+          prizeOrAchievement: d.prize_or_achievement,
+          category: d.category || undefined,
+          photo: d.photo,
+          isFeatured: Boolean(d.is_featured),
+        }));
+        setLocalSilent(STORAGE_KEYS.WINNERS, mapped);
+        return mapped;
       }
     } catch (err) {
       console.warn("Error querying Supabase winners, using fallback:", err);
@@ -565,22 +554,19 @@ export async function getClubMembers(): Promise<CouncilMember[]> {
         .order("display_order", { ascending: true });
 
       if (!error && Array.isArray(data)) {
-        if (data.length > 0) {
-          const mapped = data.map((d) => ({
-            id: d.id,
-            name: d.name,
-            role: d.role,
-            studentId: d.student_id || undefined,
-            department: d.department || undefined,
-            photo: d.photo,
-            imagePosition: d.image_position || undefined,
-            isLeadership: Boolean(d.is_leadership),
-            teamUrl: d.team_url || getTeamUrlFromRole(d.role, d.department),
-          }));
-          setLocalSilent(STORAGE_KEYS.MEMBERS, mapped);
-          return mapped;
-        }
-        return [];
+        const mapped = data.map((d) => ({
+          id: d.id,
+          name: d.name,
+          role: d.role,
+          studentId: d.student_id || undefined,
+          department: d.department || undefined,
+          photo: d.photo,
+          imagePosition: d.image_position || undefined,
+          isLeadership: Boolean(d.is_leadership),
+          teamUrl: d.team_url || getTeamUrlFromRole(d.role, d.department),
+        }));
+        setLocalSilent(STORAGE_KEYS.MEMBERS, mapped);
+        return mapped;
       }
     } catch (err) {
       console.warn("Error querying Supabase club members, using fallback:", err);

@@ -33,16 +33,18 @@ export const IntroLoader: React.FC = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-center text-center relative z-10 px-6"
           >
-            {/* Emblem */}
+            {/* Official Crest Logo */}
             <motion.div
-              initial={{ rotate: -15, scale: 0.7 }}
-              animate={{ rotate: 0, scale: 1 }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-[#D98C5B] bg-[#4E2E1E] shadow-2xl flex items-center justify-center mb-6 relative overflow-hidden"
+              initial={{ scale: 0.75, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-[#D98C5B] bg-[#4E2E1E] shadow-2xl flex items-center justify-center mb-6 relative overflow-hidden p-1 shadow-[#D98C5B]/20"
             >
-              <span className="font-serif text-2xl sm:text-3xl font-bold text-[#F5E6D3]">
-                PAC
-              </span>
+              <img
+                src="/arts_logo.jpeg"
+                alt="Arts Council NIAT Logo"
+                className="w-full h-full object-cover rounded-full"
+              />
             </motion.div>
 
             <motion.h1

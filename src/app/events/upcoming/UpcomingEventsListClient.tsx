@@ -19,7 +19,7 @@ export function UpcomingEventsListClient() {
   const load = async () => {
     try {
       const live = await getUpcomingEvents();
-      if (live && live.length > 0) setEvents(live);
+      if (Array.isArray(live)) setEvents(live);
     } catch (e) {
       console.error(e);
     }
@@ -47,14 +47,6 @@ export function UpcomingEventsListClient() {
           >
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             <span>Back to Home</span>
-          </Link>
-
-          <Link
-            href="/admin"
-            className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#D98C5B] hover:text-[#23120A] hover:bg-[#D98C5B] transition-all px-3.5 py-1.5 rounded-full bg-[#4E2E1E] border border-[#6B3B23]"
-          >
-            <Plus className="w-3.5 h-3.5" />
-            <span>Manage in Admin</span>
           </Link>
         </div>
 

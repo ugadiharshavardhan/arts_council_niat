@@ -39,9 +39,9 @@ export default function Home() {
         getPastEvents(),
         getClubMembers(),
       ]);
-      if (up && up.length > 0) setUpcomingEvents(up);
-      if (past && past.length > 0) setPastEvents(past);
-      if (mems && mems.length > 0) setMembers(mems);
+      if (Array.isArray(up)) setUpcomingEvents(up);
+      if (Array.isArray(past)) setPastEvents(past);
+      if (Array.isArray(mems)) setMembers(mems);
     } catch (err) {
       console.error("Error loading live PAC data:", err);
     }
